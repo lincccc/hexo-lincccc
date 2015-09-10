@@ -1,0 +1,249 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  <title>[论文笔记] A Developer&#39;s Guide to Silhouette Algorithms for Polygonal Models | _Sugarless</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="description" content="Paper: Tobias Isenberg, Bert Freudenberg, Nick Halper, Stefan Schlechtweg, Thomas Strothotte, A Developer’s Guide to Silhouette Algorithms for Polygonal Models, IEEE Computer Graphics and Applications">
+<meta property="og:type" content="article">
+<meta property="og:title" content="[论文笔记] A Developer's Guide to Silhouette Algorithms for Polygonal Models">
+<meta property="og:url" content="http://yoursite.com/2010/01/02/move_from_wp/e8-ae-ba-e6-96-87-e7-ac-94-e8-ae-b0-a-developers-guide-to-silhouette-algorithms-for-polygonal-models/index.html">
+<meta property="og:site_name" content="_Sugarless">
+<meta property="og:description" content="Paper: Tobias Isenberg, Bert Freudenberg, Nick Halper, Stefan Schlechtweg, Thomas Strothotte, A Developer’s Guide to Silhouette Algorithms for Polygonal Models, IEEE Computer Graphics and Applications">
+<meta property="og:image" content="http://lh5.ggpht.com/_NFbnZk4IksM/TM5hF8c3wpI/AAAAAAAAAP8/8hv6v3mfnnY/tu015_thumb%5B1%5D.jpg?imgmax=800">
+<meta property="og:image" content="http://lh3.ggpht.com/_NFbnZk4IksM/TM5hHn227-I/AAAAAAAAAQE/9M4D3LFhGUk/001_thumb.jpg?imgmax=800">
+<meta property="og:image" content="http://lh4.ggpht.com/_NFbnZk4IksM/TM5hJLttH2I/AAAAAAAAAQM/bqgANezxG4M/111_thumb.jpg?imgmax=800">
+<meta property="og:image" content="http://lh3.ggpht.com/_NFbnZk4IksM/TM5hKlEiK9I/AAAAAAAAAQU/FVeXGTMeDh4/221_thumb%5B4%5D.jpg?imgmax=800">
+<meta property="og:image" content="http://lh6.ggpht.com/_NFbnZk4IksM/TM5hMVWudhI/AAAAAAAAAQc/0kNJA1Radew/331_thumb%5B2%5D.jpg?imgmax=800">
+<meta property="og:image" content="http://lh5.ggpht.com/_NFbnZk4IksM/TM5hNqu417I/AAAAAAAAAQk/LO3SH44htoo/447_thumb%5B2%5D.jpg?imgmax=800">
+<meta property="og:image" content="http://lh6.ggpht.com/_NFbnZk4IksM/TM5hPFm7WrI/AAAAAAAAAQs/LGYYZYy5hwQ/556_thumb%5B1%5D.jpg?imgmax=800">
+<meta property="og:image" content="http://lh6.ggpht.com/_NFbnZk4IksM/TM5hRTNOAiI/AAAAAAAAAQ0/RBBACC3uWvQ/664_thumb%5B1%5D.jpg?imgmax=800">
+<meta property="og:image" content="http://lh4.ggpht.com/_NFbnZk4IksM/TM5hTYoAarI/AAAAAAAAAQ8/To5duXYCDgc/776_thumb%5B1%5D.jpg?imgmax=800">
+<meta property="og:updated_time" content="2015-09-10T05:45:12.459Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="[论文笔记] A Developer's Guide to Silhouette Algorithms for Polygonal Models">
+<meta name="twitter:description" content="Paper: Tobias Isenberg, Bert Freudenberg, Nick Halper, Stefan Schlechtweg, Thomas Strothotte, A Developer’s Guide to Silhouette Algorithms for Polygonal Models, IEEE Computer Graphics and Applications">
+  
+    <link rel="alternative" href="/atom.xml" title="_Sugarless" type="application/atom+xml">
+  
+  
+    <link rel="icon" href="/favicon.png">
+  
+  <link href="//fonts.googleapis.com/css?family=Source+Code+Pro" rel="stylesheet" type="text/css">
+  <link rel="stylesheet" href="/css/style.css" type="text/css">
+  
+
+</head>
+<body>
+  <div id="container">
+    <div id="wrap">
+      <header id="header">
+  <div id="banner"></div>
+  <div id="header-outer" class="outer">
+    <div id="header-title" class="inner">
+      <h1 id="logo-wrap">
+        <a href="/" id="logo">_Sugarless</a>
+      </h1>
+      
+    </div>
+    <div id="header-inner" class="inner">
+      <nav id="main-nav">
+        <a id="main-nav-toggle" class="nav-icon"></a>
+        
+          <a class="main-nav-link" href="/">Home</a>
+        
+          <a class="main-nav-link" href="/archives">Archives</a>
+        
+      </nav>
+      <nav id="sub-nav">
+        
+          <a id="nav-rss-link" class="nav-icon" href="/atom.xml" title="RSS Feed"></a>
+        
+        <a id="nav-search-btn" class="nav-icon" title="Search"></a>
+      </nav>
+      <div id="search-form-wrap">
+        <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" results="0" class="search-form-input" placeholder="Search"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="http://yoursite.com"></form>
+      </div>
+    </div>
+  </div>
+</header>
+      <div class="outer">
+        <section id="main"><article id="post-move_from_wp/e8-ae-ba-e6-96-87-e7-ac-94-e8-ae-b0-a-developers-guide-to-silhouette-algorithms-for-polygonal-models" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2010/01/02/move_from_wp/e8-ae-ba-e6-96-87-e7-ac-94-e8-ae-b0-a-developers-guide-to-silhouette-algorithms-for-polygonal-models/" class="article-date">
+  <time datetime="2010-01-01T16:05:00.000Z" itemprop="datePublished">2010-01-02</time>
+</a>
+    
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/Academic/">Academic</a>
+  </div>
+
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="article-title" itemprop="name">
+      [论文笔记] A Developer&#39;s Guide to Silhouette Algorithms for Polygonal Models
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p><strong>Paper:</strong> Tobias Isenberg, Bert Freudenberg, Nick Halper, Stefan Schlechtweg, Thomas Strothotte, <u>A Developer’s Guide to Silhouette Algorithms for Polygonal Models</u>, IEEE Computer Graphics and Applications, July 2003 </p>
+<hr>
+<p>本文是一篇就从3D Polygonal模型自动生成轮廓线问题展开的综述。算是读得挺细。断断续续一周有余。</p>
+<p><strong>问题描述：</strong>轮廓线，也就是绘画上说的线稿，用于勾勒物体的形状、阴影等，以区分于背景和其他物体。本文着眼于讨论从Polygonal模型自动生成轮廓线的诸多算法。<br>文中定义轮廓线为silhouette，分为<font color="#a40000">counter、crease、border<font color="#404040">和</font>self-intersection</font>四种：counter是前景最外围的轮廓线，区分其于背景；crease指物体上的折皱等，如正方体的边；border针对非闭合的模型，指那些只与一个polygon相邻的边；self-intersection当一个模型的两个polygon相交时出现。轮廓线可以数学地定义为法线与视线相垂直的点集，如下图所示：<br>&nbsp;&nbsp; <a href="http://lh5.ggpht.com/_NFbnZk4IksM/TM5hFRKhpTI/AAAAAAAAAP4/JJtd8L5Z0Fg/s1600-h/tu015%5B3%5D.jpg" target="_blank" rel="external"><img src="http://lh5.ggpht.com/_NFbnZk4IksM/TM5hF8c3wpI/AAAAAAAAAP8/8hv6v3mfnnY/tu015_thumb%5B1%5D.jpg?imgmax=800" alt="tu015" title="tu015"></a><br>但不幸的是，我们只有面的法线定义，而边上的点由于被多个面共享，其法线定义是暧昧不清的。因此，从计算的角度，轮廓线被定义为：<font color="#a40000">模型上同时被正向和背向Polygon共享的边的集合</font>（应该是指counter吧）。<a id="more"></a></p>
+<p>轮廓线算法通常需解决两个主要的问题：检测当前视点的轮廓线集合和判断这些轮廓线的可见性。有以下几类算法：</p>
+<ul>
+<li><p><strong>Image Space Algorithms</strong><br>这类算法通常利用传统渲染技术中的<font color="#a40000">图像缓冲区</font>（如color、z-buffer、normal等），运用图像处理技术扩大其中的<font color="#a40000">不连续性</font>（边缘检测技术），以寻找轮廓线。其结果是一个与成像分辨率相关的<font color="#a40000">像素矩阵</font>。典型算法如：Saito和Takahashi的z-buffer、Hertzmann的normal-buffer以及Deussen和Strothotte在这基础上的应用pen-and-ink等。<br><font color="#808080"><a href="http://lh6.ggpht.com/_NFbnZk4IksM/TM5hGkWlPQI/AAAAAAAAAQA/dQ1az3hVWQ8/s1600-h/001%5B2%5D.jpg" target="_blank" rel="external"><img src="http://lh3.ggpht.com/_NFbnZk4IksM/TM5hHn227-I/AAAAAAAAAQE/9M4D3LFhGUk/001_thumb.jpg?imgmax=800" alt="001" title="001"></a>&nbsp; # z-buffer<br></font><font color="#808080"><a href="http://lh6.ggpht.com/_NFbnZk4IksM/TM5hIfsWp-I/AAAAAAAAAQI/zyuWrOiu6DI/s1600-h/111%5B2%5D.jpg" target="_blank" rel="external"><img src="http://lh4.ggpht.com/_NFbnZk4IksM/TM5hJLttH2I/AAAAAAAAAQM/bqgANezxG4M/111_thumb.jpg?imgmax=800" alt="111" title="111"></a>&nbsp; # z&amp;normal-buffer</font><br>这一类的方法易于实现，而且通常很快，并且能够自动地找到self-intersection类的轮廓线，也具有通用性和鲁棒性；但是，用户能够控制的参数很少，并且最后得到的轮廓线没有解析表述，这使得后续处理如风格化等很难展开。<br>这类生成的轮廓线没有明确的边界，轮廓线上像素的灰度取决于缓冲区中边界特征的强度，而这也使得这一类的轮廓线无需烦恼线条锯齿的问题；另一个特征是其精确到像素，也就是说一些不足一像素的细节将会被隐藏，但这单从视觉的角度而言是不重要的。</p>
+<p> <li><strong>Hybrid algorithms</strong>&nbsp;<br>这类算法通常需要在<font color="#a40000">物体空间上作一些变换</font>（位移等），然后也是利用渲染过程中的<font color="#a40000">图像缓冲区</font>（z-buffer）生成轮廓线。其结果与上一类方法相同，也是一个<font color="#a40000">像素矩阵</font>。典型算法如：Rustagi的stencil buffer算法，需四次渲染，每次将物体沿正负x/y轴移动一个像素，那么内部的像素就会有4个stencil值，而轮廓线上的像素则会有2-3个stencil值，而外部的像素则为0-1个stencil值，以此为区分，这种方法只能生成contour；<br>Rossignac和Emmerik的算法基于z-buffer，通过将物体沿视线方向移动并调整wireframe的线条粗细，分别绘制wireframe和z-buffer来视线，这种方法对其他种类的轮廓线也有效；<br>Raskar和Cohen的算法也基于z-buffer，先在白底上画正向面，这样z-buffer中就填充了正向面的深度值，再以轮廓线颜色画背向面，这样只有同时属于正向和背向面的轮廓边能够被画出来（深度值相等），这种方法可以画出指定等宽的轮廓线（通过在第二部放大背向面得到）；<br>其余还有在三角面片周围增加一圈边缘、基于暗色环境贴图的算法等等。<br><a href="http://lh6.ggpht.com/_NFbnZk4IksM/TM5hJ8EQJ0I/AAAAAAAAAQQ/lvLYCkD1K8g/s1600-h/221%5B6%5D.jpg" target="_blank" rel="external"><img src="http://lh3.ggpht.com/_NFbnZk4IksM/TM5hKlEiK9I/AAAAAAAAAQU/FVeXGTMeDh4/221_thumb%5B4%5D.jpg?imgmax=800" alt="221" title="221"></a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="http://lh3.ggpht.com/_NFbnZk4IksM/TM5hLdXD4LI/AAAAAAAAAQY/ml3hkv2g5oE/s1600-h/331%5B4%5D.jpg" target="_blank" rel="external"><img src="http://lh6.ggpht.com/_NFbnZk4IksM/TM5hMVWudhI/AAAAAAAAAQc/0kNJA1Radew/331_thumb%5B2%5D.jpg?imgmax=800" alt="331" title="331"></a><font color="#808080">&nbsp; # Raskar和Cohen的back-front face方法&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; # Gooch的基于暗色环境贴图方法（很有艺术感）</font><br>这类方法具有很高的可控性，也更具风格化。这类方法较上种较慢，需要做物体空间上的变换，但也是实时或准实时的。得到的轮廓线具有明确的边界，但也带来了锯齿走样的问题。并且由于是像素矩阵的表达方式，这些轮廓线只精确到像素，也不能很方便地适用于风格化后处理。此外，这类方法还存在一些由于z-buffer的精度而带来的数值问题。<br></li><li><strong>Object space algorithms</strong><br>这类方法<font color="#a40000">完全基于物体空间</font>，提供对轮廓线的<font color="#a40000">解析表述</font>，可以方便地应用风格化后处理。这种方法不同于前两种，分轮廓线检测和可见性判断两步进行。</li></p>
+<p><em>轮廓边检测：</em><br><u>- Trivial method</u>&nbsp; 此类算法是轮廓边检测的基础算法，分两步：1. 将polygon分为正向和背向两类；2. 找出那些有且仅被一个正向面和一个背向面共享的边。此算法很简单、易于实现，对正交投影和透视投影都适用，也能找到所有的轮廓线，但是它没一帧都需要查看每一个面的朝向和每一条边，其算法复杂度与模型的复杂度线性相关，在没有硬件支持的情况下，其只能适用于简单模型的渲染。<br><u>- Subpolygon silhouettes</u>&nbsp; 此类算法主要是为了改善多边形轮廓的人工痕迹，使得轮廓线更逼近于真实物体。此算法是以多边形无限逼近的自由曲面为基础来考虑轮廓线的。计算顶点法线与视线间的点积，由于曲面本身法向的连续性，就会存在+/-符号的突变。对于那些两顶点点积符号不同的边，使用线性插值生成点积为零的点，并连成轮廓线。这种方法生成的轮廓线更自然，也更适用于后处理。如下图所示：<br><a href="http://lh6.ggpht.com/_NFbnZk4IksM/TM5hMy4If9I/AAAAAAAAAQg/xSxbz6Pq-D8/s1600-h/447%5B4%5D.jpg" target="_blank" rel="external"><img src="http://lh5.ggpht.com/_NFbnZk4IksM/TM5hNqu417I/AAAAAAAAAQk/LO3SH44htoo/447_thumb%5B2%5D.jpg?imgmax=800" alt="447" title="447"></a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="http://lh3.ggpht.com/_NFbnZk4IksM/TM5hOXGHlAI/AAAAAAAAAQo/4ZWUj-dZCH0/s1600-h/556%5B3%5D.jpg" target="_blank" rel="external"><img src="http://lh6.ggpht.com/_NFbnZk4IksM/TM5hPFm7WrI/AAAAAAAAAQs/LGYYZYy5hwQ/556_thumb%5B1%5D.jpg?imgmax=800" alt="556" title="556"></a><font color="#808080"># subpolygon silhouette算法示意&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; # 算法结果示意</font><br><u>- Precomputation methods</u>&nbsp; 此类算法主要是为了改善检测算法的计算速度，通过事先做一些预处理的方式。如：<br>Gooch等将模型面的法向量映射到一个高斯球上，并在球的中心放置与视平面平行的面。这样，面间共享的边就可以用法向量连起的弧线表示，而与球中心的面相交的弧线对应的边就是轮廓线。这种方法节省了每帧判断面朝向的时间，只需判断弧与面是否相交（弧本身是预处理的），如下图。为了减少相交判断的计算量，可以采用层级细分、或者将球映射到外切正方体的方法等；<br><a href="http://lh3.ggpht.com/_NFbnZk4IksM/TM5hQXFLPRI/AAAAAAAAAQw/pZa3nMrrrLs/s1600-h/664%5B3%5D.jpg" target="_blank" rel="external"><img src="http://lh6.ggpht.com/_NFbnZk4IksM/TM5hRTNOAiI/AAAAAAAAAQ0/RBBACC3uWvQ/664_thumb%5B1%5D.jpg?imgmax=800" alt="664" title="664"></a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="http://lh3.ggpht.com/_NFbnZk4IksM/TM5hSeEnk5I/AAAAAAAAAQ4/3scaVQsZtrw/s1600-h/776%5B3%5D.jpg" target="_blank" rel="external"><img src="http://lh4.ggpht.com/_NFbnZk4IksM/TM5hTYoAarI/AAAAAAAAAQ8/To5duXYCDgc/776_thumb%5B1%5D.jpg?imgmax=800" alt="776" title="776"></a><font color="#808080"># Gooch的高斯球算法示意&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; # 算法结果示意</font><br>Sander等人建立了一种存储边信息的层级搜索树（边储存在节点上），面片根据节点间的层级关系成类。每帧搜素完全背向和完全正向的面片类，相关的边则被剔除，剩余的则是轮廓边；<br>另外，还有Hertzmann和Zorin、Pop等人基于对偶空间<a href="http://en.wikipedia.org/wiki/Dual_space" target="_blank" rel="external">Dual Space</a>的预处理方法（忒高深），以后再作讨论。<br><u>- Stochastic method</u>&nbsp; 此类算法以空间和时间的连续性为前提，先随机选取一些边并用Trial Method检测其中的轮廓边，之后检测这些已知轮廓边附近的边是否为轮廓边直至画出一条完整的轮廓线，下一帧也只检查上一帧附近的边是否轮廓边（短时间内模型不会变化太多）。这种方法速度较快，是实时的，但是只能检出完整轮廓边集中的一部分。</p>
+<p><em>线条可见性判断：</em><br>可见性判断是计算机图形学的经典问题，一些传统的可见性判断方法（如z-buffer等）在此依旧适用。作者按照对象将这部分的算法分为Image、Object Space以及两者的混合体Hybid这三类。<br><u>- Image space</u>&nbsp; 这类算法基于z-buffer等可见性判断，像素级别精度。<br><u>- Object space</u>&nbsp; 这里有很多算法，不只解决线可见性的问题。作者在此处提到了一个有趣的概念QI（Quantitaitve Invisibility），即对一个点而言挡在它和视点之间的正向面的个数。QI为0的点可见，其他不可见。简单情况下，只有当边与轮廓线相交时QI值才会改变，如下图所示。边的初始QI值可通过光线追踪的方法以某一点为视点建立，根据其是否穿越轮廓线来判断QI值的增加或减少。Markosian、Herzmann和Zorin等人分别就QI做了算法速度和扩展应用方面的研究。这些算法均提供精确的可见性信息，但是其计算复杂度也相比Image space大些。<br><a href="http://lh5.ggpht.com/_NFbnZk4IksM/TM5hU6d_KvI/AAAAAAAAARE/dxFPEfnPqjY/88%5B3%5D_thumb%5B2%5D.jpg?imgmax=800" title="88[3]" target="_blank" rel="external">![88[3]</a>](<a href="http://lh5.ggpht.com/_NFbnZk4IksM/TM5hUK1SpZI/AAAAAAAAARA/TMLuvWV9KUs/s1600-h/88%5B3%5D%5B4%5D.jpg)&nbsp;&nbsp;&amp;nbsp" target="_blank" rel="external">http://lh5.ggpht.com/_NFbnZk4IksM/TM5hUK1SpZI/AAAAAAAAARA/TMLuvWV9KUs/s1600-h/88%5B3%5D%5B4%5D.jpg)&nbsp;&nbsp;&amp;nbsp</a>; # 这是一条在物体后方的线<br><u>- Hybrid</u>&nbsp; 这类算法是前两者的结合，提供一种既快又有解析表示的解。如Northrup和Markosian的方法，其对每个三角面片和轮廓边着色，以z-buffer为基础渲染一张ID buffer。每一帧，ID buffer被读出，并搜罗其中所有出现了的轮廓边ID，以此为可见集合。Isenberg基于类似的原理给出了基于z-buffer的算法，并且由于z-buffer在数值上有时并不稳定，其主张将附近8邻加入决策。这类算法是Image space和Object space在速度和精度上的权衡。</p>
+</li>
+</ul>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://yoursite.com/2010/01/02/move_from_wp/e8-ae-ba-e6-96-87-e7-ac-94-e8-ae-b0-a-developers-guide-to-silhouette-algorithms-for-polygonal-models/" data-id="ciedu83wh004up4bgsau61hfe" class="article-share-link">Share</a>
+      
+      
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Computer-Graphics/">Computer Graphics</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/NPR/">NPR</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Review/">Review</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Silhouette/">Silhouette</a></li></ul>
+
+    </footer>
+  </div>
+  
+    
+<nav id="article-nav">
+  
+    <a href="/2010/01/03/move_from_wp/e5-8d-88-e5-90-8e-e7-9a-84-e5-a3-b0-e9-9f-b3-e3-80-82spitz/" id="article-nav-newer" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Newer</strong>
+      <div class="article-nav-title">
+        
+          午后的声音。Spitz~
+        
+      </div>
+    </a>
+  
+  
+    <a href="/2010/01/01/move_from_wp/e6-96-b0-e5-b9-b4/" id="article-nav-older" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Older</strong>
+      <div class="article-nav-title">新年</div>
+    </a>
+  
+</nav>
+
+  
+</article>
+
+</section>
+        
+          <aside id="sidebar">
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Categories</h3>
+    <div class="widget">
+      <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/Academic/">Academic</a><span class="category-list-count">28</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/Academic/Engineering/">Engineering</a><span class="category-list-count">3</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Academic/Works/">Works</a><span class="category-list-count">2</span></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/Engineering/">Engineering</a><span class="category-list-count">4</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Hobby/">Hobby</a><span class="category-list-count">11</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/Hobby/Trivial/">Trivial</a><span class="category-list-count">3</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/Hobby/Trivial/Works/">Works</a><span class="category-list-count">1</span></li></ul></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/Trivial/">Trivial</a><span class="category-list-count">8</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Works/">Works</a><span class="category-list-count">10</span></li></ul>
+    </div>
+  </div>
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Tags</h3>
+    <div class="widget">
+      <ul class="tag-list"><li class="tag-list-item"><a class="tag-list-link" href="/tags/AI/">AI</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Analysis/">Analysis</a><span class="tag-list-count">3</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Android/">Android</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Anime/">Anime</a><span class="tag-list-count">7</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Art/">Art</a><span class="tag-list-count">7</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Bayesian/">Bayesian</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Caching/">Caching</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Code/">Code</a><span class="tag-list-count">5</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Computer-Graphics/">Computer Graphics</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Computer-Vision/">Computer Vision</a><span class="tag-list-count">13</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Data-Mining/">Data Mining</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Depth-Camera/">Depth Camera</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Design/">Design</a><span class="tag-list-count">5</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Dream/">Dream</a><span class="tag-list-count">3</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Ford-Fulkerson/">Ford-Fulkerson</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Friends/">Friends</a><span class="tag-list-count">3</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/GPU/">GPU</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Game/">Game</a><span class="tag-list-count">6</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Game-Design/">Game Design</a><span class="tag-list-count">3</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Gesture/">Gesture</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Graphcut/">Graphcut</a><span class="tag-list-count">5</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Kinect/">Kinect</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Life/">Life</a><span class="tag-list-count">17</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Linux/">Linux</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Machine-Learning/">Machine Learning</a><span class="tag-list-count">9</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Maching/">Maching</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Markov/">Markov</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Monster-Hunter/">Monster Hunter</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Motion/">Motion</a><span class="tag-list-count">6</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Movie/">Movie</a><span class="tag-list-count">6</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Music/">Music</a><span class="tag-list-count">7</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/NPR/">NPR</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/OS/">OS</a><span class="tag-list-count">4</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/OpenCV/">OpenCV</a><span class="tag-list-count">3</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Patent/">Patent</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Pose/">Pose</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Push-relabel/">Push-relabel</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Random-Forest/">Random Forest</a><span class="tag-list-count">5</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Random-Trees/">Random Trees</a><span class="tag-list-count">5</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Recognition/">Recognition</a><span class="tag-list-count">13</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Reconstruction/">Reconstruction</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Review/">Review</a><span class="tag-list-count">3</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Segmentation/">Segmentation</a><span class="tag-list-count">3</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Shape/">Shape</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Silhouette/">Silhouette</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Simulation/">Simulation</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/TV/">TV</a><span class="tag-list-count">3</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Testing/">Testing</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Theory-of-Computation/">Theory of Computation</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Tools/">Tools</a><span class="tag-list-count">4</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/WOW/">WOW</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Works/">Works</a><span class="tag-list-count">13</span></li></ul>
+    </div>
+  </div>
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Tag Cloud</h3>
+    <div class="widget tagcloud">
+      <a href="/tags/AI/" style="font-size: 11.11px;">AI</a> <a href="/tags/Analysis/" style="font-size: 12.22px;">Analysis</a> <a href="/tags/Android/" style="font-size: 10px;">Android</a> <a href="/tags/Anime/" style="font-size: 16.67px;">Anime</a> <a href="/tags/Art/" style="font-size: 16.67px;">Art</a> <a href="/tags/Bayesian/" style="font-size: 11.11px;">Bayesian</a> <a href="/tags/Caching/" style="font-size: 11.11px;">Caching</a> <a href="/tags/Code/" style="font-size: 14.44px;">Code</a> <a href="/tags/Computer-Graphics/" style="font-size: 11.11px;">Computer Graphics</a> <a href="/tags/Computer-Vision/" style="font-size: 18.89px;">Computer Vision</a> <a href="/tags/Data-Mining/" style="font-size: 10px;">Data Mining</a> <a href="/tags/Depth-Camera/" style="font-size: 11.11px;">Depth Camera</a> <a href="/tags/Design/" style="font-size: 14.44px;">Design</a> <a href="/tags/Dream/" style="font-size: 12.22px;">Dream</a> <a href="/tags/Ford-Fulkerson/" style="font-size: 10px;">Ford-Fulkerson</a> <a href="/tags/Friends/" style="font-size: 12.22px;">Friends</a> <a href="/tags/GPU/" style="font-size: 10px;">GPU</a> <a href="/tags/Game/" style="font-size: 15.56px;">Game</a> <a href="/tags/Game-Design/" style="font-size: 12.22px;">Game Design</a> <a href="/tags/Gesture/" style="font-size: 11.11px;">Gesture</a> <a href="/tags/Graphcut/" style="font-size: 14.44px;">Graphcut</a> <a href="/tags/Kinect/" style="font-size: 10px;">Kinect</a> <a href="/tags/Life/" style="font-size: 20px;">Life</a> <a href="/tags/Linux/" style="font-size: 11.11px;">Linux</a> <a href="/tags/Machine-Learning/" style="font-size: 17.78px;">Machine Learning</a> <a href="/tags/Maching/" style="font-size: 10px;">Maching</a> <a href="/tags/Markov/" style="font-size: 11.11px;">Markov</a> <a href="/tags/Monster-Hunter/" style="font-size: 10px;">Monster Hunter</a> <a href="/tags/Motion/" style="font-size: 15.56px;">Motion</a> <a href="/tags/Movie/" style="font-size: 15.56px;">Movie</a> <a href="/tags/Music/" style="font-size: 16.67px;">Music</a> <a href="/tags/NPR/" style="font-size: 10px;">NPR</a> <a href="/tags/OS/" style="font-size: 13.33px;">OS</a> <a href="/tags/OpenCV/" style="font-size: 12.22px;">OpenCV</a> <a href="/tags/Patent/" style="font-size: 10px;">Patent</a> <a href="/tags/Pose/" style="font-size: 10px;">Pose</a> <a href="/tags/Push-relabel/" style="font-size: 10px;">Push-relabel</a> <a href="/tags/Random-Forest/" style="font-size: 14.44px;">Random Forest</a> <a href="/tags/Random-Trees/" style="font-size: 14.44px;">Random Trees</a> <a href="/tags/Recognition/" style="font-size: 18.89px;">Recognition</a> <a href="/tags/Reconstruction/" style="font-size: 10px;">Reconstruction</a> <a href="/tags/Review/" style="font-size: 12.22px;">Review</a> <a href="/tags/Segmentation/" style="font-size: 12.22px;">Segmentation</a> <a href="/tags/Shape/" style="font-size: 10px;">Shape</a> <a href="/tags/Silhouette/" style="font-size: 10px;">Silhouette</a> <a href="/tags/Simulation/" style="font-size: 10px;">Simulation</a> <a href="/tags/TV/" style="font-size: 12.22px;">TV</a> <a href="/tags/Testing/" style="font-size: 11.11px;">Testing</a> <a href="/tags/Theory-of-Computation/" style="font-size: 10px;">Theory of Computation</a> <a href="/tags/Tools/" style="font-size: 13.33px;">Tools</a> <a href="/tags/WOW/" style="font-size: 10px;">WOW</a> <a href="/tags/Works/" style="font-size: 18.89px;">Works</a>
+    </div>
+  </div>
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Archives</h3>
+    <div class="widget">
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2012/10/">十月 2012</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2012/09/">九月 2012</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2012/01/">一月 2012</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2011/12/">十二月 2011</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2011/11/">十一月 2011</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2011/08/">八月 2011</a><span class="archive-list-count">4</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2011/07/">七月 2011</a><span class="archive-list-count">3</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2011/05/">五月 2011</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2011/04/">四月 2011</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2011/03/">三月 2011</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2010/12/">十二月 2010</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2010/11/">十一月 2010</a><span class="archive-list-count">4</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2010/10/">十月 2010</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2010/09/">九月 2010</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2010/07/">七月 2010</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2010/06/">六月 2010</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2010/05/">五月 2010</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2010/03/">三月 2010</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2010/02/">二月 2010</a><span class="archive-list-count">3</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2010/01/">一月 2010</a><span class="archive-list-count">5</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2009/12/">十二月 2009</a><span class="archive-list-count">4</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2009/11/">十一月 2009</a><span class="archive-list-count">6</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2009/05/">五月 2009</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2008/09/">九月 2008</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2008/07/">七月 2008</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2008/02/">二月 2008</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2008/01/">一月 2008</a><span class="archive-list-count">3</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2007/12/">十二月 2007</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2007/08/">八月 2007</a><span class="archive-list-count">1</span></li></ul>
+    </div>
+  </div>
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Recents</h3>
+    <div class="widget">
+      <ul>
+        
+          <li>
+            <a href="/2012/10/30/move_from_wp/e5-8d-8a-e5-a4-9c-e6-9b-b4-e6-96-b0-e7-9c-8b-e5-b8-ae-e5-a8-98/">半夜更新看板娘 ~ </a>
+          </li>
+        
+          <li>
+            <a href="/2012/09/25/move_from_wp/e8-bf-9f-e6-9d-a5-e7-9a-84wow-e6-af-95-e4-b8-9a-e7-95-99-e5-bf-b5/">迟来的WOW毕业留念</a>
+          </li>
+        
+          <li>
+            <a href="/2012/01/11/move_from_wp/e8-af-b4-e8-af-b4-e6-9c-80-e8-bf-91-e7-9c-8b-e8-bf-87-e7-9a-84-e7-94-b5-e8-a7-86-e5-89-a7/">说说最近看过的电视剧</a>
+          </li>
+        
+          <li>
+            <a href="/2012/01/06/move_from_wp/e9-82-a3-e4-ba-9b-e5-b9-b4-ef-bc-8c-e6-88-91-e4-bb-ac-e4-b8-80-e8-b5-b7-e5-86-99-e7-9a-84-e5-ad-a6-e4-bd-8d-e8-ae-ba-e6-96-87/">那些年，我们一起写的学位论文</a>
+          </li>
+        
+          <li>
+            <a href="/2011/12/31/move_from_wp/2011-e5-b9-b4-e7-bb-88-e7-9b-98-e7-82-b9/">2011年终盘点</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+
+  
+</aside>
+        
+      </div>
+      <footer id="footer">
+  
+  <div class="outer">
+    <div id="footer-info" class="inner">
+      &copy; 2015 lincccc<br>
+      Powered by <a href="http://hexo.io/" target="_blank">Hexo</a>
+    </div>
+  </div>
+</footer>
+    </div>
+    <nav id="mobile-nav">
+  
+    <a href="/" class="mobile-nav-link">Home</a>
+  
+    <a href="/archives" class="mobile-nav-link">Archives</a>
+  
+</nav>
+    
+
+<script src="//ajax.googleapis.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
+
+
+  <link rel="stylesheet" href="/fancybox/jquery.fancybox.css" type="text/css">
+  <script src="/fancybox/jquery.fancybox.pack.js" type="text/javascript"></script>
+
+
+<script src="/js/script.js" type="text/javascript"></script>
+
+  </div>
+</body>
+</html>

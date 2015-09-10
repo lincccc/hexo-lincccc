@@ -1,0 +1,229 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  <title>[论文笔记] Adaptive Insertion Policies for Managing Shared Caches | _Sugarless</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="description" content="Paper: Aamer Jaleel , William Hasenplaugh , Moinuddin Qureshi , Julien Sebot , Simon Steely, Jr. , Joel Emer, Adaptive insertion policies for managing shared caches, Proceedings of the 17th internatio">
+<meta property="og:type" content="article">
+<meta property="og:title" content="[论文笔记] Adaptive Insertion Policies for Managing Shared Caches">
+<meta property="og:url" content="http://yoursite.com/2009/11/30/move_from_wp/e8-ae-ba-e6-96-87-e7-ac-94-e8-ae-b0-adaptive-insertion-policies-for-managing-shared-caches/index.html">
+<meta property="og:site_name" content="_Sugarless">
+<meta property="og:description" content="Paper: Aamer Jaleel , William Hasenplaugh , Moinuddin Qureshi , Julien Sebot , Simon Steely, Jr. , Joel Emer, Adaptive insertion policies for managing shared caches, Proceedings of the 17th internatio">
+<meta property="og:image" content="http://lh4.ggpht.com/_NFbnZk4IksM/TKQ94KYniWI/AAAAAAAAAGg/EosugKFSi0Q/sdfa_thumb%5B1%5D.jpg?imgmax=800">
+<meta property="og:updated_time" content="2015-09-06T09:35:42.861Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="[论文笔记] Adaptive Insertion Policies for Managing Shared Caches">
+<meta name="twitter:description" content="Paper: Aamer Jaleel , William Hasenplaugh , Moinuddin Qureshi , Julien Sebot , Simon Steely, Jr. , Joel Emer, Adaptive insertion policies for managing shared caches, Proceedings of the 17th internatio">
+  
+    <link rel="alternative" href="/atom.xml" title="_Sugarless" type="application/atom+xml">
+  
+  
+    <link rel="icon" href="/favicon.png">
+  
+  <link href="//fonts.googleapis.com/css?family=Source+Code+Pro" rel="stylesheet" type="text/css">
+  <link rel="stylesheet" href="/css/style.css" type="text/css">
+  
+
+</head>
+<body>
+  <div id="container">
+    <div id="wrap">
+      <header id="header">
+  <div id="banner"></div>
+  <div id="header-outer" class="outer">
+    <div id="header-title" class="inner">
+      <h1 id="logo-wrap">
+        <a href="/" id="logo">_Sugarless</a>
+      </h1>
+      
+    </div>
+    <div id="header-inner" class="inner">
+      <nav id="main-nav">
+        <a id="main-nav-toggle" class="nav-icon"></a>
+        
+          <a class="main-nav-link" href="/">Home</a>
+        
+          <a class="main-nav-link" href="/archives">Archives</a>
+        
+      </nav>
+      <nav id="sub-nav">
+        
+          <a id="nav-rss-link" class="nav-icon" href="/atom.xml" title="RSS Feed"></a>
+        
+        <a id="nav-search-btn" class="nav-icon" title="Search"></a>
+      </nav>
+      <div id="search-form-wrap">
+        <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" results="0" class="search-form-input" placeholder="Search"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="http://yoursite.com"></form>
+      </div>
+    </div>
+  </div>
+</header>
+      <div class="outer">
+        <section id="main"><article id="post-move_from_wp/e8-ae-ba-e6-96-87-e7-ac-94-e8-ae-b0-adaptive-insertion-policies-for-managing-shared-caches" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2009/11/30/move_from_wp/e8-ae-ba-e6-96-87-e7-ac-94-e8-ae-b0-adaptive-insertion-policies-for-managing-shared-caches/" class="article-date">
+  <time datetime="2009-11-29T19:30:00.000Z" itemprop="datePublished">2009-11-30</time>
+</a>
+    
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/Academic/">Academic</a>
+  </div>
+
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="article-title" itemprop="name">
+      [论文笔记] Adaptive Insertion Policies for Managing Shared Caches
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <div id="msgcns!CDE197AF0E29D7CE!168" class="bvMsg"><br><br><font face="Arial"><strong>Paper: </strong>Aamer Jaleel , William Hasenplaugh , Moinuddin Qureshi , Julien Sebot , Simon Steely, Jr. , Joel Emer, <u>Adaptive insertion policies for managing shared caches</u>, Proceedings of the 17th international conference on Parallel architectures and compilation techniques, October 25-29, 2008, Toronto, Ontario, Canada<br><br><em> </em> <em><br><br></em></font><font face="Arial"><em>*问题描述：</em><p>在多核处理器中往往存在多个应用程序竞争使用Cache的情况，而传统的LRU策略基于程序的需求率Rate of demand来决定Cache资源的分配，但事实证明根据程序是否从Cache获益才是更为合理的分配方式。文中基于近期发表的DIP插入策略扩展，考虑同时运行的多个程序的Cache分配问题，提出了Thread-Aware Dynamic Insertion Policy(TADIP)。并，使用TADIP策略的Cache，其性能相当于两倍容量的使用LRU策略的Cache。<br></p></font><br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <font face="Arial">文中认为程序按照Cache容量与失配率间的关系可分为四类：1) “Cache Friendly”；2) “Cache Fitting”；3) “Cache Thrashing”；4) “Streaming”。其重用运行所需的Cache容量依次增大，在TADIP策略中的资源分配优先级依次降低。TADIP策略认为，要将更多的资源分配给能从Cache中获益的程序，也就是能够重用Cache的程序。<p><br><br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="http://lh3.ggpht.com/_NFbnZk4IksM/TKQ93pSk3LI/AAAAAAAAAGc/MGklVqaXx2s/s1600-h/sdfa%5B3%5D.jpg" target="_blank" rel="external"><img src="http://lh4.ggpht.com/_NFbnZk4IksM/TKQ94KYniWI/AAAAAAAAAGg/EosugKFSi0Q/sdfa_thumb%5B1%5D.jpg?imgmax=800" alt=""></a> </p></font><br> <p><font face="Arial">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; TADIP是DIP插入策略在多线程上的应用，它试图对每一个运行中的程序决策其Cache插入策略(LRU=0, BIP=1)。那么，当N个程序竞争Cache时，就等于从2N种组合策略中，选择最佳的一条N位Stream作为方案。最Naive的方法就是对所有的组合策略遍历运行后选取失配率最小的一种，但这种方法面临着指数危机，只有当N较小时，才能使用Set Dueling做实时决策。<a id="more"></a><br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 因此，文中对TADIP做了两种扩展：<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 1) TADIP-Isolated。这种方法对每个程序单独决策。它使用N+1个SDM，其中：第一个SDM称为baseline-SDM，所有的App均使用LRU策略；其余的SDM称为bimodal-SDM，有且仅有一个App使用BIP（其余LRU）。如&lt;0, 1, 0, 0&gt;，App2使用BIP，App1/3/4使用LRU。这种方法同样使用Counter计数的方法决策。当baseline-SDM发生失配时，所有App对应的Counter++；而当bimodal-SDM发生失配时，只有对应1位的Counter–。也就是说，当LRU对Cache性能造成伤害时，那就是用BIP吧。当然如果Counter=0，还是使用LRU。<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 2) TADIP-Feedback。这种策略认为插入决策是不能与其他程序剥离开的。它使用2N个SDM，每个程序占用其中的一对SDM。在这一对SDM中，拥有者分别使用LRU和BIP策略，而其余程序则使用它们当前的最佳策略。然后通过Counter计数决定跟随块的插入策略。这种策略引入了所有程序的当前策略作为新策略的参考，显然要比第一种更加合理可靠，但却需要更多的SDM和Counter。<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="http://lh6.ggpht.com/_NFbnZk4IksM/TKQ95h-XjvI/AAAAAAAAAGo/WGsNcGw4DcE/dsssdf%5B7%5D_thumb.jpg?imgmax=800" title="dsssdf[7]" target="_blank" rel="external">![dsssdf[7]</a>](<a href="http://lh6.ggpht.com/_NFbnZk4IksM/TKQ94gmjZrI/AAAAAAAAAGk/oq-y5zK-qJ8/s1600-h/dsssdf%5B7%5D%5B2%5D.jpg" target="_blank" rel="external">http://lh6.ggpht.com/_NFbnZk4IksM/TKQ94gmjZrI/AAAAAAAAAGk/oq-y5zK-qJ8/s1600-h/dsssdf%5B7%5D%5B2%5D.jpg</a>)  </font><br></p></div>
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://yoursite.com/2009/11/30/move_from_wp/e8-ae-ba-e6-96-87-e7-ac-94-e8-ae-b0-adaptive-insertion-policies-for-managing-shared-caches/" data-id="ciedu83vk0049p4bgqmcj6etg" class="article-share-link">Share</a>
+      
+      
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Caching/">Caching</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/OS/">OS</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Tools/">Tools</a></li></ul>
+
+    </footer>
+  </div>
+  
+    
+<nav id="article-nav">
+  
+    <a href="/2009/12/08/move_from_wp/e8-af-bb-e4-b9-a6-e7-ac-94-e8-ae-b0-linux-e5-86-85-e6-a0-b8-e5-8a-a8-e6-80-81-e5-86-85-e5-ad-98-e5-88-86-e9-85-8d/" id="article-nav-newer" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Newer</strong>
+      <div class="article-nav-title">
+        
+          [读书笔记] Linux内核动态内存分配
+        
+      </div>
+    </a>
+  
+  
+    <a href="/2009/11/24/move_from_wp/e8-ae-ba-e6-96-87-e7-ac-94-e8-ae-b0-action-recognition-from-arbitrary-views-using-3d-exemplars/" id="article-nav-older" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Older</strong>
+      <div class="article-nav-title">[论文笔记] Action Recognition from Arbitrary Views using 3D Exemplars</div>
+    </a>
+  
+</nav>
+
+  
+</article>
+
+</section>
+        
+          <aside id="sidebar">
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Categories</h3>
+    <div class="widget">
+      <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/Academic/">Academic</a><span class="category-list-count">28</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/Academic/Engineering/">Engineering</a><span class="category-list-count">3</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Academic/Works/">Works</a><span class="category-list-count">2</span></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/Engineering/">Engineering</a><span class="category-list-count">4</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Hobby/">Hobby</a><span class="category-list-count">11</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/Hobby/Trivial/">Trivial</a><span class="category-list-count">3</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/Hobby/Trivial/Works/">Works</a><span class="category-list-count">1</span></li></ul></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/Trivial/">Trivial</a><span class="category-list-count">8</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Works/">Works</a><span class="category-list-count">10</span></li></ul>
+    </div>
+  </div>
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Tags</h3>
+    <div class="widget">
+      <ul class="tag-list"><li class="tag-list-item"><a class="tag-list-link" href="/tags/AI/">AI</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Analysis/">Analysis</a><span class="tag-list-count">3</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Android/">Android</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Anime/">Anime</a><span class="tag-list-count">7</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Art/">Art</a><span class="tag-list-count">7</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Bayesian/">Bayesian</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Caching/">Caching</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Code/">Code</a><span class="tag-list-count">5</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Computer-Graphics/">Computer Graphics</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Computer-Vision/">Computer Vision</a><span class="tag-list-count">13</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Data-Mining/">Data Mining</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Depth-Camera/">Depth Camera</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Design/">Design</a><span class="tag-list-count">5</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Dream/">Dream</a><span class="tag-list-count">3</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Ford-Fulkerson/">Ford-Fulkerson</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Friends/">Friends</a><span class="tag-list-count">3</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/GPU/">GPU</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Game/">Game</a><span class="tag-list-count">6</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Game-Design/">Game Design</a><span class="tag-list-count">3</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Gesture/">Gesture</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Graphcut/">Graphcut</a><span class="tag-list-count">5</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Kinect/">Kinect</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Life/">Life</a><span class="tag-list-count">17</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Linux/">Linux</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Machine-Learning/">Machine Learning</a><span class="tag-list-count">9</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Maching/">Maching</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Markov/">Markov</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Monster-Hunter/">Monster Hunter</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Motion/">Motion</a><span class="tag-list-count">6</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Movie/">Movie</a><span class="tag-list-count">6</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Music/">Music</a><span class="tag-list-count">7</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/NPR/">NPR</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/OS/">OS</a><span class="tag-list-count">4</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/OpenCV/">OpenCV</a><span class="tag-list-count">3</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Patent/">Patent</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Pose/">Pose</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Push-relabel/">Push-relabel</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Random-Forest/">Random Forest</a><span class="tag-list-count">5</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Random-Trees/">Random Trees</a><span class="tag-list-count">5</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Recognition/">Recognition</a><span class="tag-list-count">13</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Reconstruction/">Reconstruction</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Review/">Review</a><span class="tag-list-count">3</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Segmentation/">Segmentation</a><span class="tag-list-count">3</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Shape/">Shape</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Silhouette/">Silhouette</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Simulation/">Simulation</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/TV/">TV</a><span class="tag-list-count">3</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Testing/">Testing</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Theory-of-Computation/">Theory of Computation</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Tools/">Tools</a><span class="tag-list-count">4</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/WOW/">WOW</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Works/">Works</a><span class="tag-list-count">13</span></li></ul>
+    </div>
+  </div>
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Tag Cloud</h3>
+    <div class="widget tagcloud">
+      <a href="/tags/AI/" style="font-size: 11.11px;">AI</a> <a href="/tags/Analysis/" style="font-size: 12.22px;">Analysis</a> <a href="/tags/Android/" style="font-size: 10px;">Android</a> <a href="/tags/Anime/" style="font-size: 16.67px;">Anime</a> <a href="/tags/Art/" style="font-size: 16.67px;">Art</a> <a href="/tags/Bayesian/" style="font-size: 11.11px;">Bayesian</a> <a href="/tags/Caching/" style="font-size: 11.11px;">Caching</a> <a href="/tags/Code/" style="font-size: 14.44px;">Code</a> <a href="/tags/Computer-Graphics/" style="font-size: 11.11px;">Computer Graphics</a> <a href="/tags/Computer-Vision/" style="font-size: 18.89px;">Computer Vision</a> <a href="/tags/Data-Mining/" style="font-size: 10px;">Data Mining</a> <a href="/tags/Depth-Camera/" style="font-size: 11.11px;">Depth Camera</a> <a href="/tags/Design/" style="font-size: 14.44px;">Design</a> <a href="/tags/Dream/" style="font-size: 12.22px;">Dream</a> <a href="/tags/Ford-Fulkerson/" style="font-size: 10px;">Ford-Fulkerson</a> <a href="/tags/Friends/" style="font-size: 12.22px;">Friends</a> <a href="/tags/GPU/" style="font-size: 10px;">GPU</a> <a href="/tags/Game/" style="font-size: 15.56px;">Game</a> <a href="/tags/Game-Design/" style="font-size: 12.22px;">Game Design</a> <a href="/tags/Gesture/" style="font-size: 11.11px;">Gesture</a> <a href="/tags/Graphcut/" style="font-size: 14.44px;">Graphcut</a> <a href="/tags/Kinect/" style="font-size: 10px;">Kinect</a> <a href="/tags/Life/" style="font-size: 20px;">Life</a> <a href="/tags/Linux/" style="font-size: 11.11px;">Linux</a> <a href="/tags/Machine-Learning/" style="font-size: 17.78px;">Machine Learning</a> <a href="/tags/Maching/" style="font-size: 10px;">Maching</a> <a href="/tags/Markov/" style="font-size: 11.11px;">Markov</a> <a href="/tags/Monster-Hunter/" style="font-size: 10px;">Monster Hunter</a> <a href="/tags/Motion/" style="font-size: 15.56px;">Motion</a> <a href="/tags/Movie/" style="font-size: 15.56px;">Movie</a> <a href="/tags/Music/" style="font-size: 16.67px;">Music</a> <a href="/tags/NPR/" style="font-size: 10px;">NPR</a> <a href="/tags/OS/" style="font-size: 13.33px;">OS</a> <a href="/tags/OpenCV/" style="font-size: 12.22px;">OpenCV</a> <a href="/tags/Patent/" style="font-size: 10px;">Patent</a> <a href="/tags/Pose/" style="font-size: 10px;">Pose</a> <a href="/tags/Push-relabel/" style="font-size: 10px;">Push-relabel</a> <a href="/tags/Random-Forest/" style="font-size: 14.44px;">Random Forest</a> <a href="/tags/Random-Trees/" style="font-size: 14.44px;">Random Trees</a> <a href="/tags/Recognition/" style="font-size: 18.89px;">Recognition</a> <a href="/tags/Reconstruction/" style="font-size: 10px;">Reconstruction</a> <a href="/tags/Review/" style="font-size: 12.22px;">Review</a> <a href="/tags/Segmentation/" style="font-size: 12.22px;">Segmentation</a> <a href="/tags/Shape/" style="font-size: 10px;">Shape</a> <a href="/tags/Silhouette/" style="font-size: 10px;">Silhouette</a> <a href="/tags/Simulation/" style="font-size: 10px;">Simulation</a> <a href="/tags/TV/" style="font-size: 12.22px;">TV</a> <a href="/tags/Testing/" style="font-size: 11.11px;">Testing</a> <a href="/tags/Theory-of-Computation/" style="font-size: 10px;">Theory of Computation</a> <a href="/tags/Tools/" style="font-size: 13.33px;">Tools</a> <a href="/tags/WOW/" style="font-size: 10px;">WOW</a> <a href="/tags/Works/" style="font-size: 18.89px;">Works</a>
+    </div>
+  </div>
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Archives</h3>
+    <div class="widget">
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2012/10/">十月 2012</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2012/09/">九月 2012</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2012/01/">一月 2012</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2011/12/">十二月 2011</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2011/11/">十一月 2011</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2011/08/">八月 2011</a><span class="archive-list-count">4</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2011/07/">七月 2011</a><span class="archive-list-count">3</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2011/05/">五月 2011</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2011/04/">四月 2011</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2011/03/">三月 2011</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2010/12/">十二月 2010</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2010/11/">十一月 2010</a><span class="archive-list-count">4</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2010/10/">十月 2010</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2010/09/">九月 2010</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2010/07/">七月 2010</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2010/06/">六月 2010</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2010/05/">五月 2010</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2010/03/">三月 2010</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2010/02/">二月 2010</a><span class="archive-list-count">3</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2010/01/">一月 2010</a><span class="archive-list-count">5</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2009/12/">十二月 2009</a><span class="archive-list-count">4</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2009/11/">十一月 2009</a><span class="archive-list-count">6</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2009/05/">五月 2009</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2008/09/">九月 2008</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2008/07/">七月 2008</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2008/02/">二月 2008</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2008/01/">一月 2008</a><span class="archive-list-count">3</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2007/12/">十二月 2007</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2007/08/">八月 2007</a><span class="archive-list-count">1</span></li></ul>
+    </div>
+  </div>
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Recents</h3>
+    <div class="widget">
+      <ul>
+        
+          <li>
+            <a href="/2012/10/30/move_from_wp/e5-8d-8a-e5-a4-9c-e6-9b-b4-e6-96-b0-e7-9c-8b-e5-b8-ae-e5-a8-98/">半夜更新看板娘 ~ </a>
+          </li>
+        
+          <li>
+            <a href="/2012/09/25/move_from_wp/e8-bf-9f-e6-9d-a5-e7-9a-84wow-e6-af-95-e4-b8-9a-e7-95-99-e5-bf-b5/">迟来的WOW毕业留念</a>
+          </li>
+        
+          <li>
+            <a href="/2012/01/11/move_from_wp/e8-af-b4-e8-af-b4-e6-9c-80-e8-bf-91-e7-9c-8b-e8-bf-87-e7-9a-84-e7-94-b5-e8-a7-86-e5-89-a7/">说说最近看过的电视剧</a>
+          </li>
+        
+          <li>
+            <a href="/2012/01/06/move_from_wp/e9-82-a3-e4-ba-9b-e5-b9-b4-ef-bc-8c-e6-88-91-e4-bb-ac-e4-b8-80-e8-b5-b7-e5-86-99-e7-9a-84-e5-ad-a6-e4-bd-8d-e8-ae-ba-e6-96-87/">那些年，我们一起写的学位论文</a>
+          </li>
+        
+          <li>
+            <a href="/2011/12/31/move_from_wp/2011-e5-b9-b4-e7-bb-88-e7-9b-98-e7-82-b9/">2011年终盘点</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+
+  
+</aside>
+        
+      </div>
+      <footer id="footer">
+  
+  <div class="outer">
+    <div id="footer-info" class="inner">
+      &copy; 2015 lincccc<br>
+      Powered by <a href="http://hexo.io/" target="_blank">Hexo</a>
+    </div>
+  </div>
+</footer>
+    </div>
+    <nav id="mobile-nav">
+  
+    <a href="/" class="mobile-nav-link">Home</a>
+  
+    <a href="/archives" class="mobile-nav-link">Archives</a>
+  
+</nav>
+    
+
+<script src="//ajax.googleapis.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
+
+
+  <link rel="stylesheet" href="/fancybox/jquery.fancybox.css" type="text/css">
+  <script src="/fancybox/jquery.fancybox.pack.js" type="text/javascript"></script>
+
+
+<script src="/js/script.js" type="text/javascript"></script>
+
+  </div>
+</body>
+</html>

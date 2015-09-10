@@ -1,0 +1,670 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  <title>_Sugarless</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="description" content="lincccc.com">
+<meta property="og:type" content="website">
+<meta property="og:title" content="_Sugarless">
+<meta property="og:url" content="http://yoursite.com/page/4/index.html">
+<meta property="og:site_name" content="_Sugarless">
+<meta property="og:description" content="lincccc.com">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="_Sugarless">
+<meta name="twitter:description" content="lincccc.com">
+  
+    <link rel="alternative" href="/atom.xml" title="_Sugarless" type="application/atom+xml">
+  
+  
+    <link rel="icon" href="/favicon.png">
+  
+  <link href="//fonts.googleapis.com/css?family=Source+Code+Pro" rel="stylesheet" type="text/css">
+  <link rel="stylesheet" href="/css/style.css" type="text/css">
+  
+
+</head>
+<body>
+  <div id="container">
+    <div id="wrap">
+      <header id="header">
+  <div id="banner"></div>
+  <div id="header-outer" class="outer">
+    <div id="header-title" class="inner">
+      <h1 id="logo-wrap">
+        <a href="/" id="logo">_Sugarless</a>
+      </h1>
+      
+    </div>
+    <div id="header-inner" class="inner">
+      <nav id="main-nav">
+        <a id="main-nav-toggle" class="nav-icon"></a>
+        
+          <a class="main-nav-link" href="/">Home</a>
+        
+          <a class="main-nav-link" href="/archives">Archives</a>
+        
+      </nav>
+      <nav id="sub-nav">
+        
+          <a id="nav-rss-link" class="nav-icon" href="/atom.xml" title="RSS Feed"></a>
+        
+        <a id="nav-search-btn" class="nav-icon" title="Search"></a>
+      </nav>
+      <div id="search-form-wrap">
+        <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" results="0" class="search-form-input" placeholder="Search"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="http://yoursite.com"></form>
+      </div>
+    </div>
+  </div>
+</header>
+      <div class="outer">
+        <section id="main">
+  
+    <article id="post-move_from_wp/e8-af-bb-e4-b9-a6-e7-ac-94-e8-ae-b0-e6-b8-b8-e6-88-8f-e6-b5-8b-e8-af-95-part-1-ef-bc-9a-e5-9f-ba-e6-9c-ac-e6-a6-82-e5-bf-b5" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2010/05/28/move_from_wp/e8-af-bb-e4-b9-a6-e7-ac-94-e8-ae-b0-e6-b8-b8-e6-88-8f-e6-b5-8b-e8-af-95-part-1-ef-bc-9a-e5-9f-ba-e6-9c-ac-e6-a6-82-e5-bf-b5/" class="article-date">
+  <time datetime="2010-05-28T13:58:00.000Z" itemprop="datePublished">2010-05-28</time>
+</a>
+    
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/Engineering/">Engineering</a>
+  </div>
+
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2010/05/28/move_from_wp/e8-af-bb-e4-b9-a6-e7-ac-94-e8-ae-b0-e6-b8-b8-e6-88-8f-e6-b5-8b-e8-af-95-part-1-ef-bc-9a-e5-9f-ba-e6-9c-ac-e6-a6-82-e5-bf-b5/">[读书笔记] 游戏测试 Part 1：基本概念</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p><strong>Book：</strong>Charles P. Schultz, Robert Bryant, Tim Langdell, <u><em>Game Testing All in One</em></u>（周学毛等译, 清华大学出版社）, Thomson Learning</p>
+<hr>
+<p>为着这学期软件工程课8000+字的Term Paper看的这书。前日去图书馆原是想借些正经软工书的，翻了满架子的书竟是本本写得都像畅销书，还真如众人所说的，真水。想看些架构设计的书，竟也没找着。稍有些质感读起来也不太枯燥的，就只有一些游戏方面的书，有图，还有些我知晓的例子。那便看吧。  </p>
+<p>测试为什么重要呢？因为游戏会出错，出各种各样的错，并且即使经过了漫长的尽可能全面的测试，游戏依旧会出错。但这恰恰说明在发布前的测试是十分必要的，不管是对于游戏出版商，还是对于开发团队而言。一款出色的游戏会得到褒奖，而一款充满Bug频频跳闸的游戏则会给开发团队带来漫天的骂声，销售额和利润也随之蒸发。</p>
+<p>测试为什么对于游戏尤其重要呢？其实测试对于任意一款应用软件都是相当重要的，但是没有一款应用软件像游戏这样拥有庞大、多样、富有压力的客户群。不要指望玩家规规矩矩地按照手册上写的点击菜单，你永远都无法完全预测到每一个玩家所有可能的变态操作——他们可能在物品交易的过程中突发奇想地丢掉正在交易的物品，而导致玩家数据错误。因此，游戏测试是任重而道远的。<br>&nbsp;</p>
+        
+          <p class="article-more-link">
+            <a href="/2010/05/28/move_from_wp/e8-af-bb-e4-b9-a6-e7-ac-94-e8-ae-b0-e6-b8-b8-e6-88-8f-e6-b5-8b-e8-af-95-part-1-ef-bc-9a-e5-9f-ba-e6-9c-ac-e6-a6-82-e5-bf-b5/#more">Read More</a>
+          </p>
+        
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://yoursite.com/2010/05/28/move_from_wp/e8-af-bb-e4-b9-a6-e7-ac-94-e8-ae-b0-e6-b8-b8-e6-88-8f-e6-b5-8b-e8-af-95-part-1-ef-bc-9a-e5-9f-ba-e6-9c-ac-e6-a6-82-e5-bf-b5/" data-id="ciedu83s5001xp4bgadnnh4i8" class="article-share-link">Share</a>
+      
+      
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Game/">Game</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Game-Design/">Game Design</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Testing/">Testing</a></li></ul>
+
+    </footer>
+  </div>
+  
+</article>
+
+
+  
+    <article id="post-move_from_wp/e6-b8-85-e6-98-8e-e5-b0-86-e8-87-b3-ef-bc-8c-e9-9b-a8-e6-96-ad-e6-96-ad-e7-bb-ad-e7-bb-ad-e5-9c-b0-e7-ba-b7-e7-ba-b7" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2010/03/30/move_from_wp/e6-b8-85-e6-98-8e-e5-b0-86-e8-87-b3-ef-bc-8c-e9-9b-a8-e6-96-ad-e6-96-ad-e7-bb-ad-e7-bb-ad-e5-9c-b0-e7-ba-b7-e7-ba-b7/" class="article-date">
+  <time datetime="2010-03-29T21:52:00.000Z" itemprop="datePublished">2010-03-30</time>
+</a>
+    
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/Trivial/">Trivial</a>
+  </div>
+
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2010/03/30/move_from_wp/e6-b8-85-e6-98-8e-e5-b0-86-e8-87-b3-ef-bc-8c-e9-9b-a8-e6-96-ad-e6-96-ad-e7-bb-ad-e7-bb-ad-e5-9c-b0-e7-ba-b7-e7-ba-b7/">清明将至，雨断断续续地纷纷</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>近脱产地准备iBT已半月有余，每天做2小时的反复听力现在总算跟得上iBT的语速了。顺便背着单词，拿词汇书啃实在痛苦了些，就把一些阅读里听力里的词和句子记在Excel里然后每天看看，至于为啥要写在Excel里呢，因为这样排布起来比较好看~ 700字的阅读最近看起来也不太吃力了，虽然长句读起来还是有些卡时间有时也会超，我发现我比较喜欢看地理和心理类的文章。</p>
+<p>作文就只做了些翻译和句型的练习，看到题目还是没有清晰的头绪，接下去得看些范文再模仿着写下。口语基本没准备，前几日试着录了下，发现自己说中文都很含糊&gt; &lt;，难道你们一直听到我口齿不清啊，我要去画圈圈。。</p>
+<p>四个部分里准备地最开心的是听力，因为lecture的内容还是比较有实质的，偶尔还可以收获些谈资，更重要的是可以以此为名看美剧和电影。最辛苦的应该是口语吧，所以迟迟都没有开始，说出第一句话还是很困难的，小时候花了几年，现在长大了心智成熟了但怎么着也要酝酿个几个星期吧。</p>
+<p>看多了英语，最近觉得听到中文讲话，偶尔听听日语歌还有一丝不挂都是十分美妙的事情，有种回家的感觉。</p>
+<p>这段时间杭州的天气着实奇怪，周一阴周二三雨周四五阴周末晴，循环往复。于是每天起床头一件事就是头疼今天穿什么才不至于热死或冷死。panda抱怨是三峡害的，他小时候杭州的天气绝对是四季分明。自辩老师也抱怨三峡导致了西南干旱。我觉得他们都在理，三峡断了我再游长江的美梦，所以，赶快炸了去吧。</p>
+<p>刚又去教五调程序了，原本一直跑得挺好动作识别得也挺好，末了老耿至了，soso竟鬼使神差地首次砸到天花板上的日光灯，接着识别结果就开始紊乱了。小魏说这叫蝴蝶效应。我汗，怎么总这样，真是佛曰不可说啊。</p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://yoursite.com/2010/03/30/move_from_wp/e6-b8-85-e6-98-8e-e5-b0-86-e8-87-b3-ef-bc-8c-e9-9b-a8-e6-96-ad-e6-96-ad-e7-bb-ad-e7-bb-ad-e5-9c-b0-e7-ba-b7-e7-ba-b7/" data-id="ciedu83xy005up4bgj2hm8uac" class="article-share-link">Share</a>
+      
+      
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Life/">Life</a></li></ul>
+
+    </footer>
+  </div>
+  
+</article>
+
+
+  
+    <article id="post-move_from_wp/e4-b8-a4-e6-9c-ac-e7-ab-a5-e8-af-9d" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2010/03/14/move_from_wp/e4-b8-a4-e6-9c-ac-e7-ab-a5-e8-af-9d/" class="article-date">
+  <time datetime="2010-03-13T22:55:00.000Z" itemprop="datePublished">2010-03-14</time>
+</a>
+    
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/Trivial/">Trivial</a>
+  </div>
+
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2010/03/14/move_from_wp/e4-b8-a4-e6-9c-ac-e7-ab-a5-e8-af-9d/">两本童话</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>今晚在UME看的原声《波西·杰克逊和神火之盗》，原本是早早地奔去买记忆中今晚首映的爱丽丝的票的，结果被告知上映日期为3月26，今日上映的是神火之盗。售票小姐一脸疲倦地问我，看否？许是今天UME的人真的很多或者她有隐情。我心想看吧，都远远地跑来了，总不至于只纠结了下近来的记忆力就又坐半小时公交晃回去。</p>
+<p>原来是本童话。和哈利波特差不多的海报，和哈利波特差不多的基调和色彩，和哈利波特差不多的养眼少年男主角，以及和哈利波特差不多的出身，我是说电影的出身。也是同样的三人小组，两男一女，一个精明一个忠诚一个万能。不过它比哈利波特好些，至少我看得懂。这片子几乎没什么出彩的地方，但它告诉了我们一些事情：<br>1. 具象化的美杜莎真是恶心，然后知道如何打败美杜莎吗？诀窍是iPhone。<br>2. 旅行中一定要随身携带Mac，和远方的伙伴保持通信了解法宝的使用方法，因为出发时太急促来不及说。<br>3. 美杜莎的头是个好武器，但赢了之后千万别高兴得亲她，这太恶心了。<br>4. 不要吃免费的食物！<br>5. 拿跑车做奖品的话，就不要把车钥匙放在车里，更不要给车加满油。<br>6. 最后我觉得，如果宙斯用闪电火和波塞冬打架的话，他会输的，因为水导电。<br>7. 最后的最后，他们怎么处理美杜莎的头了？扔垃圾桶里了？</p>
+<p>回来的时候路过IFE，外带了杯摩卡，回到寝室看完了剩下一半的《了不起的狐狸爸爸》。也是一本童话。狐设是细长细长的身材，小小的脚尖走起来像跳芭蕾舞，通篇发光两次呈国旗色彩的皮毛，甚得我心。几首插曲都很美妙，尤其那首开篇歌词一胖一矮一瘦的童谣，还有那首一群农场工人围在一起唱的中间大段字幕组都没有翻译的小调。</p>
+        
+          <p class="article-more-link">
+            <a href="/2010/03/14/move_from_wp/e4-b8-a4-e6-9c-ac-e7-ab-a5-e8-af-9d/#more">Read More</a>
+          </p>
+        
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://yoursite.com/2010/03/14/move_from_wp/e4-b8-a4-e6-9c-ac-e7-ab-a5-e8-af-9d/" data-id="ciedu842h0089p4bgj3tg0x6z" class="article-share-link">Share</a>
+      
+      
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Dream/">Dream</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Friends/">Friends</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Life/">Life</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Movie/">Movie</a></li></ul>
+
+    </footer>
+  </div>
+  
+</article>
+
+
+  
+    <article id="post-move_from_wp/e8-af-bb-e4-b9-a6-e7-ac-94-e8-ae-b0-e4-ba-ba-e5-b7-a5-e6-99-ba-e8-83-bd-e4-b8-ad-e7-9a-84-e4-b8-8d-e7-a1-ae-e5-ae-9a-e7-9f-a5-e8-af-86-e4-b8-8e-e6-8e-a8-e7-90-86-part-2-ef-bc-9a-e5-85-b3-e4-ba-8e" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2010/02/12/move_from_wp/e8-af-bb-e4-b9-a6-e7-ac-94-e8-ae-b0-e4-ba-ba-e5-b7-a5-e6-99-ba-e8-83-bd-e4-b8-ad-e7-9a-84-e4-b8-8d-e7-a1-ae-e5-ae-9a-e7-9f-a5-e8-af-86-e4-b8-8e-e6-8e-a8-e7-90-86-part-2-ef-bc-9a-e5-85-b3-e4-ba-8e/" class="article-date">
+  <time datetime="2010-02-11T23:09:00.000Z" itemprop="datePublished">2010-02-12</time>
+</a>
+    
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/Academic/">Academic</a>
+  </div>
+
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2010/02/12/move_from_wp/e8-af-bb-e4-b9-a6-e7-ac-94-e8-ae-b0-e4-ba-ba-e5-b7-a5-e6-99-ba-e8-83-bd-e4-b8-ad-e7-9a-84-e4-b8-8d-e7-a1-ae-e5-ae-9a-e7-9f-a5-e8-af-86-e4-b8-8e-e6-8e-a8-e7-90-86-part-2-ef-bc-9a-e5-85-b3-e4-ba-8e/">[读书笔记] 人工智能中的不确定知识与推理 PART 2：关于时间的概率推理</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p><strong>BOOK：</strong>Stuart Russell, Peter Norvig, <u>Artifical Intelligence: A Modern Approach</u>（中译第二版，姜哲等）, Pearson</p>
+<hr>
+<p>在静态世界中，每一个随机变量的取值都是唯一固定的；而有时问题是动态的，环境状态会随时间不断变化，比如考虑病情的发展，因此有必要对时间上的不确定性建模。我们将状态的改变过程描述为一系列快照，每一个快照（或时间片）都描述了世界在某个特定时刻的状态，包含一个随机变量集合，其中一部分是可观察的，如证据变量Effect，另一部分是不可观察的，如Cause。为了方便标记，一般假设时间片间有一个固定的有限时间间隔，以整数标记。符号U1:3对应变量U1，U2，U3。</p>
+<ul>
+<li><p><strong>马尔可夫假设</strong><br>马尔可夫假设认为，当前状态值只依赖于过去“有限的”已出现状态历史。这一假设使我们得以避免指定数目无界的条件假设表（过去的历史是无限的）。满足这一假设的过程被称为马尔可夫过程或者马尔可夫链，最简单的也应用最广的是一阶马尔可夫过程，即当前状态只依赖于相邻的前一个状态，与更早的状态无关：<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="http://lh4.ggpht.com/_NFbnZk4IksM/TM5cRpFjevI/AAAAAAAAALU/LRiXpsP7JJc/s1600-h/clause53%5B2%5D.jpg"><img src="http://lh3.ggpht.com/_NFbnZk4IksM/TM5cSUYnyRI/AAAAAAAAALY/DeMSz_zhsS8/clause53_thumb.jpg?imgmax=800" alt="clause53" title="clause53"></a>&nbsp;&nbsp;&nbsp; | 转移模型<br>另外，也假设时刻t的证据变量只取决于当前状态：<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="http://lh6.ggpht.com/_NFbnZk4IksM/TM5cTHHDVdI/AAAAAAAAALc/nSKAtGUM1Yo/s1600-h/clause63%5B2%5D.jpg"><img src="http://lh4.ggpht.com/_NFbnZk4IksM/TM5cTz82MjI/AAAAAAAAALg/7DTLtVVrtAU/clause63_thumb.jpg?imgmax=800" alt="clause63" title="clause63"></a>&nbsp;&nbsp;&nbsp; | 传感器模型<br>一阶马尔可夫的假设在大多数情况下都只是一种近似，而且往往是太不精确的，有两种可能的弥补方法：1）提高马尔可夫过程的阶数；2）扩大状态变量集合。但是可以证明，提高阶数，总能够通过增加状态变量的个数重新形式化，以保持阶数不变。</p>
+        
+          <p class="article-more-link">
+            <a href="/2010/02/12/move_from_wp/e8-af-bb-e4-b9-a6-e7-ac-94-e8-ae-b0-e4-ba-ba-e5-b7-a5-e6-99-ba-e8-83-bd-e4-b8-ad-e7-9a-84-e4-b8-8d-e7-a1-ae-e5-ae-9a-e7-9f-a5-e8-af-86-e4-b8-8e-e6-8e-a8-e7-90-86-part-2-ef-bc-9a-e5-85-b3-e4-ba-8e/#more">Read More</a>
+          </p>
+        
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://yoursite.com/2010/02/12/move_from_wp/e8-af-bb-e4-b9-a6-e7-ac-94-e8-ae-b0-e4-ba-ba-e5-b7-a5-e6-99-ba-e8-83-bd-e4-b8-ad-e7-9a-84-e4-b8-8d-e7-a1-ae-e5-ae-9a-e7-9f-a5-e8-af-86-e4-b8-8e-e6-8e-a8-e7-90-86-part-2-ef-bc-9a-e5-85-b3-e4-ba-8e/" data-id="ciedu83sc0022p4bgi6n11uwd" class="article-share-link">Share</a>
+      
+      
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/AI/">AI</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Analysis/">Analysis</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Bayesian/">Bayesian</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Markov/">Markov</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Recognition/">Recognition</a></li></ul>
+
+    </footer>
+  </div>
+  
+</article>
+
+
+  
+    <article id="post-move_from_wp/e8-af-bb-e4-b9-a6-e7-ac-94-e8-ae-b0-e4-ba-ba-e5-b7-a5-e6-99-ba-e8-83-bd-e4-b8-ad-e7-9a-84-e4-b8-8d-e7-a1-ae-e5-ae-9a-e7-9f-a5-e8-af-86-e4-b8-8e-e6-8e-a8-e7-90-86-part-1-ef-bc-9a-e6-a6-82-e7-8e-87" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2010/02/06/move_from_wp/e8-af-bb-e4-b9-a6-e7-ac-94-e8-ae-b0-e4-ba-ba-e5-b7-a5-e6-99-ba-e8-83-bd-e4-b8-ad-e7-9a-84-e4-b8-8d-e7-a1-ae-e5-ae-9a-e7-9f-a5-e8-af-86-e4-b8-8e-e6-8e-a8-e7-90-86-part-1-ef-bc-9a-e6-a6-82-e7-8e-87/" class="article-date">
+  <time datetime="2010-02-05T19:07:00.000Z" itemprop="datePublished">2010-02-06</time>
+</a>
+    
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/Academic/">Academic</a>
+  </div>
+
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2010/02/06/move_from_wp/e8-af-bb-e4-b9-a6-e7-ac-94-e8-ae-b0-e4-ba-ba-e5-b7-a5-e6-99-ba-e8-83-bd-e4-b8-ad-e7-9a-84-e4-b8-8d-e7-a1-ae-e5-ae-9a-e7-9f-a5-e8-af-86-e4-b8-8e-e6-8e-a8-e7-90-86-part-1-ef-bc-9a-e6-a6-82-e7-8e-87/">[读书笔记] 人工智能中的不确定知识与推理 PART 1：概率推理</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p><strong>BOOK：</strong>Stuart Russell, Peter Norvig, <u>Artifical Intelligence: A Modern Approach</u>（中译第二版，姜哲等）, Pearson</p>
+<hr>
+<p>不确定性的研究来源于一个不幸的事实：智能体几乎从来无法了解关于其环境的全部事实， 因此对其行动的可行程度构造一个完备而正确的描述是几乎不可能的。书中概括规则不确定性的来源为三个方面：1）惰性，对所有相关规则的一一罗列着实过于繁杂；2）理论的无知，现代科学在大多数领域都无法掌握完备的规则；3）实践的无知，即使掌握所有规则，我们也无法对其一一验证。<p>  <p></p>
+<blockquote>
+<p>题外话：书中第一章绪论提到一种观点“要解决一个难题，你必须已经差不多知道答案”，这里的解决指的是AI方法的解决，直白地说，人类无法通过人工智能来解决连自己都找不到头绪的问题。这种观点缠绕着AI由古至今，数学的上限决定了AI发展的上限，学者们能做的只是不断逼近却无法超越（也许），这是哲学与数学产生的基础所决定的可悲事实。 </p>
+</blockquote>
+<p>因此，我们只能期待智能体在给定所拥有的环境信息下，在可以执行的规划中选择性能度量达到最大的一个，即理性决策（期望效用最大化）。理性决策是概率理论和效用理论的结合，前者提供一种方法以概括不确定性，后者对智能体的偏好进行表示和推理使其选择能产生最高期望效用的行动。<br>那么，作为一种合格的不确定性推理模型，首先要合理地表示各种不确定的规则，而后对于给定的观察事实（证据）能够给出各种规划的效用分布情况，最后针对效用分布作出理性决策。这样的推理模型有很多，其中一种最基础也是已经得到成熟发展的不确定知识表示方法，就是贝叶斯网络。<br>
+        
+          <p class="article-more-link">
+            <a href="/2010/02/06/move_from_wp/e8-af-bb-e4-b9-a6-e7-ac-94-e8-ae-b0-e4-ba-ba-e5-b7-a5-e6-99-ba-e8-83-bd-e4-b8-ad-e7-9a-84-e4-b8-8d-e7-a1-ae-e5-ae-9a-e7-9f-a5-e8-af-86-e4-b8-8e-e6-8e-a8-e7-90-86-part-1-ef-bc-9a-e6-a6-82-e7-8e-87/#more">Read More</a>
+          </p>
+        
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://yoursite.com/2010/02/06/move_from_wp/e8-af-bb-e4-b9-a6-e7-ac-94-e8-ae-b0-e4-ba-ba-e5-b7-a5-e6-99-ba-e8-83-bd-e4-b8-ad-e7-9a-84-e4-b8-8d-e7-a1-ae-e5-ae-9a-e7-9f-a5-e8-af-86-e4-b8-8e-e6-8e-a8-e7-90-86-part-1-ef-bc-9a-e6-a6-82-e7-8e-87/" data-id="ciedu83sj0029p4bgh7y2yp4v" class="article-share-link">Share</a>
+      
+      
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/AI/">AI</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Analysis/">Analysis</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Bayesian/">Bayesian</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Markov/">Markov</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Recognition/">Recognition</a></li></ul>
+
+    </footer>
+  </div>
+  
+</article>
+
+
+  
+    <article id="post-move_from_wp/e5-af-92-e5-81-87-e5-a7-8b" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2010/02/02/move_from_wp/e5-af-92-e5-81-87-e5-a7-8b/" class="article-date">
+  <time datetime="2010-02-01T21:08:00.000Z" itemprop="datePublished">2010-02-02</time>
+</a>
+    
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/Trivial/">Trivial</a>
+  </div>
+
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2010/02/02/move_from_wp/e5-af-92-e5-81-87-e5-a7-8b/">寒假始</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>1日，抱着大大的一束百合，打了两次的，才找到莹妞说的新开的高级会所附近的某新开的酒店，末了上楼还被当成送花的小妹= =，酒店经理义正言辞地对俺说“怎也不知道带个花瓶来！”。离被告知的时间已过半小时又一刻，主角们竟都还没到，在场的全是三姑六婆或者花白头发的叔爷们，么有一人认识俺的&gt;&lt;，所幸俺临危不惧才不致酿成惨剧。</p>
+<p>许是订婚请的人本不多，又是中午能来的更少（俺也是头一遭参加，说是订婚酒女方中午男方晚上），一顿饭吃下来除了主人家，只认识三颗人，两颗是我初中同学一颗是我小学同学T T。真是有史以来最寂寞的一顿酒席。不过见到久违的同学还是开心的，另加兄愈发惊艳，安小妹则愈发讨喜，笑问何时办喜酒，两人竟均答“如果一个人也行，那便可以办了”。我对八卦真是迟钝吧，记忆中两人都是花草有主的。</p>
+<p>算来离家已近8年，和家乡已经有些脱节了，逢人说话讲方言要先思考半拍关于如何表达，不识得新开的酒店餐厅、新造的街道小区、其实是南边大片新造和东面大片改造的所有。这个地方和我的记忆愈发不像了，初中时在江滨闲逛可从来不会遇到黑不溜秋的黑人。希望那些好吃的小食店别拆别搬别换老板最重要别变味道最好别加价！</p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://yoursite.com/2010/02/02/move_from_wp/e5-af-92-e5-81-87-e5-a7-8b/" data-id="ciedu83zu006dp4bg0w35erwr" class="article-share-link">Share</a>
+      
+      
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Life/">Life</a></li></ul>
+
+    </footer>
+  </div>
+  
+</article>
+
+
+  
+    <article id="post-move_from_wp/2009-e5-b9-b4-e7-bb-88-e7-9b-98-e7-82-b9" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2010/01/10/move_from_wp/2009-e5-b9-b4-e7-bb-88-e7-9b-98-e7-82-b9/" class="article-date">
+  <time datetime="2010-01-09T16:35:00.000Z" itemprop="datePublished">2010-01-10</time>
+</a>
+    
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/Hobby/">Hobby</a>
+  </div>
+
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2010/01/10/move_from_wp/2009-e5-b9-b4-e7-bb-88-e7-9b-98-e7-82-b9/">2009年终盘点</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>今日小雨。湿哒哒粘糊糊的，红茶包也有些潮气。趁着复习的中场休息，做一下09的年终盘点。盘点是每年必做的，数数听过什么歌、看过什么片子、去过什么地方、买了什么东西，还有花了多少钱，当然这个就不贴出来了，秘密啊。</p>
+<font size="3"><strong>※音乐</strong><br></font>09年L团的各位大叔们还在玩SOLO，正经的单曲一枚也没有。BLESS不算，1.27才release，再好听也是要算在10年的；Hurry Xmas双小鹿版也不算，理由同去年，想抢钱明说嘛，还在Super Live上说应Fans的要求再发行，Fans的要求是你们几个快点并回来别到处沾花惹草好不好，海豆子你说谎不脸红。不过，今年圣诞的Goods还是要小赞下的，小鹿手办和帽子都很可爱（扯远了）。<br><br><strong># 新添的Artists：</strong><br>シド / DREAMS.COME.TRUE / 吉田拓郎 / レミオロメン / Sukima.Switch<br>Lisa.Hannigan / Heinz.Holliger / Travis<br><strong># 删去的Artists：</strong><br>N.A.<br><strong># 第一耳就爱上的歌：</strong><br>Yui：<font color="#9b9b9b">[Again]</font>（钢炼OP1，唱的时候背不下歌词总跟不上她的快嘴巴）<br>绚香：<font color="#a0a0a0">[梦を味方に] [みんな空の下]</font>（恭喜结婚，10年好好休养，早日归来）<br>JUJU with JAY’ED：<font color="#a0a0a0">[明日がくるなら]</font><br>ステレオポニー：<font color="#a0a0a0">[泪のムコウ]</font>（没记错的话，是高达00的OP之一，几个小姑娘歌写的不错，但现场有待加强）<br>スキマスイッチ：<font color="#a0a0a0">[全力少年] [水色のスカート]</font>（第一次听是在玩太鼓达人的时候，前奏太悠扬以致开唱后有些跟不上节奏，真难，不过好听，后来找到作为插曲的片子[东京糖衣巧克力]也很有特点）<br>flumpool：<font color="#a0a0a0">[星に願いを] <font color="#404040">（Live时不断下坠的流星背景真震撼）</font><br></font>Sukima Switch：<font color="#a0a0a0">[ゴールデンタイムラバー] [雫]</font>（钢炼最近的OP，歌词里有一句“How Many？需要多少代价来交换？”真是切题）<br>
+        
+          <p class="article-more-link">
+            <a href="/2010/01/10/move_from_wp/2009-e5-b9-b4-e7-bb-88-e7-9b-98-e7-82-b9/#more">Read More</a>
+          </p>
+        
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://yoursite.com/2010/01/10/move_from_wp/2009-e5-b9-b4-e7-bb-88-e7-9b-98-e7-82-b9/" data-id="ciedu83ji0000p4bgsigtprqx" class="article-share-link">Share</a>
+      
+      
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Anime/">Anime</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Life/">Life</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Movie/">Movie</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Music/">Music</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/TV/">TV</a></li></ul>
+
+    </footer>
+  </div>
+  
+</article>
+
+
+  
+    <article id="post-move_from_wp/e5-a4-87-e8-80-83-e7-ac-94-e8-ae-b0-theory-of-computation" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2010/01/08/move_from_wp/e5-a4-87-e8-80-83-e7-ac-94-e8-ae-b0-theory-of-computation/" class="article-date">
+  <time datetime="2010-01-07T21:27:00.000Z" itemprop="datePublished">2010-01-08</time>
+</a>
+    
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/Academic/">Academic</a>
+  </div>
+
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2010/01/08/move_from_wp/e5-a4-87-e8-80-83-e7-ac-94-e8-ae-b0-theory-of-computation/">[备考笔记] THEORY OF COMPUTATION</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>好课。本科大四的时候还主动选修了的课。老师高高的。挺帅。却挑了个实在不怎么好的时间上课。周一大早。我总醒不来，醒来了也想着去了反正迷糊还是多睡会养好精神下午好干活就又躺下了。然后转眼就要考试了。再看书，那些本科时不懂的依旧不懂。却又有些大四时备考数值分析时热血沸腾的感觉。</p>
+<p>对那些曾经Make Me无比Confused的概念和理论一一罗列解析：<br> <div class="bvMsg"> </p>
+<ul>
+<li><p><strong>可数无穷Countably Infinite及对角化论证Diagonal Argument
+</strong>这是计算理论里第一个十分纠结的概念。可数无穷很难在脑子里成像，书上给出的定义是“可数无穷集合A与<strong>N</strong>之间存在一个双射f ”，也就是说，A的元素与<strong>N</strong>存在一一对应的关系。我们可以像数自然数一样枚举它，如果你活得像宇宙一样长，就可以永远抱着数完它的信心。<br>Cantor的对角化原理可以用来证明某集合是不可数的，通常假设某集合是可数的，并罗列其与<strong>N</strong>间的双射关系为一列，那么若集合不可数，则可以按照对角原则构造一些元素，使其属于该集合但按照其构造规则不能被罗列。WIKI上给出了十分详细的证明，关于<a href="http://en.wikipedia.org/wiki/Cantor">可数无穷集的幂集</a>和<a href="http://en.wikipedia.org/wiki/Cantor">实数</a>的不可数问题。<br>那么，我们可以对不可数无穷做以下描述：就是那些比可数无穷还要长的数列们，即使你活得像宇宙一样长，也还是放弃吧。<br>&nbsp; <li><strong>确定型有穷自动机DFA与非确定性有穷自动NDFA的等价
+</strong>等价，指的是其接受相同的语言。如果对于某类语言，有一台NDFA按照非确定的规则转换状态接受它，那么就存在一台DFA以NDFA每读入一段输入串后的可能状态集合为状态，按照确定的规则接受它。并且，这样的构造是指数的。<br>&nbsp; <li><strong>正则Regular与非正则语言以及泵定理Pumping Lemma</strong><br>正则语言可以用表达式写出来，可以被FA接受，其中可能用到组合字符串是可以穷举的；非正则语言是难以预料的，只能用文字来表述，比如根据前端决定后段的字符串。<br>
+        
+          <p class="article-more-link">
+            <a href="/2010/01/08/move_from_wp/e5-a4-87-e8-80-83-e7-ac-94-e8-ae-b0-theory-of-computation/#more">Read More</a>
+          </p>
+        
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://yoursite.com/2010/01/08/move_from_wp/e5-a4-87-e8-80-83-e7-ac-94-e8-ae-b0-theory-of-computation/" data-id="ciedu840l006up4bgykmkrb9l" class="article-share-link">Share</a>
+      
+      
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Review/">Review</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Theory-of-Computation/">Theory of Computation</a></li></ul>
+
+    </footer>
+  </div>
+  
+</article>
+
+
+  
+    <article id="post-move_from_wp/e5-8d-88-e5-90-8e-e7-9a-84-e5-a3-b0-e9-9f-b3-e3-80-82spitz" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2010/01/03/move_from_wp/e5-8d-88-e5-90-8e-e7-9a-84-e5-a3-b0-e9-9f-b3-e3-80-82spitz/" class="article-date">
+  <time datetime="2010-01-02T21:30:00.000Z" itemprop="datePublished">2010-01-03</time>
+</a>
+    
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/Hobby/">Hobby</a>
+  </div>
+
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2010/01/03/move_from_wp/e5-8d-88-e5-90-8e-e7-9a-84-e5-a3-b0-e9-9f-b3-e3-80-82spitz/">午后的声音。Spitz~</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>对音乐一直保持着先闻声再识人的习惯。往往听一首歌很久很久以后才会去翻歌手的名字找他的履历，至于记住相貌更是几个月以后的事情了。其实不止对歌手吧，对身边的普通人也是这样的。高中的时候花了两年才把全班同学的脸和名字对号入座，结果才保持了一年就又分开了，再到现在，就连名字也有些模糊了。不知道这算不算是我的生理缺陷。</p>
+<p>Spitz算是唯一一个我先识人再闻声的。Spitz是一种小狗的名字，狐狸犬类，小型，分布于芬兰、德国、日本。日本银狐犬Japanese Spitz，毛是纯白色的，据说对主人特别地依赖但是对陌生人却神经质地多疑。当年瞎逛的时候见到一文谈到Spitz小犬的育养方法顺便说到了日本有只乐队就叫Spitz。突然就觉得好有趣。于是就。。。恩。</p>
+<p>相比L团，Spitz绝对是支朴实无华的乐队，编曲风格也明亮得多，就连行事也低调得一塌糊涂，宣传活动也很少参加。用Vo.草野正宗的话说，“我们不像是一级的乐队”，“是像副食小吃性质的乐队”。虽然也是日本乐届的传奇人物，但就算是在鼎盛时期他们也不曾大红大紫到抽筋的地步，不过还是属于单曲初登场NO.1在公信榜上徘徊的人。</p>
+<p><a href="http://lh4.ggpht.com/_NFbnZk4IksM/TM5f5KktFuI/AAAAAAAAAO4/9ubRS7U71-Y/s1600-h/bf6df3da5fcc38c7b6fd48a9%5B3%5D%5B4%5D.jpg"><img src="http://lh6.ggpht.com/_NFbnZk4IksM/TM5f58mINUI/AAAAAAAAAO8/CSgXC1lmgPY/bf6df3da5fcc38c7b6fd48a9%5B3%5D_thumb%5B2%5D.jpg?imgmax=800" alt="" title="bf6df3da5fcc38c7b6fd48a9[3]"></a>
+        
+          <p class="article-more-link">
+            <a href="/2010/01/03/move_from_wp/e5-8d-88-e5-90-8e-e7-9a-84-e5-a3-b0-e9-9f-b3-e3-80-82spitz/#more">Read More</a>
+          </p>
+        
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://yoursite.com/2010/01/03/move_from_wp/e5-8d-88-e5-90-8e-e7-9a-84-e5-a3-b0-e9-9f-b3-e3-80-82spitz/" data-id="ciedu841y007up4bg9ocwhu8z" class="article-share-link">Share</a>
+      
+      
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Life/">Life</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Music/">Music</a></li></ul>
+
+    </footer>
+  </div>
+  
+</article>
+
+
+  
+    <article id="post-move_from_wp/e8-ae-ba-e6-96-87-e7-ac-94-e8-ae-b0-a-developers-guide-to-silhouette-algorithms-for-polygonal-models" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2010/01/02/move_from_wp/e8-ae-ba-e6-96-87-e7-ac-94-e8-ae-b0-a-developers-guide-to-silhouette-algorithms-for-polygonal-models/" class="article-date">
+  <time datetime="2010-01-01T16:05:00.000Z" itemprop="datePublished">2010-01-02</time>
+</a>
+    
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/Academic/">Academic</a>
+  </div>
+
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2010/01/02/move_from_wp/e8-ae-ba-e6-96-87-e7-ac-94-e8-ae-b0-a-developers-guide-to-silhouette-algorithms-for-polygonal-models/">[论文笔记] A Developer&#39;s Guide to Silhouette Algorithms for Polygonal Models</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p><strong>Paper:</strong> Tobias Isenberg, Bert Freudenberg, Nick Halper, Stefan Schlechtweg, Thomas Strothotte, <u>A Developer’s Guide to Silhouette Algorithms for Polygonal Models</u>, IEEE Computer Graphics and Applications, July 2003 </p>
+<hr>
+<p>本文是一篇就从3D Polygonal模型自动生成轮廓线问题展开的综述。算是读得挺细。断断续续一周有余。</p>
+<p><strong>问题描述：</strong>轮廓线，也就是绘画上说的线稿，用于勾勒物体的形状、阴影等，以区分于背景和其他物体。本文着眼于讨论从Polygonal模型自动生成轮廓线的诸多算法。<br>文中定义轮廓线为silhouette，分为<font color="#a40000">counter、crease、border<font color="#404040">和</font>self-intersection</font>四种：counter是前景最外围的轮廓线，区分其于背景；crease指物体上的折皱等，如正方体的边；border针对非闭合的模型，指那些只与一个polygon相邻的边；self-intersection当一个模型的两个polygon相交时出现。轮廓线可以数学地定义为法线与视线相垂直的点集，如下图所示：<br>&nbsp;&nbsp; <a href="http://lh5.ggpht.com/_NFbnZk4IksM/TM5hFRKhpTI/AAAAAAAAAP4/JJtd8L5Z0Fg/s1600-h/tu015%5B3%5D.jpg"><img src="http://lh5.ggpht.com/_NFbnZk4IksM/TM5hF8c3wpI/AAAAAAAAAP8/8hv6v3mfnnY/tu015_thumb%5B1%5D.jpg?imgmax=800" alt="tu015" title="tu015"></a><br>但不幸的是，我们只有面的法线定义，而边上的点由于被多个面共享，其法线定义是暧昧不清的。因此，从计算的角度，轮廓线被定义为：<font color="#a40000">模型上同时被正向和背向Polygon共享的边的集合</font>（应该是指counter吧）。
+        
+          <p class="article-more-link">
+            <a href="/2010/01/02/move_from_wp/e8-ae-ba-e6-96-87-e7-ac-94-e8-ae-b0-a-developers-guide-to-silhouette-algorithms-for-polygonal-models/#more">Read More</a>
+          </p>
+        
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://yoursite.com/2010/01/02/move_from_wp/e8-ae-ba-e6-96-87-e7-ac-94-e8-ae-b0-a-developers-guide-to-silhouette-algorithms-for-polygonal-models/" data-id="ciedu83wh004up4bgsau61hfe" class="article-share-link">Share</a>
+      
+      
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Computer-Graphics/">Computer Graphics</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/NPR/">NPR</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Review/">Review</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Silhouette/">Silhouette</a></li></ul>
+
+    </footer>
+  </div>
+  
+</article>
+
+
+  
+  
+    <nav id="page-nav">
+      <a class="extend prev" rel="prev" href="/page/3/">&laquo; Prev</a><a class="page-number" href="/">1</a><a class="page-number" href="/page/2/">2</a><a class="page-number" href="/page/3/">3</a><span class="page-number current">4</span><a class="page-number" href="/page/5/">5</a><a class="page-number" href="/page/6/">6</a><a class="page-number" href="/page/7/">7</a><a class="extend next" rel="next" href="/page/5/">Next &raquo;</a>
+    </nav>
+  
+</section>
+        
+          <aside id="sidebar">
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Categories</h3>
+    <div class="widget">
+      <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/Academic/">Academic</a><span class="category-list-count">28</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/Academic/Engineering/">Engineering</a><span class="category-list-count">3</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Academic/Works/">Works</a><span class="category-list-count">2</span></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/Engineering/">Engineering</a><span class="category-list-count">4</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Hobby/">Hobby</a><span class="category-list-count">11</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/Hobby/Trivial/">Trivial</a><span class="category-list-count">3</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/Hobby/Trivial/Works/">Works</a><span class="category-list-count">1</span></li></ul></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/Trivial/">Trivial</a><span class="category-list-count">8</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Works/">Works</a><span class="category-list-count">10</span></li></ul>
+    </div>
+  </div>
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Tags</h3>
+    <div class="widget">
+      <ul class="tag-list"><li class="tag-list-item"><a class="tag-list-link" href="/tags/AI/">AI</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Analysis/">Analysis</a><span class="tag-list-count">3</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Android/">Android</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Anime/">Anime</a><span class="tag-list-count">7</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Art/">Art</a><span class="tag-list-count">7</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Bayesian/">Bayesian</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Caching/">Caching</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Code/">Code</a><span class="tag-list-count">5</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Computer-Graphics/">Computer Graphics</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Computer-Vision/">Computer Vision</a><span class="tag-list-count">13</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Data-Mining/">Data Mining</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Depth-Camera/">Depth Camera</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Design/">Design</a><span class="tag-list-count">5</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Dream/">Dream</a><span class="tag-list-count">3</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Ford-Fulkerson/">Ford-Fulkerson</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Friends/">Friends</a><span class="tag-list-count">3</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/GPU/">GPU</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Game/">Game</a><span class="tag-list-count">6</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Game-Design/">Game Design</a><span class="tag-list-count">3</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Gesture/">Gesture</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Graphcut/">Graphcut</a><span class="tag-list-count">5</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Kinect/">Kinect</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Life/">Life</a><span class="tag-list-count">17</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Linux/">Linux</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Machine-Learning/">Machine Learning</a><span class="tag-list-count">9</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Maching/">Maching</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Markov/">Markov</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Monster-Hunter/">Monster Hunter</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Motion/">Motion</a><span class="tag-list-count">6</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Movie/">Movie</a><span class="tag-list-count">6</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Music/">Music</a><span class="tag-list-count">7</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/NPR/">NPR</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/OS/">OS</a><span class="tag-list-count">4</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/OpenCV/">OpenCV</a><span class="tag-list-count">3</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Patent/">Patent</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Pose/">Pose</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Push-relabel/">Push-relabel</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Random-Forest/">Random Forest</a><span class="tag-list-count">5</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Random-Trees/">Random Trees</a><span class="tag-list-count">5</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Recognition/">Recognition</a><span class="tag-list-count">13</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Reconstruction/">Reconstruction</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Review/">Review</a><span class="tag-list-count">3</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Segmentation/">Segmentation</a><span class="tag-list-count">3</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Shape/">Shape</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Silhouette/">Silhouette</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Simulation/">Simulation</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/TV/">TV</a><span class="tag-list-count">3</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Testing/">Testing</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Theory-of-Computation/">Theory of Computation</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Tools/">Tools</a><span class="tag-list-count">4</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/WOW/">WOW</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Works/">Works</a><span class="tag-list-count">13</span></li></ul>
+    </div>
+  </div>
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Tag Cloud</h3>
+    <div class="widget tagcloud">
+      <a href="/tags/AI/" style="font-size: 11.11px;">AI</a> <a href="/tags/Analysis/" style="font-size: 12.22px;">Analysis</a> <a href="/tags/Android/" style="font-size: 10px;">Android</a> <a href="/tags/Anime/" style="font-size: 16.67px;">Anime</a> <a href="/tags/Art/" style="font-size: 16.67px;">Art</a> <a href="/tags/Bayesian/" style="font-size: 11.11px;">Bayesian</a> <a href="/tags/Caching/" style="font-size: 11.11px;">Caching</a> <a href="/tags/Code/" style="font-size: 14.44px;">Code</a> <a href="/tags/Computer-Graphics/" style="font-size: 11.11px;">Computer Graphics</a> <a href="/tags/Computer-Vision/" style="font-size: 18.89px;">Computer Vision</a> <a href="/tags/Data-Mining/" style="font-size: 10px;">Data Mining</a> <a href="/tags/Depth-Camera/" style="font-size: 11.11px;">Depth Camera</a> <a href="/tags/Design/" style="font-size: 14.44px;">Design</a> <a href="/tags/Dream/" style="font-size: 12.22px;">Dream</a> <a href="/tags/Ford-Fulkerson/" style="font-size: 10px;">Ford-Fulkerson</a> <a href="/tags/Friends/" style="font-size: 12.22px;">Friends</a> <a href="/tags/GPU/" style="font-size: 10px;">GPU</a> <a href="/tags/Game/" style="font-size: 15.56px;">Game</a> <a href="/tags/Game-Design/" style="font-size: 12.22px;">Game Design</a> <a href="/tags/Gesture/" style="font-size: 11.11px;">Gesture</a> <a href="/tags/Graphcut/" style="font-size: 14.44px;">Graphcut</a> <a href="/tags/Kinect/" style="font-size: 10px;">Kinect</a> <a href="/tags/Life/" style="font-size: 20px;">Life</a> <a href="/tags/Linux/" style="font-size: 11.11px;">Linux</a> <a href="/tags/Machine-Learning/" style="font-size: 17.78px;">Machine Learning</a> <a href="/tags/Maching/" style="font-size: 10px;">Maching</a> <a href="/tags/Markov/" style="font-size: 11.11px;">Markov</a> <a href="/tags/Monster-Hunter/" style="font-size: 10px;">Monster Hunter</a> <a href="/tags/Motion/" style="font-size: 15.56px;">Motion</a> <a href="/tags/Movie/" style="font-size: 15.56px;">Movie</a> <a href="/tags/Music/" style="font-size: 16.67px;">Music</a> <a href="/tags/NPR/" style="font-size: 10px;">NPR</a> <a href="/tags/OS/" style="font-size: 13.33px;">OS</a> <a href="/tags/OpenCV/" style="font-size: 12.22px;">OpenCV</a> <a href="/tags/Patent/" style="font-size: 10px;">Patent</a> <a href="/tags/Pose/" style="font-size: 10px;">Pose</a> <a href="/tags/Push-relabel/" style="font-size: 10px;">Push-relabel</a> <a href="/tags/Random-Forest/" style="font-size: 14.44px;">Random Forest</a> <a href="/tags/Random-Trees/" style="font-size: 14.44px;">Random Trees</a> <a href="/tags/Recognition/" style="font-size: 18.89px;">Recognition</a> <a href="/tags/Reconstruction/" style="font-size: 10px;">Reconstruction</a> <a href="/tags/Review/" style="font-size: 12.22px;">Review</a> <a href="/tags/Segmentation/" style="font-size: 12.22px;">Segmentation</a> <a href="/tags/Shape/" style="font-size: 10px;">Shape</a> <a href="/tags/Silhouette/" style="font-size: 10px;">Silhouette</a> <a href="/tags/Simulation/" style="font-size: 10px;">Simulation</a> <a href="/tags/TV/" style="font-size: 12.22px;">TV</a> <a href="/tags/Testing/" style="font-size: 11.11px;">Testing</a> <a href="/tags/Theory-of-Computation/" style="font-size: 10px;">Theory of Computation</a> <a href="/tags/Tools/" style="font-size: 13.33px;">Tools</a> <a href="/tags/WOW/" style="font-size: 10px;">WOW</a> <a href="/tags/Works/" style="font-size: 18.89px;">Works</a>
+    </div>
+  </div>
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Archives</h3>
+    <div class="widget">
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2012/10/">十月 2012</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2012/09/">九月 2012</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2012/01/">一月 2012</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2011/12/">十二月 2011</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2011/11/">十一月 2011</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2011/08/">八月 2011</a><span class="archive-list-count">4</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2011/07/">七月 2011</a><span class="archive-list-count">3</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2011/05/">五月 2011</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2011/04/">四月 2011</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2011/03/">三月 2011</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2010/12/">十二月 2010</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2010/11/">十一月 2010</a><span class="archive-list-count">4</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2010/10/">十月 2010</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2010/09/">九月 2010</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2010/07/">七月 2010</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2010/06/">六月 2010</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2010/05/">五月 2010</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2010/03/">三月 2010</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2010/02/">二月 2010</a><span class="archive-list-count">3</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2010/01/">一月 2010</a><span class="archive-list-count">5</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2009/12/">十二月 2009</a><span class="archive-list-count">4</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2009/11/">十一月 2009</a><span class="archive-list-count">6</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2009/05/">五月 2009</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2008/09/">九月 2008</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2008/07/">七月 2008</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2008/02/">二月 2008</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2008/01/">一月 2008</a><span class="archive-list-count">3</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2007/12/">十二月 2007</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2007/08/">八月 2007</a><span class="archive-list-count">1</span></li></ul>
+    </div>
+  </div>
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Recents</h3>
+    <div class="widget">
+      <ul>
+        
+          <li>
+            <a href="/2012/10/30/move_from_wp/e5-8d-8a-e5-a4-9c-e6-9b-b4-e6-96-b0-e7-9c-8b-e5-b8-ae-e5-a8-98/">半夜更新看板娘 ~ </a>
+          </li>
+        
+          <li>
+            <a href="/2012/09/25/move_from_wp/e8-bf-9f-e6-9d-a5-e7-9a-84wow-e6-af-95-e4-b8-9a-e7-95-99-e5-bf-b5/">迟来的WOW毕业留念</a>
+          </li>
+        
+          <li>
+            <a href="/2012/01/11/move_from_wp/e8-af-b4-e8-af-b4-e6-9c-80-e8-bf-91-e7-9c-8b-e8-bf-87-e7-9a-84-e7-94-b5-e8-a7-86-e5-89-a7/">说说最近看过的电视剧</a>
+          </li>
+        
+          <li>
+            <a href="/2012/01/06/move_from_wp/e9-82-a3-e4-ba-9b-e5-b9-b4-ef-bc-8c-e6-88-91-e4-bb-ac-e4-b8-80-e8-b5-b7-e5-86-99-e7-9a-84-e5-ad-a6-e4-bd-8d-e8-ae-ba-e6-96-87/">那些年，我们一起写的学位论文</a>
+          </li>
+        
+          <li>
+            <a href="/2011/12/31/move_from_wp/2011-e5-b9-b4-e7-bb-88-e7-9b-98-e7-82-b9/">2011年终盘点</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+
+  
+</aside>
+        
+      </div>
+      <footer id="footer">
+  
+  <div class="outer">
+    <div id="footer-info" class="inner">
+      &copy; 2015 lincccc<br>
+      Powered by <a href="http://hexo.io/" target="_blank">Hexo</a>
+    </div>
+  </div>
+</footer>
+    </div>
+    <nav id="mobile-nav">
+  
+    <a href="/" class="mobile-nav-link">Home</a>
+  
+    <a href="/archives" class="mobile-nav-link">Archives</a>
+  
+</nav>
+    
+
+<script src="//ajax.googleapis.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
+
+
+  <link rel="stylesheet" href="/fancybox/jquery.fancybox.css" type="text/css">
+  <script src="/fancybox/jquery.fancybox.pack.js" type="text/javascript"></script>
+
+
+<script src="/js/script.js" type="text/javascript"></script>
+
+  </div>
+</body>
+</html>

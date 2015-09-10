@@ -1,0 +1,248 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  <title>[论文笔记] CUDA Cuts: Fast Graph Cuts on the GPU | _Sugarless</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="description" content="Paper：V. Vineet, P. J. Narayanan. CUDA cuts: Fast graph cuts on the GPU. In Proc. CVPR Workshop, 2008. 
+
+问题概述：Graph cut是一种十分有用和流行的能量优化算法，在计算机视觉领域普遍应用于前背景分割（Image segmentation）、立体视觉（stereo vision）、抠图（I">
+<meta property="og:type" content="article">
+<meta property="og:title" content="[论文笔记] CUDA Cuts: Fast Graph Cuts on the GPU">
+<meta property="og:url" content="http://yoursite.com/2011/03/03/move_from_wp/e8-ae-ba-e6-96-87-e7-ac-94-e8-ae-b0-cuda-cuts-fast-graph-cuts-on-the-gpu/index.html">
+<meta property="og:site_name" content="_Sugarless">
+<meta property="og:description" content="Paper：V. Vineet, P. J. Narayanan. CUDA cuts: Fast graph cuts on the GPU. In Proc. CVPR Workshop, 2008. 
+
+问题概述：Graph cut是一种十分有用和流行的能量优化算法，在计算机视觉领域普遍应用于前背景分割（Image segmentation）、立体视觉（stereo vision）、抠图（I">
+<meta property="og:image" content="http://lh5.ggpht.com/_NFbnZk4IksM/TW7tKf5NYhI/AAAAAAAAAT4/xGoqbJF-PVk/32201125605PM_thumb3.jpg?imgmax=800">
+<meta property="og:image" content="http://lh5.ggpht.com/_NFbnZk4IksM/TW7tSaLtB5I/AAAAAAAAAUA/EKvaRoXDfAg/32201125411PM_thumb2.jpg?imgmax=800">
+<meta property="og:updated_time" content="2015-09-10T05:45:12.455Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="[论文笔记] CUDA Cuts: Fast Graph Cuts on the GPU">
+<meta name="twitter:description" content="Paper：V. Vineet, P. J. Narayanan. CUDA cuts: Fast graph cuts on the GPU. In Proc. CVPR Workshop, 2008. 
+
+问题概述：Graph cut是一种十分有用和流行的能量优化算法，在计算机视觉领域普遍应用于前背景分割（Image segmentation）、立体视觉（stereo vision）、抠图（I">
+  
+    <link rel="alternative" href="/atom.xml" title="_Sugarless" type="application/atom+xml">
+  
+  
+    <link rel="icon" href="/favicon.png">
+  
+  <link href="//fonts.googleapis.com/css?family=Source+Code+Pro" rel="stylesheet" type="text/css">
+  <link rel="stylesheet" href="/css/style.css" type="text/css">
+  
+
+</head>
+<body>
+  <div id="container">
+    <div id="wrap">
+      <header id="header">
+  <div id="banner"></div>
+  <div id="header-outer" class="outer">
+    <div id="header-title" class="inner">
+      <h1 id="logo-wrap">
+        <a href="/" id="logo">_Sugarless</a>
+      </h1>
+      
+    </div>
+    <div id="header-inner" class="inner">
+      <nav id="main-nav">
+        <a id="main-nav-toggle" class="nav-icon"></a>
+        
+          <a class="main-nav-link" href="/">Home</a>
+        
+          <a class="main-nav-link" href="/archives">Archives</a>
+        
+      </nav>
+      <nav id="sub-nav">
+        
+          <a id="nav-rss-link" class="nav-icon" href="/atom.xml" title="RSS Feed"></a>
+        
+        <a id="nav-search-btn" class="nav-icon" title="Search"></a>
+      </nav>
+      <div id="search-form-wrap">
+        <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" results="0" class="search-form-input" placeholder="Search"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="http://yoursite.com"></form>
+      </div>
+    </div>
+  </div>
+</header>
+      <div class="outer">
+        <section id="main"><article id="post-move_from_wp/e8-ae-ba-e6-96-87-e7-ac-94-e8-ae-b0-cuda-cuts-fast-graph-cuts-on-the-gpu" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2011/03/03/move_from_wp/e8-ae-ba-e6-96-87-e7-ac-94-e8-ae-b0-cuda-cuts-fast-graph-cuts-on-the-gpu/" class="article-date">
+  <time datetime="2011-03-02T17:33:00.000Z" itemprop="datePublished">2011-03-03</time>
+</a>
+    
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/Academic/">Academic</a>
+  </div>
+
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="article-title" itemprop="name">
+      [论文笔记] CUDA Cuts: Fast Graph Cuts on the GPU
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p><strong>Paper：</strong>V. Vineet, P. J. Narayanan. <u>CUDA cuts: Fast graph cuts on the GPU</u>. In Proc. CVPR Workshop, 2008. </p>
+<hr>
+<p><strong>问题概述：</strong>Graph cut是一种十分有用和流行的能量优化算法，在计算机视觉领域普遍应用于前背景分割（Image segmentation）、立体视觉（stereo vision）、抠图（Image matting）等。但在获得不错效果的同时，Max-flow / Min-cost问题求解的时间代价却很大。本文作者称其所知最佳的Graph cut实现求解一张640×480的图至少需<font color="#b53d2f">100毫秒</font>（平均数据会差得多），无法满足实时应用的需求。但事实上，Max-flow求解中经典的Push-relabel算法在流的计算和维护上只与局部相关，具有潜在的可并行性，适于GPU加速。因此，作者实现了push-relabel算法的GPU版。作者称其算法于一张640×480的图平均每秒可以求解150次Graph cut（Nvidia 8800 GTX），也就是约<font color="#b53d2f">6.7毫秒</font>速，是传统CPU算法约<font color="#b53d2f">30-40倍速</font>。作者还提供源码的下载，<a href="http://cvit.iiit.ac.in/resources/cudacuts" target="_blank" rel="external">点我</a>。</p>
+<p><strong>Definition &amp; Notation： 
+</strong>对于一个图 <em>G = (V, E)</em> ，其中 <em>V</em> 为节点集合，包括源点 <em>s</em> 和终点 <em>t</em> （也可以定义多个端点，其可以优化为双顶点图）、以及其他诸多中间节点集合 <em>V’</em> ，<em>E</em> 为连接这些节点的边，每条边附有容量 <em>c(u, v)</em> 代表节点 <em>u</em> 通过这条边流向节点 <em>v</em> 所能承受的最大流量，在具体应用中边的容量通常等价于其能量值。Graph cut的目的在于找到图的Min-cut，Cut将 <em>V’</em> 分割为两个部分，去掉这些边将使舍得图中的任意一个节点只与 <em>s</em> 或 <em>t</em> 相连通（如下图），而Min-cut是所有cut中边的能量值总和最小的一个。<br><a href="http://lh3.ggpht.com/_NFbnZk4IksM/TW7tJS1vRhI/AAAAAAAAAT0/J3epFOd8Mwo/s1600-h/32201125605PM5.jpg" target="_blank" rel="external"><img src="http://lh5.ggpht.com/_NFbnZk4IksM/TW7tKf5NYhI/AAAAAAAAAT4/xGoqbJF-PVk/32201125605PM_thumb3.jpg?imgmax=800" alt="3-2-2011 2-56-05 PM" title="3-2-2011 2-56-05 PM"></a><br><a id="more"></a>算法上要直接找Min-cut是十分困难的，通常要将问题转化为与之等价的Max-flow问题（理论推导<a href="http://www.math.uri.edu/~eaton/maxflowmincut.pdf" target="_blank" rel="external">点我</a>）。Graph cut具体应用的性能关键在于能量函数的定义，用于计算机视觉中的一种常见能量函数定义如下：<br><a href="http://lh5.ggpht.com/_NFbnZk4IksM/TW7tK1qjcnI/AAAAAAAAAT8/lbGG13ID66M/s1600-h/32201125411PM4.jpg" target="_blank" rel="external"><img src="http://lh5.ggpht.com/_NFbnZk4IksM/TW7tSaLtB5I/AAAAAAAAAUA/EKvaRoXDfAg/32201125411PM_thumb2.jpg?imgmax=800" alt="3-2-2011 2-54-11 PM" title="3-2-2011 2-54-11 PM"></a><br><em>Dp</em> 定义数据能量，<em>Vp, q</em> 定义平滑度能量，<em>N</em> 定义相邻关系，<em>fp</em> 为像素 <em>p</em> 的标签（属于 s 或 t ）。<br>&nbsp;</p>
+<p><strong>经典Push-relabel算法：</strong><br>求解Max-flow有两种经典的算法：Ford-Fulkerson和Push-relabel算法。<font color="#b53d2f">Ford-Fulkerson算法</font>的大意是在图中不断寻找 <em>s</em> 和 <em>t</em> 之间可用路径，记入总流量，并维护一张残余网络（Residual graph），直到再也找不到可用路径为止，此时的总流量就是Max-flow（具体算法<a href="http://www.math.ufl.edu/~vatter/teaching/summer04/flow.pdf" target="_blank" rel="external">点我</a>）。Ford-Fulkerson算法的串行性很大，因为可用路径的查找是全局性的，这是GPU所不擅长的。<br>&nbsp; </p>
+<p><font color="#b53d2f">Push-relabel算法</font>，相对的，具有很强的局部性和可并行性，在每一个子操作中指关心节点及其相邻节点。Push-relabel的基本思路是将尽可能多的流量从 <em>s</em> 推向 <em>t</em> ，但是当 <em>t</em> 已经无法再接受更多的流量时，这些流量将会被反推回 <em>s</em>，最终达到平衡（和Ford-Fulkerson算法一样，再也找不到 <em>s</em> 到 <em>t</em> 的可用路径）。算法过程中的“流”称为Preflow（先流），它并不像Ford-Fulkerson算法过程中的流一样总是持续升高直至Max-flow，而是初始预测一个值，在不断趋近于Max-flow，过程中可能出现回流的现象。Preflow对每一个节点满足 <em>e(u) = in(u) – out(u)</em>，且 <em>e(u) ≥ 0</em>。当 <em>e(u) &gt; 0</em> 时，节点 <em>u</em> 溢出（overflowing）。溢出的节点需要将多余的流量Push向其相邻的节点，即<font color="#b53d2f">Push操作</font>。当一条从 <em>s</em> 到 <em>t</em> 的路径上所有的节点都不溢出时，此路径上的Preflow就变成真正的Flow了。<br>&nbsp;<br>Push-relabel算法和Ford-Fulkerson算法一样都会维护一张残余网络。对于图中的每一个节点 <em>u</em>，若在残余网络中存在 <em>e(u, v)</em>，则 <em>h(u) ≤ h(v) + 1</em>。Push操作只能在 <em>h(u) ＞ h(v)</em> ，<em>u</em> 节点溢出且 <em>e(u, v) </em>残留容量时进行；而当 <em>u</em> 节点溢出，且与之相邻所有残留边节点的 <em>h(v) ≥ h(u)</em> 时，只能进行<font color="#b53d2f">Label操作</font>，增加节点 <em>u</em> 的高度，即 <em>h(u) += 1</em>。在初始化时，<em>h(s) = n</em>，<em>t</em> 及其他所有节点的高度均为 <em>0</em>；从 <em>s</em> 出发的所有边初始化 <em>f(e) = c(e)</em>，其余边 <em>f(e) =0</em>。Push-relabel算法将不断重复Push和Label操作，直至任意操作都无法进行。<br><em><font color="#999999">（更详细的算法步骤推荐查阅Tutorial，</font><font color="#999999"><a href="http://www.topcoder.com/tc?module=Static&amp;d1=tutorials&amp;d2=maxflowPushRelabel" target="_blank" rel="external">点我</a></font></em><font color="#999999"><em>）<br>&nbsp; 
+</em></font>比较形象点，Push-relabel是泛滥的洪水，奔腾向前，堵了就倒流；Ford-Fulkerson则是很温吞的做法，先找个人探路，回来报告能流多少水就开闸放多少。<br>&nbsp;</p>
+<p><strong>Push-relabel算法的GPU版：</strong></p>
+<p><font color="#b53d2f">存储和线程结构：</font><br>Grid拥有和输入图片一样的维度，并被分为若干个Block，每个Block的维度为 B×B。每个线程对应一个节点（像素），即每个Block对应 B×B 个节点、需要访问 (B+2)×(B+2) 个节点的数据。每个节点包含以下数据：溢出量 e(u)，高度 h(u)，活跃状态 flag(u) 以及与其相邻节点间的边的容量。活跃状态共3种：Active，<em>e(u) ＞ 0</em> 且 <em>h(u) = h(v) + 1</em>；Passive，<em>e(u) ＞ 0</em> 且 <em>h(u) ≠ h(v) + 1</em>，这种状态在Relabel后可能变成Active；Inactive，没有溢出且没有相邻残留边，<br>这些数据存储在全局或设备内存中，被所有线程共享。<br>（GPU架构及Cuda指南参考NVidia相关手册，<a href="www.nvidia.com/object/cuda_home.html">点我</a>）<br>&nbsp;<br>本文作者通过<font color="#b53d2f">4个Kernel</font>实现GPU版Push-relabel算法：<br>1) <em>Push Kernel (node u)：</em>  <table border="0" cellspacing="0" cellpadding="1" width="580"> <tbody> <tr> <td valign="top" width="21">&nbsp;&nbsp; ■</td> <td valign="top" width="557">将 <em>h(u)</em> 和 <em>e(u)</em> 从全局内存读入到Block共享内存中（使用共享内存是因为一些数据会被相邻线程共享，这种读入方式相对单独的读入更节省时间）；</td></tr> <tr> <td valign="top" width="24">&nbsp;&nbsp; ■</td> <td valign="top" width="557">同步线程（使用共享内存都需要做这一步，为了保证所有内存都被完全读入了）；</td></tr> <tr> <td valign="top" width="27">&nbsp;&nbsp; ■</td> <td valign="top" width="557">将 <em>e(u)</em> 按照Push规则推向相邻节点（不大于边的剩余容量，且 <em>h(u) ≥ h(v)</em> ）；</td></tr> <tr> <td valign="top" width="30">&nbsp;&nbsp; ■</td> <td valign="top" width="557">将以上Preflow记入一个特殊的全局数组 <em>F</em>。</td></tr></tbody></table>之所以记入 <em>F</em>，而不直接写入相邻节点，是因为在并行Push操作时，一个节点的溢出值同时受到多个相邻节点的影响，如果直接写入，可能造成数据的不一致性（Read-after-write data consistency）。因此，作者将原来的Push操作分成了Push和Pull两个Kernel执行（另一种选择是在同一个Kernel中分两部分执行，之间进行一次同步，但是对于Block边缘的节点，这种同步需要等待其他Block的线程，这种Block间的同步并不被所有GPU支持）。<br>&nbsp;<br>2) <em>Pull Kernel (node u)：</em>  <table border="0" cellspacing="0" cellpadding="1" width="578"> <tbody> <tr> <td valign="top" width="29">&nbsp;&nbsp; ■</td> <td valign="top" width="547">读入 <em>F</em> 中推向 <em>u</em> 的Preflow；</td></tr> <tr> <td valign="top" width="29">&nbsp;&nbsp; ■</td> <td valign="top" width="547">累加所有新的Preflow，得到最终的溢出值，记入 <em>e(u)</em> 到全局内存。</td></tr></tbody></table>&nbsp;&nbsp;<br>3) <em>Local Relabel Kernal (node u)：</em><br>按照经典Push-relabel算法中的Relabel操作，局部地调整节点的高度  <table border="0" cellspacing="0" cellpadding="1" width="578"> <tbody> <tr> <td valign="top" width="21">&nbsp;&nbsp; ■</td> <td valign="top" width="555">将 <em>h(u)</em> 和 <em>flag(u)</em> 从全局内存读入到Block共享内存中；</td></tr> <tr> <td valign="top" width="24">&nbsp;&nbsp; ■</td> <td valign="top" width="555">同步线程；</td></tr> <tr> <td valign="top" width="27">&nbsp;&nbsp; ■</td> <td valign="top" width="555">计算 <em>u</em> 相邻 active / passive 节点的最小高度；</td></tr> <tr> <td valign="top" width="30">&nbsp;&nbsp; ■</td> <td valign="top" width="555">该最小高度+1，作为新高度写入 <em>h(u)</em> 到全局内存。</td></tr></tbody></table>&nbsp;&nbsp;<br>4) <em>Global Relabel Kernal：</em><br>从终点 t 开始，按照广度优先策略，遍历所有节点，更新其高度至正确的距离（节点的高度总是其与终点距离的下限）。迭代次数 k 被记录与全局内存中。  <table border="0" cellspacing="0" cellpadding="1" width="577"> <tbody> <tr> <td valign="top" width="21">&nbsp;&nbsp; ■</td> <td valign="top" width="554">如果 k == 1，所有与 t 相邻且有残留边的节点高度被设为 1；</td></tr> <tr> <td valign="top" width="24">&nbsp;&nbsp; ■</td> <td valign="top" width="554">所有未被设置的节点检查其相邻节点，若其相邻节点的高度为 k，则设置该节点高度为 k+1；</td></tr> <tr> <td valign="top" width="27">&nbsp;&nbsp; ■</td> <td valign="top" width="554">更新高度值到全局内存。</td></tr></tbody></table>&nbsp;&nbsp;<br>算法总体流程：<br>_a. 计算能量矩阵 → b. Push+Pull Kernel循环 → c. Local Relabel Kernel循环 → d. Global Relabel Kernel循环 → e. 重复b到d至收敛（没有可进行的Push和Relabel操作）<br>&nbsp; </p>
+<hr>
+<p> 作者还基于GPU实现了Dynamic graph cut，应用于连续细微变化的Graph cut，通过对前一帧的简单修改形成新图，重用其他数据，加速Max-flow的求解。作者的实验数据称GPU实现可以提速70-100倍。不过具体应用具体分析，提速肯定是有的，多少未知，要待我实现过试验过。据说这个印度人提供的代码Bug颇多，虽然不太信，但还是先做了要重新实现的准备。末了，吐个槽，这论文贡献不大，确实只是发Workshop的水平。</p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://yoursite.com/2011/03/03/move_from_wp/e8-ae-ba-e6-96-87-e7-ac-94-e8-ae-b0-cuda-cuts-fast-graph-cuts-on-the-gpu/" data-id="ciedu83uy003zp4bgg31mhrwj" class="article-share-link">Share</a>
+      
+      
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/GPU/">GPU</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Graphcut/">Graphcut</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Push-relabel/">Push-relabel</a></li></ul>
+
+    </footer>
+  </div>
+  
+    
+<nav id="article-nav">
+  
+    <a href="/2011/03/07/move_from_wp/e5-9f-ba-e7-a1-80-e7-ae-97-e6-b3-95-e4-b8-80-e4-b8-aaford-fulkerson-e7-ae-97-e6-b3-95-e7-9a-84-e4-be-8b-e5-ad-90/" id="article-nav-newer" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Newer</strong>
+      <div class="article-nav-title">
+        
+          [基础算法] 一个Ford-Fulkerson算法的例子
+        
+      </div>
+    </a>
+  
+  
+    <a href="/2010/12/28/move_from_wp/2010-e5-b9-b4-e7-bb-88-e7-9b-98-e7-82-b9/" id="article-nav-older" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Older</strong>
+      <div class="article-nav-title">2010年终盘点</div>
+    </a>
+  
+</nav>
+
+  
+</article>
+
+</section>
+        
+          <aside id="sidebar">
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Categories</h3>
+    <div class="widget">
+      <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/Academic/">Academic</a><span class="category-list-count">28</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/Academic/Engineering/">Engineering</a><span class="category-list-count">3</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Academic/Works/">Works</a><span class="category-list-count">2</span></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/Engineering/">Engineering</a><span class="category-list-count">4</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Hobby/">Hobby</a><span class="category-list-count">11</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/Hobby/Trivial/">Trivial</a><span class="category-list-count">3</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/Hobby/Trivial/Works/">Works</a><span class="category-list-count">1</span></li></ul></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/Trivial/">Trivial</a><span class="category-list-count">8</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Works/">Works</a><span class="category-list-count">10</span></li></ul>
+    </div>
+  </div>
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Tags</h3>
+    <div class="widget">
+      <ul class="tag-list"><li class="tag-list-item"><a class="tag-list-link" href="/tags/AI/">AI</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Analysis/">Analysis</a><span class="tag-list-count">3</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Android/">Android</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Anime/">Anime</a><span class="tag-list-count">7</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Art/">Art</a><span class="tag-list-count">7</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Bayesian/">Bayesian</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Caching/">Caching</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Code/">Code</a><span class="tag-list-count">5</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Computer-Graphics/">Computer Graphics</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Computer-Vision/">Computer Vision</a><span class="tag-list-count">13</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Data-Mining/">Data Mining</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Depth-Camera/">Depth Camera</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Design/">Design</a><span class="tag-list-count">5</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Dream/">Dream</a><span class="tag-list-count">3</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Ford-Fulkerson/">Ford-Fulkerson</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Friends/">Friends</a><span class="tag-list-count">3</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/GPU/">GPU</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Game/">Game</a><span class="tag-list-count">6</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Game-Design/">Game Design</a><span class="tag-list-count">3</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Gesture/">Gesture</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Graphcut/">Graphcut</a><span class="tag-list-count">5</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Kinect/">Kinect</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Life/">Life</a><span class="tag-list-count">17</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Linux/">Linux</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Machine-Learning/">Machine Learning</a><span class="tag-list-count">9</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Maching/">Maching</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Markov/">Markov</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Monster-Hunter/">Monster Hunter</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Motion/">Motion</a><span class="tag-list-count">6</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Movie/">Movie</a><span class="tag-list-count">6</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Music/">Music</a><span class="tag-list-count">7</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/NPR/">NPR</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/OS/">OS</a><span class="tag-list-count">4</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/OpenCV/">OpenCV</a><span class="tag-list-count">3</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Patent/">Patent</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Pose/">Pose</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Push-relabel/">Push-relabel</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Random-Forest/">Random Forest</a><span class="tag-list-count">5</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Random-Trees/">Random Trees</a><span class="tag-list-count">5</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Recognition/">Recognition</a><span class="tag-list-count">13</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Reconstruction/">Reconstruction</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Review/">Review</a><span class="tag-list-count">3</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Segmentation/">Segmentation</a><span class="tag-list-count">3</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Shape/">Shape</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Silhouette/">Silhouette</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Simulation/">Simulation</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/TV/">TV</a><span class="tag-list-count">3</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Testing/">Testing</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Theory-of-Computation/">Theory of Computation</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Tools/">Tools</a><span class="tag-list-count">4</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/WOW/">WOW</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Works/">Works</a><span class="tag-list-count">13</span></li></ul>
+    </div>
+  </div>
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Tag Cloud</h3>
+    <div class="widget tagcloud">
+      <a href="/tags/AI/" style="font-size: 11.11px;">AI</a> <a href="/tags/Analysis/" style="font-size: 12.22px;">Analysis</a> <a href="/tags/Android/" style="font-size: 10px;">Android</a> <a href="/tags/Anime/" style="font-size: 16.67px;">Anime</a> <a href="/tags/Art/" style="font-size: 16.67px;">Art</a> <a href="/tags/Bayesian/" style="font-size: 11.11px;">Bayesian</a> <a href="/tags/Caching/" style="font-size: 11.11px;">Caching</a> <a href="/tags/Code/" style="font-size: 14.44px;">Code</a> <a href="/tags/Computer-Graphics/" style="font-size: 11.11px;">Computer Graphics</a> <a href="/tags/Computer-Vision/" style="font-size: 18.89px;">Computer Vision</a> <a href="/tags/Data-Mining/" style="font-size: 10px;">Data Mining</a> <a href="/tags/Depth-Camera/" style="font-size: 11.11px;">Depth Camera</a> <a href="/tags/Design/" style="font-size: 14.44px;">Design</a> <a href="/tags/Dream/" style="font-size: 12.22px;">Dream</a> <a href="/tags/Ford-Fulkerson/" style="font-size: 10px;">Ford-Fulkerson</a> <a href="/tags/Friends/" style="font-size: 12.22px;">Friends</a> <a href="/tags/GPU/" style="font-size: 10px;">GPU</a> <a href="/tags/Game/" style="font-size: 15.56px;">Game</a> <a href="/tags/Game-Design/" style="font-size: 12.22px;">Game Design</a> <a href="/tags/Gesture/" style="font-size: 11.11px;">Gesture</a> <a href="/tags/Graphcut/" style="font-size: 14.44px;">Graphcut</a> <a href="/tags/Kinect/" style="font-size: 10px;">Kinect</a> <a href="/tags/Life/" style="font-size: 20px;">Life</a> <a href="/tags/Linux/" style="font-size: 11.11px;">Linux</a> <a href="/tags/Machine-Learning/" style="font-size: 17.78px;">Machine Learning</a> <a href="/tags/Maching/" style="font-size: 10px;">Maching</a> <a href="/tags/Markov/" style="font-size: 11.11px;">Markov</a> <a href="/tags/Monster-Hunter/" style="font-size: 10px;">Monster Hunter</a> <a href="/tags/Motion/" style="font-size: 15.56px;">Motion</a> <a href="/tags/Movie/" style="font-size: 15.56px;">Movie</a> <a href="/tags/Music/" style="font-size: 16.67px;">Music</a> <a href="/tags/NPR/" style="font-size: 10px;">NPR</a> <a href="/tags/OS/" style="font-size: 13.33px;">OS</a> <a href="/tags/OpenCV/" style="font-size: 12.22px;">OpenCV</a> <a href="/tags/Patent/" style="font-size: 10px;">Patent</a> <a href="/tags/Pose/" style="font-size: 10px;">Pose</a> <a href="/tags/Push-relabel/" style="font-size: 10px;">Push-relabel</a> <a href="/tags/Random-Forest/" style="font-size: 14.44px;">Random Forest</a> <a href="/tags/Random-Trees/" style="font-size: 14.44px;">Random Trees</a> <a href="/tags/Recognition/" style="font-size: 18.89px;">Recognition</a> <a href="/tags/Reconstruction/" style="font-size: 10px;">Reconstruction</a> <a href="/tags/Review/" style="font-size: 12.22px;">Review</a> <a href="/tags/Segmentation/" style="font-size: 12.22px;">Segmentation</a> <a href="/tags/Shape/" style="font-size: 10px;">Shape</a> <a href="/tags/Silhouette/" style="font-size: 10px;">Silhouette</a> <a href="/tags/Simulation/" style="font-size: 10px;">Simulation</a> <a href="/tags/TV/" style="font-size: 12.22px;">TV</a> <a href="/tags/Testing/" style="font-size: 11.11px;">Testing</a> <a href="/tags/Theory-of-Computation/" style="font-size: 10px;">Theory of Computation</a> <a href="/tags/Tools/" style="font-size: 13.33px;">Tools</a> <a href="/tags/WOW/" style="font-size: 10px;">WOW</a> <a href="/tags/Works/" style="font-size: 18.89px;">Works</a>
+    </div>
+  </div>
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Archives</h3>
+    <div class="widget">
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2012/10/">十月 2012</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2012/09/">九月 2012</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2012/01/">一月 2012</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2011/12/">十二月 2011</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2011/11/">十一月 2011</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2011/08/">八月 2011</a><span class="archive-list-count">4</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2011/07/">七月 2011</a><span class="archive-list-count">3</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2011/05/">五月 2011</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2011/04/">四月 2011</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2011/03/">三月 2011</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2010/12/">十二月 2010</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2010/11/">十一月 2010</a><span class="archive-list-count">4</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2010/10/">十月 2010</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2010/09/">九月 2010</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2010/07/">七月 2010</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2010/06/">六月 2010</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2010/05/">五月 2010</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2010/03/">三月 2010</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2010/02/">二月 2010</a><span class="archive-list-count">3</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2010/01/">一月 2010</a><span class="archive-list-count">5</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2009/12/">十二月 2009</a><span class="archive-list-count">4</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2009/11/">十一月 2009</a><span class="archive-list-count">6</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2009/05/">五月 2009</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2008/09/">九月 2008</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2008/07/">七月 2008</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2008/02/">二月 2008</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2008/01/">一月 2008</a><span class="archive-list-count">3</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2007/12/">十二月 2007</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2007/08/">八月 2007</a><span class="archive-list-count">1</span></li></ul>
+    </div>
+  </div>
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Recents</h3>
+    <div class="widget">
+      <ul>
+        
+          <li>
+            <a href="/2012/10/30/move_from_wp/e5-8d-8a-e5-a4-9c-e6-9b-b4-e6-96-b0-e7-9c-8b-e5-b8-ae-e5-a8-98/">半夜更新看板娘 ~ </a>
+          </li>
+        
+          <li>
+            <a href="/2012/09/25/move_from_wp/e8-bf-9f-e6-9d-a5-e7-9a-84wow-e6-af-95-e4-b8-9a-e7-95-99-e5-bf-b5/">迟来的WOW毕业留念</a>
+          </li>
+        
+          <li>
+            <a href="/2012/01/11/move_from_wp/e8-af-b4-e8-af-b4-e6-9c-80-e8-bf-91-e7-9c-8b-e8-bf-87-e7-9a-84-e7-94-b5-e8-a7-86-e5-89-a7/">说说最近看过的电视剧</a>
+          </li>
+        
+          <li>
+            <a href="/2012/01/06/move_from_wp/e9-82-a3-e4-ba-9b-e5-b9-b4-ef-bc-8c-e6-88-91-e4-bb-ac-e4-b8-80-e8-b5-b7-e5-86-99-e7-9a-84-e5-ad-a6-e4-bd-8d-e8-ae-ba-e6-96-87/">那些年，我们一起写的学位论文</a>
+          </li>
+        
+          <li>
+            <a href="/2011/12/31/move_from_wp/2011-e5-b9-b4-e7-bb-88-e7-9b-98-e7-82-b9/">2011年终盘点</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+
+  
+</aside>
+        
+      </div>
+      <footer id="footer">
+  
+  <div class="outer">
+    <div id="footer-info" class="inner">
+      &copy; 2015 lincccc<br>
+      Powered by <a href="http://hexo.io/" target="_blank">Hexo</a>
+    </div>
+  </div>
+</footer>
+    </div>
+    <nav id="mobile-nav">
+  
+    <a href="/" class="mobile-nav-link">Home</a>
+  
+    <a href="/archives" class="mobile-nav-link">Archives</a>
+  
+</nav>
+    
+
+<script src="//ajax.googleapis.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
+
+
+  <link rel="stylesheet" href="/fancybox/jquery.fancybox.css" type="text/css">
+  <script src="/fancybox/jquery.fancybox.pack.js" type="text/javascript"></script>
+
+
+<script src="/js/script.js" type="text/javascript"></script>
+
+  </div>
+</body>
+</html>

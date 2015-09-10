@@ -1,0 +1,247 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  <title>[论文笔记] Game Over: Learning by Dying | _Sugarless</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="description" content="Paper：Grammenos, Dimitris. Game over: learning by dying. In Proc. of CHI 2008 (Florence, Italy 2008), ACM
+
+问题描述：这是一篇关于游戏开发者如何更容易地理解游戏的可亲性（Game Accessiblity）的文章。作者设计和开发了一款名为“Game Over！”的游戏，帮助开发人员认识游戏可亲">
+<meta property="og:type" content="article">
+<meta property="og:title" content="[论文笔记] Game Over: Learning by Dying">
+<meta property="og:url" content="http://yoursite.com/2010/06/07/move_from_wp/e8-ae-ba-e6-96-87-e7-ac-94-e8-ae-b0-game-over-learning-by-dying/index.html">
+<meta property="og:site_name" content="_Sugarless">
+<meta property="og:description" content="Paper：Grammenos, Dimitris. Game over: learning by dying. In Proc. of CHI 2008 (Florence, Italy 2008), ACM
+
+问题描述：这是一篇关于游戏开发者如何更容易地理解游戏的可亲性（Game Accessiblity）的文章。作者设计和开发了一款名为“Game Over！”的游戏，帮助开发人员认识游戏可亲">
+<meta property="og:updated_time" content="2015-09-06T10:27:04.735Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="[论文笔记] Game Over: Learning by Dying">
+<meta name="twitter:description" content="Paper：Grammenos, Dimitris. Game over: learning by dying. In Proc. of CHI 2008 (Florence, Italy 2008), ACM
+
+问题描述：这是一篇关于游戏开发者如何更容易地理解游戏的可亲性（Game Accessiblity）的文章。作者设计和开发了一款名为“Game Over！”的游戏，帮助开发人员认识游戏可亲">
+  
+    <link rel="alternative" href="/atom.xml" title="_Sugarless" type="application/atom+xml">
+  
+  
+    <link rel="icon" href="/favicon.png">
+  
+  <link href="//fonts.googleapis.com/css?family=Source+Code+Pro" rel="stylesheet" type="text/css">
+  <link rel="stylesheet" href="/css/style.css" type="text/css">
+  
+
+</head>
+<body>
+  <div id="container">
+    <div id="wrap">
+      <header id="header">
+  <div id="banner"></div>
+  <div id="header-outer" class="outer">
+    <div id="header-title" class="inner">
+      <h1 id="logo-wrap">
+        <a href="/" id="logo">_Sugarless</a>
+      </h1>
+      
+    </div>
+    <div id="header-inner" class="inner">
+      <nav id="main-nav">
+        <a id="main-nav-toggle" class="nav-icon"></a>
+        
+          <a class="main-nav-link" href="/">Home</a>
+        
+          <a class="main-nav-link" href="/archives">Archives</a>
+        
+      </nav>
+      <nav id="sub-nav">
+        
+          <a id="nav-rss-link" class="nav-icon" href="/atom.xml" title="RSS Feed"></a>
+        
+        <a id="nav-search-btn" class="nav-icon" title="Search"></a>
+      </nav>
+      <div id="search-form-wrap">
+        <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" results="0" class="search-form-input" placeholder="Search"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="http://yoursite.com"></form>
+      </div>
+    </div>
+  </div>
+</header>
+      <div class="outer">
+        <section id="main"><article id="post-move_from_wp/e8-ae-ba-e6-96-87-e7-ac-94-e8-ae-b0-game-over-learning-by-dying" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2010/06/07/move_from_wp/e8-ae-ba-e6-96-87-e7-ac-94-e8-ae-b0-game-over-learning-by-dying/" class="article-date">
+  <time datetime="2010-06-07T15:29:00.000Z" itemprop="datePublished">2010-06-07</time>
+</a>
+    
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/Academic/">Academic</a>
+  </div>
+
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="article-title" itemprop="name">
+      [论文笔记] Game Over: Learning by Dying
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p><strong>Paper：</strong>Grammenos, Dimitris. <u>Game over: learning by dying</u>. In Proc. of CHI 2008 (Florence, Italy 2008), ACM</p>
+<hr>
+<p><strong>问题描述：</strong>这是一篇关于游戏开发者如何更容易地理解游戏的可亲性（Game Accessiblity）的文章。作者设计和开发了一款名为“Game Over！”的游戏，帮助开发人员认识游戏可亲性的重要性，并学习关于其的一些原则和指标。这是世界上第一款“Universally inaccessible game”。此外，作者还通过多种渠道的调查，系统地评估了该游戏所起到的效果。</p>
+<blockquote>
+<p>“Game Over！”的灵感来自于1986年发行的视频游戏“Takeshi’s Challenge”。它由一个十分讨厌视频游戏的人（北野武，知道他是谁吧）参与企划，在游戏中几乎打破了所有的视频游戏原则，设计了N多无比变态苦役的任务，比如按某个键4小时、唱歌1小时或者打Boss20000次，号称“还没有开始就Game Over的游戏”（但令人称奇的是，如此变态的游戏，居然在日本大卖，当然也因为它是如此变态，它也只在日本卖）。私以为，“Takeshi’s Challenge”真正的好玩之处在于它挑起了玩家抵抗变态设计的兴趣，使得他们想尽一切的办法来方便地完成这些变态的任务，而寻找trick本身是十分有趣的。比如，对于“按键4小时”这个任务，拿重物代替手指按住按键就是个很好的trick，玩家所需要做的只是等待、并在4小时后回来观察结果。这款游戏可能是在无意中打开了一种新的解谜游戏的模式。当然，这是题外话。</p>
+</blockquote>
+<p>游戏的可亲性（Game Accessibility）指的是游戏是否能被玩家所参与，私以为与游戏的可用性（Usability）十分相关，但可亲性更加基础些。可亲性理论认为，有一部分玩家无法玩游戏是因为他们自身物理上、感知或者精神上的残疾；但是另外一部分玩家，是由于不好的游戏设计，而无法充分体验其中、甚至根本无法开始它，如：<br>1）运行时的环境。在一个十分嘈杂的环境中玩游戏，玩家可以被认为是条件性地失聪的。而在一个十分亮的环境中（太阳底下），玩家则是条件性地失明的；<br>2）玩家使用的硬件和软件环境也会对游戏体验造成影响，比如移动设备的小屏幕、旧型的浏览器或者不同的操作系统，都会对游戏的兼容性提出挑战；<br>3）最后，由于不同玩家的游戏技巧和喜好不同，也会造成游戏的不可亲性，比如对于一个十分不喜好或者不适应按各种组合键玩格斗游戏的人，好的设计就应该提供其他的可选按键方案。<br><a id="more"></a> </p>
+<p>游戏可亲性是评价一款游戏好坏的一项十分基本和基础的标准，它是衡量隔阂在玩家与游戏之间的障碍的尺度。没有可亲性，谈论可玩性是没有意义的。<br>因此，有一些组织一直致力于提出和不断完善游戏可亲性的指标（Game Accessibility Guidelines），如GASIG在2004年发布的与此相关的白皮书。但是不幸的是，这种文字指标在实际应用中表现得十分低效和不可用，这主要是因为它们常十分抽象而难以理解，以致于开发人员虽然记住了很多指标，但在遭遇具体问题时却下意识地忽略了它。并且，这些指标有时是相互矛盾的，单条指标在解决了一些问题后偶尔会产生新的问题。<br>设计人员还可以通过一些反面的例子来学习什么是好的设计，这不是什么新的点子。有一些网站一直在做这样的事情，提供各种各样坏设计的例子，包括真实的产品和软件交互界面等，比如<a href="http://www.baddesigns.com/" title="http://www.baddesigns.com/" target="_blank" rel="external">Bad Human Factors Designs</a>，<a href="http://homepage.mac.com/bradster/iarchitect/shame.htm" target="_blank" rel="external">Interface Hall of Shame</a>和<a href="http://www.worstoftheweb.com/" target="_blank" rel="external">Worst of the Web</a>等。相较于抽象的指标，这是一种比较能够让人获得深刻印象的方法。那么，既然最容易让产品设计师吸取教训的方法是浏览失败的产品设计，我们是不是可以认为，让游戏设计师认识可亲性最快捷有效的方法是体验不可亲的游戏呢？是的，这就是此文所设计和开发的世界上最不可亲的游戏“Game Over！”。<br>普遍认为，游戏开发者大多都是爱玩游戏的，并且，他们中的大多数能够十分清楚地记忆他们所玩过的最好玩的和最不好玩的游戏。当他们在一款失败的游戏中体验到某一种失败的设计后，他们就变得能够认识到与其相似的其他失败设计，并在今后的设计中避免它们。并且，有研究表明，在人的记忆中，一款好玩的游戏可能被另一款更好玩的游戏所覆盖，但是所有曾经遭遇的糟糕的游戏体验都会被清晰地记忆——<em>“Notable failures last for a lifetime“</em>。因此，我们似乎可以预见，“Game Over！”将是一款让人印象深刻的游戏，因为它涵盖了太多无比糟糕的设计。</p>
+<p>“Game Over！”作为一款游戏可亲性的学习工具，作者认为应当满足以下要求：<br>1）Easy：容易。简单。有一个众所周知的目标和游戏机制。这使得游戏玩家可以方便地理解游戏中存在的问题以及造成问题的原因；<br>2）Break：直接、明显地破坏游戏可亲性原则；<br>3）One Rule：一次只破坏这些原则中的一条，这使得识别问题所在变得简单；<br>4）Major：覆盖这些原则中主要的、典型的部分；<br>5）Advice：在给出这些可亲性原则或概念的同时，针对每一条，给出相应的解决问题的建议；<br>6）Humor：幽默。这是为了让游戏本身变得有趣；<br>7）Platform：能够在尽可能多的平台上运行。</p>
+<p>基于这些要求，作者挑选了一个射击游戏作为“Game Over！”的蓝本。玩家被设定为一个乘坐飞盘的外星人，抵抗地球人的舰队对宇宙的进攻。这个故事与我们所熟悉的拯救宇宙的故事是恰恰相反的，以强化“Game Over！”与正常游戏的逆关系。游戏共21个关卡，过关条件是失去3条命，即所谓的Learning by Dying（作者认为，好的游戏设计应当总是给出一些提示玩家如何去赢的线索——无论它多么困难——这样即使玩家失败了，他也只会抱怨自己不够厉害，而不会抱怨设计者变态）。在每一关结束，屏幕上会给出与之相关的名言和可亲性原则等，帮助游戏开发者强化记忆。在整个游戏中，玩家可以被杀死，但敌人永远都不会死。也就是说，如果过关条件被设计为杀死敌人，那么这将真的成为一个永远也无法过关的游戏。典型地，有以下关卡：<br>1）Start Screen：<br>这是游戏的开始画面，也是一个热身运动。它要求玩家同时按下“Ctrl + Shift + Enter + Home + F3 + F12 + →”键，这是何等变态的要求。哪怕只体验一次，开发者也会记住，减少按键的个数是多么地重要而美好。<br>2）Level 3 #Hunt and Peck：<br>在这一关中，游戏的按键控制会被随机地修改为其他，玩家需要去找到它才能避免死亡，但这几乎是不可能的。这一关是在告诉开发者，需要为玩家提供修改游戏控制方式的功能。<br>3）Level 9 #Chill Out：<br>这一关，所有的游戏动作会变得十分十分缓慢，类似的在第8关中相当地快。对应的主题则是，为玩家提供控制游戏速度的功能。<br>4）Level 13 #Low Budget：<br>所有游戏中的元素会变得十分十分小，类似的在第14关中十分十分大。对应的主题则是，允许玩家控制文字和图像的大小，或提供适应不同屏幕分辨率的解决方案。<br>5）Level 19 #Chatterbox：<br>这一关的画面是黑暗不可见的（模拟高光强的情况），但是游戏提供有关敌人和火力所在位置的音频提示，如“Look out! There is a big spaceship that looks really mean on your left”。这显然是十分唠叨的一句提示，它直到最后一个单词才说出玩家所需要的信息。那么显然，这一关所对应的主题是，提供有意义且有效率的语言提示。</p>
+<p>游戏制作完成后，作者通过三种方式测试和统计它对游戏开发人员是否有帮助：1）On-line调查；2）面对面的反馈调查；3）公开的网络上关于“Game Over！”的评价的收集，包括一些网站、blog和论坛。在作者提供的数据中，尽管一部分受调查者表示他们事先或多或少地都了解一些游戏可亲性原则，但大多数人的确通过该游戏认识到了更多。并且有趣的是，在48%对游戏可亲性原则了解少于一半的人群中，有38%的人认为该游戏对他们的帮助非常大，33%认为大，29%认为中等，没有人认为没有或只有少量帮助。但也的确收到了一些十分负面的评价，有人认为特地设计一款游戏来学习可亲性是十分没有必要的，抽象的指标就足够了；还有人认为它不够有趣。</p>
+<p>我们可以从以下几个方面来看待“Game Over！”游戏的成功与否：<br><strong>1）受众：</strong><br>显然，这不是一款适合大众玩家的游戏，作者的目的在于教育游戏开发者。但是由于其包含的可亲性原则的浅显，它可能更适合于初入游戏开发领域的新手。诚如作者调查问卷第一题“How familiar were you with the accessiblity guidelines presented？”的调查结果所示，一些资深开发者对这些原则是十分熟悉的。那么，对于这些人来说，玩这样一款游戏无异于浪费时间。那么，为什么在资深人员手中依然会出现不可亲的设计呢？私以为那是由于开发资金与时间的限制、以及对玩家的蔑视，唯有现实中的教训才能使其反省。在很多游戏开发公司中，通常会摆放一些游戏设备供员工在午休或下班后时间玩游戏。其间不只该公司的游戏，也包括其他竞争者的产品。员工在玩游戏的过程中，通过自身的感受和与队友的讨论，会不断体验到好设计与不好的设计之间的差距。这虽然是一种十分随机和粗放的体验模式，但往往能收到意想不到的效果，比如发现新的原则。<br><strong>2）可玩性：</strong><br>由于这并不是一款单纯的游戏，讨论它的可玩性应与其所相应的Guildlines相比较。诚然，它比Guildlines有趣一点，但它也需要开发者耗费更多的时间。并且，有些关卡的内容和其对应的可亲性原则事实上并没有很好地切合，这同样会让开发者感到迷惑。另外，由于它的设计理念和目的，使得它“一点也不好玩”，也就是说，玩家需要时刻以开发者的身份约束自己，才能觉得它相对有趣些。并且，这种最初出于面对好创意的喜悦之情，会随着时间而退去；也就是说，最后，它会变得和Guildlines一样枯燥（事实上，在玩到一半时，我已经感觉到了）。那么，从这个意义上来讲，它与其说是一款学习可亲性原则的游戏，不如说是一款引人注意的、交互繁琐而精良的可亲性Guildlines。<br><strong>3）评价系统：</strong><br>在这个方面，作者做得是不错了。他尝试了多种渠道，试图让尽可能多的人试用和反馈“Game Over！”；并撰写了简单直白的调查问卷，仅5个问题，调查使用者玩游戏前、玩游戏后对可亲性原则的认识，以及他们对游戏本身可玩性的看法、是否适合用作教育工具、是否推荐他人等。值得一提的是，作者还进行了面对面的试用调查，并详细记录了试用者的一些言论，这使得评价更加具体并附有个性，再者直接的交流也比调查问卷能更准确地反映试用者的真实感受。</p>
+<p>私以为，此文在交互方式的创意上是具有启迪作用的。尤其作为一种针对成人的职业教育工具，它直接将行业产品作为教育的手段，十分直接而富有震撼力。我们总是希望，教育可以跳出文字与图片构成的教材课本，而以一种更为直接、具象和有趣的方式传达知识。那么，此文的观点就是，游戏专业的学生可以以游戏为课本，医学专业的学术可以以人体为课本。再有，就是以夸张的反面教材的堆积，以低廉的方式使人们获得教训。</p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://yoursite.com/2010/06/07/move_from_wp/e8-ae-ba-e6-96-87-e7-ac-94-e8-ae-b0-game-over-learning-by-dying/" data-id="ciedu83uh003pp4bgrzvymb1j" class="article-share-link">Share</a>
+      
+      
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Game/">Game</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Game-Design/">Game Design</a></li></ul>
+
+    </footer>
+  </div>
+  
+    
+<nav id="article-nav">
+  
+    <a href="/2010/07/05/move_from_wp/e5-ae-8c-e7-bb-93-ef-bc-81-e5-a4-a7-e5-b9-b4-e7-95-aa-e9-92-a2-e7-82-bc-ef-bc-81/" id="article-nav-newer" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Newer</strong>
+      <div class="article-nav-title">
+        
+          完结！大年番~ 钢炼~！
+        
+      </div>
+    </a>
+  
+  
+    <a href="/2010/05/30/move_from_wp/e8-af-bb-e4-b9-a6-e7-ac-94-e8-ae-b0-e6-b8-b8-e6-88-8f-e6-b5-8b-e8-af-95-part-2-ef-bc-9a-e6-b5-8b-e8-af-95-e6-8a-80-e6-9c-af/" id="article-nav-older" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Older</strong>
+      <div class="article-nav-title">[读书笔记] 游戏测试 Part 2：测试技术</div>
+    </a>
+  
+</nav>
+
+  
+</article>
+
+</section>
+        
+          <aside id="sidebar">
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Categories</h3>
+    <div class="widget">
+      <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/Academic/">Academic</a><span class="category-list-count">28</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/Academic/Engineering/">Engineering</a><span class="category-list-count">3</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Academic/Works/">Works</a><span class="category-list-count">2</span></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/Engineering/">Engineering</a><span class="category-list-count">4</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Hobby/">Hobby</a><span class="category-list-count">11</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/Hobby/Trivial/">Trivial</a><span class="category-list-count">3</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/Hobby/Trivial/Works/">Works</a><span class="category-list-count">1</span></li></ul></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/Trivial/">Trivial</a><span class="category-list-count">8</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Works/">Works</a><span class="category-list-count">10</span></li></ul>
+    </div>
+  </div>
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Tags</h3>
+    <div class="widget">
+      <ul class="tag-list"><li class="tag-list-item"><a class="tag-list-link" href="/tags/AI/">AI</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Analysis/">Analysis</a><span class="tag-list-count">3</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Android/">Android</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Anime/">Anime</a><span class="tag-list-count">7</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Art/">Art</a><span class="tag-list-count">7</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Bayesian/">Bayesian</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Caching/">Caching</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Code/">Code</a><span class="tag-list-count">5</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Computer-Graphics/">Computer Graphics</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Computer-Vision/">Computer Vision</a><span class="tag-list-count">13</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Data-Mining/">Data Mining</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Depth-Camera/">Depth Camera</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Design/">Design</a><span class="tag-list-count">5</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Dream/">Dream</a><span class="tag-list-count">3</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Ford-Fulkerson/">Ford-Fulkerson</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Friends/">Friends</a><span class="tag-list-count">3</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/GPU/">GPU</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Game/">Game</a><span class="tag-list-count">6</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Game-Design/">Game Design</a><span class="tag-list-count">3</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Gesture/">Gesture</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Graphcut/">Graphcut</a><span class="tag-list-count">5</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Kinect/">Kinect</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Life/">Life</a><span class="tag-list-count">17</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Linux/">Linux</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Machine-Learning/">Machine Learning</a><span class="tag-list-count">9</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Maching/">Maching</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Markov/">Markov</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Monster-Hunter/">Monster Hunter</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Motion/">Motion</a><span class="tag-list-count">6</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Movie/">Movie</a><span class="tag-list-count">6</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Music/">Music</a><span class="tag-list-count">7</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/NPR/">NPR</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/OS/">OS</a><span class="tag-list-count">4</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/OpenCV/">OpenCV</a><span class="tag-list-count">3</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Patent/">Patent</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Pose/">Pose</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Push-relabel/">Push-relabel</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Random-Forest/">Random Forest</a><span class="tag-list-count">5</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Random-Trees/">Random Trees</a><span class="tag-list-count">5</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Recognition/">Recognition</a><span class="tag-list-count">13</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Reconstruction/">Reconstruction</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Review/">Review</a><span class="tag-list-count">3</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Segmentation/">Segmentation</a><span class="tag-list-count">3</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Shape/">Shape</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Silhouette/">Silhouette</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Simulation/">Simulation</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/TV/">TV</a><span class="tag-list-count">3</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Testing/">Testing</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Theory-of-Computation/">Theory of Computation</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Tools/">Tools</a><span class="tag-list-count">4</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/WOW/">WOW</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Works/">Works</a><span class="tag-list-count">13</span></li></ul>
+    </div>
+  </div>
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Tag Cloud</h3>
+    <div class="widget tagcloud">
+      <a href="/tags/AI/" style="font-size: 11.11px;">AI</a> <a href="/tags/Analysis/" style="font-size: 12.22px;">Analysis</a> <a href="/tags/Android/" style="font-size: 10px;">Android</a> <a href="/tags/Anime/" style="font-size: 16.67px;">Anime</a> <a href="/tags/Art/" style="font-size: 16.67px;">Art</a> <a href="/tags/Bayesian/" style="font-size: 11.11px;">Bayesian</a> <a href="/tags/Caching/" style="font-size: 11.11px;">Caching</a> <a href="/tags/Code/" style="font-size: 14.44px;">Code</a> <a href="/tags/Computer-Graphics/" style="font-size: 11.11px;">Computer Graphics</a> <a href="/tags/Computer-Vision/" style="font-size: 18.89px;">Computer Vision</a> <a href="/tags/Data-Mining/" style="font-size: 10px;">Data Mining</a> <a href="/tags/Depth-Camera/" style="font-size: 11.11px;">Depth Camera</a> <a href="/tags/Design/" style="font-size: 14.44px;">Design</a> <a href="/tags/Dream/" style="font-size: 12.22px;">Dream</a> <a href="/tags/Ford-Fulkerson/" style="font-size: 10px;">Ford-Fulkerson</a> <a href="/tags/Friends/" style="font-size: 12.22px;">Friends</a> <a href="/tags/GPU/" style="font-size: 10px;">GPU</a> <a href="/tags/Game/" style="font-size: 15.56px;">Game</a> <a href="/tags/Game-Design/" style="font-size: 12.22px;">Game Design</a> <a href="/tags/Gesture/" style="font-size: 11.11px;">Gesture</a> <a href="/tags/Graphcut/" style="font-size: 14.44px;">Graphcut</a> <a href="/tags/Kinect/" style="font-size: 10px;">Kinect</a> <a href="/tags/Life/" style="font-size: 20px;">Life</a> <a href="/tags/Linux/" style="font-size: 11.11px;">Linux</a> <a href="/tags/Machine-Learning/" style="font-size: 17.78px;">Machine Learning</a> <a href="/tags/Maching/" style="font-size: 10px;">Maching</a> <a href="/tags/Markov/" style="font-size: 11.11px;">Markov</a> <a href="/tags/Monster-Hunter/" style="font-size: 10px;">Monster Hunter</a> <a href="/tags/Motion/" style="font-size: 15.56px;">Motion</a> <a href="/tags/Movie/" style="font-size: 15.56px;">Movie</a> <a href="/tags/Music/" style="font-size: 16.67px;">Music</a> <a href="/tags/NPR/" style="font-size: 10px;">NPR</a> <a href="/tags/OS/" style="font-size: 13.33px;">OS</a> <a href="/tags/OpenCV/" style="font-size: 12.22px;">OpenCV</a> <a href="/tags/Patent/" style="font-size: 10px;">Patent</a> <a href="/tags/Pose/" style="font-size: 10px;">Pose</a> <a href="/tags/Push-relabel/" style="font-size: 10px;">Push-relabel</a> <a href="/tags/Random-Forest/" style="font-size: 14.44px;">Random Forest</a> <a href="/tags/Random-Trees/" style="font-size: 14.44px;">Random Trees</a> <a href="/tags/Recognition/" style="font-size: 18.89px;">Recognition</a> <a href="/tags/Reconstruction/" style="font-size: 10px;">Reconstruction</a> <a href="/tags/Review/" style="font-size: 12.22px;">Review</a> <a href="/tags/Segmentation/" style="font-size: 12.22px;">Segmentation</a> <a href="/tags/Shape/" style="font-size: 10px;">Shape</a> <a href="/tags/Silhouette/" style="font-size: 10px;">Silhouette</a> <a href="/tags/Simulation/" style="font-size: 10px;">Simulation</a> <a href="/tags/TV/" style="font-size: 12.22px;">TV</a> <a href="/tags/Testing/" style="font-size: 11.11px;">Testing</a> <a href="/tags/Theory-of-Computation/" style="font-size: 10px;">Theory of Computation</a> <a href="/tags/Tools/" style="font-size: 13.33px;">Tools</a> <a href="/tags/WOW/" style="font-size: 10px;">WOW</a> <a href="/tags/Works/" style="font-size: 18.89px;">Works</a>
+    </div>
+  </div>
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Archives</h3>
+    <div class="widget">
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2012/10/">十月 2012</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2012/09/">九月 2012</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2012/01/">一月 2012</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2011/12/">十二月 2011</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2011/11/">十一月 2011</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2011/08/">八月 2011</a><span class="archive-list-count">4</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2011/07/">七月 2011</a><span class="archive-list-count">3</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2011/05/">五月 2011</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2011/04/">四月 2011</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2011/03/">三月 2011</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2010/12/">十二月 2010</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2010/11/">十一月 2010</a><span class="archive-list-count">4</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2010/10/">十月 2010</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2010/09/">九月 2010</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2010/07/">七月 2010</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2010/06/">六月 2010</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2010/05/">五月 2010</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2010/03/">三月 2010</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2010/02/">二月 2010</a><span class="archive-list-count">3</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2010/01/">一月 2010</a><span class="archive-list-count">5</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2009/12/">十二月 2009</a><span class="archive-list-count">4</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2009/11/">十一月 2009</a><span class="archive-list-count">6</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2009/05/">五月 2009</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2008/09/">九月 2008</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2008/07/">七月 2008</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2008/02/">二月 2008</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2008/01/">一月 2008</a><span class="archive-list-count">3</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2007/12/">十二月 2007</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2007/08/">八月 2007</a><span class="archive-list-count">1</span></li></ul>
+    </div>
+  </div>
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Recents</h3>
+    <div class="widget">
+      <ul>
+        
+          <li>
+            <a href="/2012/10/30/move_from_wp/e5-8d-8a-e5-a4-9c-e6-9b-b4-e6-96-b0-e7-9c-8b-e5-b8-ae-e5-a8-98/">半夜更新看板娘 ~ </a>
+          </li>
+        
+          <li>
+            <a href="/2012/09/25/move_from_wp/e8-bf-9f-e6-9d-a5-e7-9a-84wow-e6-af-95-e4-b8-9a-e7-95-99-e5-bf-b5/">迟来的WOW毕业留念</a>
+          </li>
+        
+          <li>
+            <a href="/2012/01/11/move_from_wp/e8-af-b4-e8-af-b4-e6-9c-80-e8-bf-91-e7-9c-8b-e8-bf-87-e7-9a-84-e7-94-b5-e8-a7-86-e5-89-a7/">说说最近看过的电视剧</a>
+          </li>
+        
+          <li>
+            <a href="/2012/01/06/move_from_wp/e9-82-a3-e4-ba-9b-e5-b9-b4-ef-bc-8c-e6-88-91-e4-bb-ac-e4-b8-80-e8-b5-b7-e5-86-99-e7-9a-84-e5-ad-a6-e4-bd-8d-e8-ae-ba-e6-96-87/">那些年，我们一起写的学位论文</a>
+          </li>
+        
+          <li>
+            <a href="/2011/12/31/move_from_wp/2011-e5-b9-b4-e7-bb-88-e7-9b-98-e7-82-b9/">2011年终盘点</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+
+  
+</aside>
+        
+      </div>
+      <footer id="footer">
+  
+  <div class="outer">
+    <div id="footer-info" class="inner">
+      &copy; 2015 lincccc<br>
+      Powered by <a href="http://hexo.io/" target="_blank">Hexo</a>
+    </div>
+  </div>
+</footer>
+    </div>
+    <nav id="mobile-nav">
+  
+    <a href="/" class="mobile-nav-link">Home</a>
+  
+    <a href="/archives" class="mobile-nav-link">Archives</a>
+  
+</nav>
+    
+
+<script src="//ajax.googleapis.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
+
+
+  <link rel="stylesheet" href="/fancybox/jquery.fancybox.css" type="text/css">
+  <script src="/fancybox/jquery.fancybox.pack.js" type="text/javascript"></script>
+
+
+<script src="/js/script.js" type="text/javascript"></script>
+
+  </div>
+</body>
+</html>

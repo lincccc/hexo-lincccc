@@ -1,0 +1,275 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  <title>[源码笔记] Linux内核内存检测工具Kmemcheck浅读 | _Sugarless</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="description" content="Linux内核2.6.31版本发布于2009年9月9日（真是个吉利的日子），其中新加入了两个内核内存管理方面的新工具Kmemcheck和Kmemleak。Kmemcheck工作于内核态，用于检测未初始化等内存非法读写访问并发出警告（类似的编程辅助工具Valgrind也可用于内存检测，但其工作于用户态，对内核态进程无能）。但是由于Kmemcheck会大大地影响内核工作的速度，并消耗较近两倍的内存使用">
+<meta property="og:type" content="article">
+<meta property="og:title" content="[源码笔记] Linux内核内存检测工具Kmemcheck浅读">
+<meta property="og:url" content="http://yoursite.com/2009/12/14/move_from_wp/e6-ba-90-e7-a0-81-e7-ac-94-e8-ae-b0-linux-e5-86-85-e6-a0-b8-e5-86-85-e5-ad-98-e6-a3-80-e6-b5-8b-e5-b7-a5-e5-85-b7kmemcheck-e6-b5-85-e8-af-bb/index.html">
+<meta property="og:site_name" content="_Sugarless">
+<meta property="og:description" content="Linux内核2.6.31版本发布于2009年9月9日（真是个吉利的日子），其中新加入了两个内核内存管理方面的新工具Kmemcheck和Kmemleak。Kmemcheck工作于内核态，用于检测未初始化等内存非法读写访问并发出警告（类似的编程辅助工具Valgrind也可用于内存检测，但其工作于用户态，对内核态进程无能）。但是由于Kmemcheck会大大地影响内核工作的速度，并消耗较近两倍的内存使用">
+<meta property="og:image" content="http://lh4.ggpht.com/_NFbnZk4IksM/TKQ8zasSZfI/AAAAAAAAAFo/792JyZMn_kQ/code01_thumb16_thumb.jpg?imgmax=800">
+<meta property="og:image" content="http://lh5.ggpht.com/_NFbnZk4IksM/TKQ82XPPkOI/AAAAAAAAAF4/QoHdBsY9toc/code02_thumb2_thumb.jpg?imgmax=800">
+<meta property="og:image" content="http://lh6.ggpht.com/_NFbnZk4IksM/TKQ832_mCfI/AAAAAAAAAGA/XVosqa_8rCA/re02_thumb2_thumb.jpg?imgmax=800">
+<meta property="og:image" content="http://lh5.ggpht.com/_NFbnZk4IksM/TKQ84zKpc3I/AAAAAAAAAGI/B3WFyoqBxCc/code03_thumb2_thumb.jpg?imgmax=800">
+<meta property="og:updated_time" content="2015-09-10T05:39:59.085Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="[源码笔记] Linux内核内存检测工具Kmemcheck浅读">
+<meta name="twitter:description" content="Linux内核2.6.31版本发布于2009年9月9日（真是个吉利的日子），其中新加入了两个内核内存管理方面的新工具Kmemcheck和Kmemleak。Kmemcheck工作于内核态，用于检测未初始化等内存非法读写访问并发出警告（类似的编程辅助工具Valgrind也可用于内存检测，但其工作于用户态，对内核态进程无能）。但是由于Kmemcheck会大大地影响内核工作的速度，并消耗较近两倍的内存使用">
+  
+    <link rel="alternative" href="/atom.xml" title="_Sugarless" type="application/atom+xml">
+  
+  
+    <link rel="icon" href="/favicon.png">
+  
+  <link href="//fonts.googleapis.com/css?family=Source+Code+Pro" rel="stylesheet" type="text/css">
+  <link rel="stylesheet" href="/css/style.css" type="text/css">
+  
+
+</head>
+<body>
+  <div id="container">
+    <div id="wrap">
+      <header id="header">
+  <div id="banner"></div>
+  <div id="header-outer" class="outer">
+    <div id="header-title" class="inner">
+      <h1 id="logo-wrap">
+        <a href="/" id="logo">_Sugarless</a>
+      </h1>
+      
+    </div>
+    <div id="header-inner" class="inner">
+      <nav id="main-nav">
+        <a id="main-nav-toggle" class="nav-icon"></a>
+        
+          <a class="main-nav-link" href="/">Home</a>
+        
+          <a class="main-nav-link" href="/archives">Archives</a>
+        
+      </nav>
+      <nav id="sub-nav">
+        
+          <a id="nav-rss-link" class="nav-icon" href="/atom.xml" title="RSS Feed"></a>
+        
+        <a id="nav-search-btn" class="nav-icon" title="Search"></a>
+      </nav>
+      <div id="search-form-wrap">
+        <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" results="0" class="search-form-input" placeholder="Search"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="http://yoursite.com"></form>
+      </div>
+    </div>
+  </div>
+</header>
+      <div class="outer">
+        <section id="main"><article id="post-move_from_wp/e6-ba-90-e7-a0-81-e7-ac-94-e8-ae-b0-linux-e5-86-85-e6-a0-b8-e5-86-85-e5-ad-98-e6-a3-80-e6-b5-8b-e5-b7-a5-e5-85-b7kmemcheck-e6-b5-85-e8-af-bb" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2009/12/14/move_from_wp/e6-ba-90-e7-a0-81-e7-ac-94-e8-ae-b0-linux-e5-86-85-e6-a0-b8-e5-86-85-e5-ad-98-e6-a3-80-e6-b5-8b-e5-b7-a5-e5-85-b7kmemcheck-e6-b5-85-e8-af-bb/" class="article-date">
+  <time datetime="2009-12-14T13:36:00.000Z" itemprop="datePublished">2009-12-14</time>
+</a>
+    
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/Engineering/">Engineering</a>
+  </div>
+
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="article-title" itemprop="name">
+      [源码笔记] Linux内核内存检测工具Kmemcheck浅读
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p><a href="http://kernelnewbies.org/Linux_2_6_31#head-618eb7ad2f7573347b61f743a183ef744d369133" target="_blank" rel="external">Linux内核2.6.31版本</a>发布于2009年9月9日（真是个吉利的日子），其中新加入了两个内核内存管理方面的新工具Kmemcheck和Kmemleak。Kmemcheck工作于内核态，用于检测未初始化等内存非法读写访问并发出警告（类似的编程辅助工具Valgrind也可用于内存检测，但其工作于用户态，对内核态进程无能）。但是由于Kmemcheck会大大地影响内核工作的速度，并消耗较近两倍的内存使用，其将只作为Linux内核的一个调试工具，需要手动开启。</p>
+<p>这对于内核开发（如设备驱动程序）者而言，是十分有用的。因为编程习惯或者对未初始化内存的不经意使用（C语言甚至允许访问任意的内存地址），非常可能导致一些难以检查的错误，有时还可能导致系统一直处于无响应状态。Kmemcheck能够帮助定位大多数内存错误的上下文，虽然目前它只支持x86平台，且仍在不断改进中。</p>
+<font size="3"><strong>1. 实现思路</strong></font>
+
+<p>Kmemcheck记录跟踪内存中每一位的内存状态，并于每次访问时检查其状态是否合法，若判断为非法访问，则给出警告信息。</p>
+<p><strong>1.1 分配</strong><br>当Kmemcheck被开启时，每一块动态申请并要求跟踪的核态内存A都将有一块和其大小相同的影子内存B（其地址记录于每个页描述符的shadow字段中），用于记录A中每个字节的内存状态，这是判断内存访问是否合法的依据：<br> <table border="0" cellspacing="0" cellpadding="2" width="660"> <tbody> <tr> <td valign="top" width="260">KMEMCHECK_SHADOW_UNALLOCATED</td> <td valign="top" width="398">未分配的（在SLAB中，新分配的slab页面中没有被分配object的部分会被设置成此状态）</td></tr> <tr> <td valign="top" width="260">KMEMCHECK_SHADOW_UNINITIALIZED</td> <td valign="top" width="398">未初始化的（一般情况下，新分配的页面都会被设置成此状态）</td></tr> <tr> <td valign="top" width="260">KMEMCHECK_SHADOW_FREED</td> <td valign="top" width="398">释放的（在SLAB中，当object被释放后，其所占用的内存会被设置成此状态）</td></tr> <tr> <td valign="top" width="260">KMEMCHECK_SHADOW_INITIALIZED</td> <td valign="top" width="398">初始化的（对它的访问是正确的）</td></tr></tbody></table></p>
+<p>以上4中状态，前3种均为非法访问，Kmemcheck会给出相应的警告。<a id="more"></a></p>
+<p>Kmemcheck在页表项的页面属性新定义了一个_PAGE_HIDDEN标志位，在slab_cache中添加SLAB_NOTRACK属性，在GFP中添加<strong>GFP_NOTRACK属性。<br>当分配内存时，A对应页表项中的_PAGE_PRESENT标志位被清零（表示该页不存在，引起一次缺页中断），并置位_PAGE_HIDDEN标志位以区别于真正的缺页中断；B则置位了</strong>GFP_NOTRACK使得其自身不被Kmemcheck跟踪，并且B中的每个字节都会被标志位uninitialized。另外，为了系统的正常运行，关键的内核代买也被SLAB_NOTRACK和__GFP_NOTRACK保护起来，不受Kmemcheck跟踪。</p>
+<p><strong>1.2 操作</strong><br>当对内存读写操作发生时，被Kmemcheck跟踪的内存将发生一次缺页中断，调用do_page_fault()，Kmemcheck在其中置入的钩子函数就会起作用。如果是读操作，则检查对应shadow中的状态是否为initialized，若否，则启动报错程序；如果是写操作，则将对应shadow置为initialized。<br>检查完成之后，将这些页的_PAGE_PRESENT置位为“存在”，使其能够返回完成原来的操作；并置位TF（X86_EFLAGS_TF）标志位，使得CPU在执行下一条指令进入单步调试状态，并在之后调用的do_debug()中将以上访问页的_PAGE_PRESENT重新置为“不存在”。那么，当下次读写访问到来时，又可以进入Kmencheck检查。</p>
+<p><strong>1.3 释放</strong><br>除了释放跟踪内存A和shadow，还需将其标记为“存在”和“不隐藏”。</p>
+<p><strong><font size="3">2. 技术细节</font></strong></p>
+<p><strong>2.1 内存管理
+</strong>Kmemcheck检测内存的功能主要通过对照与跟踪内存紧密相关的影子内存实现。影子内存随着跟踪内存分配而分配并初始化，也随着跟踪内存的释放而释放。Kmemcheck中与内存管理相关的核心函数主要位于mm/kmemcheck.c中，涉及跟踪内存的初始化、影子内存的分配和初始化等。<br> <table border="1" cellspacing="0" cellpadding="2" width="664"> <tbody> <tr> <td valign="top" width="192"><a href="http://lxr.linux.no/linux+v2.6.31/mm/kmemcheck.c#L7" target="_blank" rel="external">kmemcheck_alloc_shadow</a>(<em>page, order, flags, node)</em></td> <td valign="top" width="470">调用alloc_pages_node()分配相同大小的影子内存，其“不被跟踪”（__GFP_NOTRACK）；<br>将影子页的地址赋予每个对应跟踪页描述符中的shadow字段；<br>将每个跟踪页置位“不存在”（~_PAGE_PRESENT）和“隐藏”（_PAGE_HIDDEN）。</td></tr> <tr> <td valign="top" width="194"><a href="http://lxr.linux.no/linux+v2.6.31/mm/kmemcheck.c#L38" target="_blank" rel="external">kmemcheck_free_shadow</a>(page, order)</td> <td valign="top" width="470">将每个跟踪页置位“存在”（_PAGE_PRESENT）和“不隐藏”（~_PAGE_HIDDEN）；<br>将每个跟踪页的shadow字段置为NULL；<br>调用__free_pages()释放对应的影子内存。</td></tr> <tr> <td valign="top" width="196"><a href="http://lxr.linux.no/linux+v2.6.31/mm/kmemcheck.c#L59" target="_blank" rel="external">kmemcheck_slab_alloc</a>(<em>kmem_cache, gfpflags, </em>object, size)</td> <td valign="top" width="470">调用kmemcheck_mark_uninitialized()将跟踪对象所对应的影子内存置位“未初始化”。<br>（Kmemcheck允许被跟踪页中的部分对象为不被跟踪的，这通过将其影子置位为“初始化”来实现）</td></tr> <tr> <td valign="top" width="198"><a href="http://lxr.linux.no/linux+v2.6.31/mm/kmemcheck.c#L92" target="_blank" rel="external">kmemcheck_slab_free</a>(<em>kmem_cache, </em>object, size)</td> <td valign="top" width="470">调用kmemcheck_mark_freed()将跟踪对象所对应的影子内存置位为“已释放”。</td></tr> <tr> <td valign="top" width="199"><a href="http://lxr.linux.no/linux+v2.6.31/mm/kmemcheck.c#L99" target="_blank" rel="external">kmemcheck_pagealloc_alloc</a>(*page, order, gfpflags)</td> <td valign="top" width="470">调用kmemcheck_alloc_shadow()分配影子内存并标记跟踪内存；<br>若此内存需被跟踪，则置位其影子为“未初始化”；否则为“初始化”。</td></tr></tbody></table></p>
+<p>在SLAB/SLUB等通用或专用对象分配机制中：<br>1) kmemcheck_alloc_shadow()被插入到allocate_slab()的新页成功分配之后，分配影子并标识跟踪页（allocate_slab()负责在slab不够用时添加新页并构造新slab）。此后，若slab已被构造函数 初始化则将影子置为“未初始化”，否则置为“未分配”；<br>2) kmemcheck_slab_alloc()被插入到slab_alloc()的新object成功分配之后，将对应影子置为“未初始化”（slab_alloc()负责为申请的通用或专用对象申请空间）；<br>3) kmemcheck_slab_free()被插入到slab_free()的object释放之后，将对应影子置为“已释放”（slab_free()负责释放已申请的通过或专用对象）；<br>4) kmemcheck_free_shadow()被插入到<strong>free_slab()的slab被释放后，将对应影子释放（</strong>free_slab()负责释放多余空闲的slab）。</p>
+<p>在连续页框分配机制中：<br>1) kmemcheck_pagealloc_alloc()被插入到<strong>alloc_pages_slowpath()连续页分配成功后，分配影子、标识跟踪页并置位影子状态（</strong>alloc_pages_slowpath()负责从全局内存池中分配新页）；<br>2) kmemcheck_free_shadow()被插入到__free_pages_ok()和free_hot_cold_page()等页被释放后，将对应影子释放。</p>
+<p>在非连续内存区分配机制中（如vmalloc），由于其页框也是通过调用alloc_page()来分配的，因此也可受到Kmemcheck的监控。</p>
+<p>那么，通过这些置入内存管理函数中的钩子函数，当一个动态内存申请函数（如kmalloc）被调用时（分配标志中不包含<strong>GFP_NOTRACK，</strong>GFP_HIGHMEM，对于SLAB内存，cache创建时标志中不包含SLAB_NOTRACK），影子页面就被创建、初始化，而跟踪页面被置位“不存在”和“隐藏”。这样，Kmemcheck就能够结合缺页中断、单步调试等技术跟踪和检查这些内存访问的合法性。当其对应的释放函数（如kfree）被调用时，相应的影子页面被释放，而跟踪页面被置位“存在”和“不隐藏”，使得Kmemcheck停止工作。</p>
+<p><strong>2.2 跟踪机制实现</strong><br>前文提到Kmemcheck通过不断交替标志跟踪页“存在”（kmemcheck_show()）和“不存在”（kmemcheck_hide()），使得其对页面的跟踪能始终持续到其被释放。出于进程的并发性、安全性等考虑，Kmemcheck通过kmemcheck_context中的balance字段来同步kmemcheck_show和kmemcheck_hide这一对操作，这是使得Kmemcheck跟踪机制得以顺利工作的关键。核心代码位于/arch/x86/mm/kmemcheck/kmemcheck.c中。<br> <table border="1" cellspacing="0" cellpadding="2" width="614"> <tbody> <tr> <td valign="top" width="220"><a href="http://lxr.linux.no/linux+v2.6.31/arch/x86/mm/kmemcheck/kmemcheck.c#L151" target="_blank" rel="external">kmemcheck_show_all</a>()</td> <td valign="top" width="392">将每个地址对应的页置为“存在”，并刷新TLB</td></tr> <tr> <td valign="top" width="220"><a href="http://lxr.linux.no/linux+v2.6.31/arch/x86/mm/kmemcheck/kmemcheck.c#L164" target="_blank" rel="external">kmemcheck_hide_all</a>()</td> <td valign="top" width="392">将每个地址对应的页置为“不存在”，并刷新TLB</td></tr> <tr> <td valign="top" width="220"><a href="http://lxr.linux.no/linux+v2.6.31/arch/x86/mm/kmemcheck/kmemcheck.c#L180" target="_blank" rel="external">kmemcheck_show</a>(<em>regs)</em></td> <td valign="top" width="392">调用kmemcheck_show_all()；<br>balance+1；<br>置位TF（X86_EFLAGS_TF）标志位，开启单步调试。</td></tr> <tr> <td valign="top" width="220"><a href="http://lxr.linux.no/linux+v2.6.31/arch/x86/mm/kmemcheck/kmemcheck.c#L221" target="_blank" rel="external">kmemcheck_hide</a>(regs)</td> <td valign="top" width="392">调用kmemcheck_hide_all()；<br>balance-1，并清空当前跟踪地址；<br>复位TF标志位，关闭单步调试。</td></tr></tbody></table> </p>
+<p>缺页异常处理函数do_page_fault()在大多数情况下只对用户态内存和核态非连续内存区调用，负责为属于进程地址空间但还尚未分配物理页框的页分配物理页框，并交换至物理内存中使得进程可以正常访问（有编程错误而导致的缺页异常不在讨论范围内）。在核态分支中，kmemcheck_fault()调用被插入到正常缺页处理函数vmalloc_fault()之后，包括访问合法性的检查和kmemcheck_show()的调用。之所以选择这个位置，是因为高地址的跟踪页可能被置换出物理内存，插在正常缺页处理之前会引起页面交换的混乱，访问到不相称的内存。</p>
+<p>在以上的操作中，为了完成缺页中断使得正常访问得以进行，跟踪页被置为“存在”，那么在后续的操作中，其必须被再次置为“不存在”，才能让Kmemcheck的内存检查得以重复实现。在x86体系结构中，正常情况下指令是乱序执行的。为了避免在重置标志位前跟踪页中的其他地址被再次访问，Kmemcheck在置位“存在”之时开启了CPU的单步调试。这样，CPU就陷入了调试陷阱（Debug Trap），在处理函数do_debug()中，kmemcheck_trap()被调用，其在检查balance值的合法性后，调用kmemcheck_hide()完成单次检测操作标识符的复位。</p>
+<p><strong>2.3 读写合法检查</strong><br>Kmemcheck中的读写合法检查通过对照影子页中对应地址的内存状态值来实现，其核心函数为kmemcheck_access()，位于/arch/x86/mm/kmemcheck/kmemcheck.c中。其流程大致如下：<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; a. 检查本次kmemcheck_access的调用合法性（是否与另一kmemcheck_access调用冲突）；<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; b. 调用kmemcheck_opcode_decode解码指令；<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; c. 根据操作码执行不同的合法性检查：读指令执行kmemcheck_read，写指令执行kmemcheck_write，其余还包括一些特殊指令如movs、cmps等，这些特殊指令目前还不甚完善，故不作讨论。<br> <table border="1" cellspacing="0" cellpadding="2" width="628"> <tbody> <tr> <td valign="top" width="213"><a href="http://lxr.linux.no/linux+v2.6.31/arch/x86/mm/kmemcheck/kmemcheck.c#L309" target="_blank" rel="external">kmemcheck_read_strict</a>(<em>reg, addr, size)</em></td> <td valign="top" width="413">此函数检查不超过页边界的读操作。<br>检查对应影子中记录的内存状态是否合法；<br>如有错，则记录错误信息、出错上下文等；<br>标记本次检查过的内存影子为“初始化”，避免二次报错。</td></tr> <tr> <td valign="top" width="213"><a href="http://lxr.linux.no/linux+v2.6.31/arch/x86/mm/kmemcheck/kmemcheck.c#L335" target="_blank" rel="external">kmemcheck_read</a>(reg, addr, size)</td> <td valign="top" width="413">此函数通过将需要检查的地址段按页切割，并调用kmemcheck_read_strict()检查其合法性</td></tr> <tr> <td valign="top" width="213"><a href="http://lxr.linux.no/linux+v2.6.31/arch/x86/mm/kmemcheck/kmemcheck.c#L358" target="_blank" rel="external">kmemcheck_write_strict</a>(<em>reg, addr, size)</em></td> <td valign="top" width="413">此函数处理不超过页边界的写操作，将其对应影子标识为“初始化”。</td></tr> <tr> <td valign="top" width="213"><a href="http://lxr.linux.no/linux+v2.6.31/arch/x86/mm/kmemcheck/kmemcheck.c#L371" target="_blank" rel="external">kmemcheck_write</a>(reg, addr, size)</td> <td valign="top" width="413">此函数通过将需要检查的地址段按页切割，并调用kmemcheck_write_strict()处理。</td></tr></tbody></table> </p>
+<p><strong>2.4 错误处理报告
+</strong>对于捕获到的内存非法读写，Kmemcheck调用kmemcheck_error_save()将其存储在结构体kmemcheck_error的形式存放在一个循环缓冲区error_fifo中，包括警告类型、引发警告的内存地址及其访问长度、各寄存器的值和stack trace，同时还将访问地址附近的跟踪页和其对应影子页拷贝保存在记录中。此后，将预先设置好的一个tasklet（负责错误处理）插入到当前CPU的tasklet队列中，然后去触发一个软中断。这样，当注册的tasklet被调度执行时，会将循环缓冲区中所有的记录都打印出来。其代码位于/arch/x86/mm/kmemcheck/error.c中。</p>
+<p>作为一个新加入内核的补丁工具，Kmemcheck存在很多不完善的地方，比如movs指令所触发的kmemcheck_copy()操作虽然包含源地址和目标地址两个操作却只能给出一次警告等等。因此，Kmemcheck的代码中还嵌有很多自身bug的发现和记录代码，与捕获错误共用同一套报告方法和数据结构。</p>
+<p><strong>2.5 内核选项配置</strong><br>由于Kmemcheck启用的代价很高（需要近2倍的内存并降低运行速度），它被严格地限定为linux内核的debug工具，在普通模式下是默认不被开启的。只有当程序员需要调试内核代码时，才可手动开启。<br>下面例举了重新编译内核时选项中针对 Kmemcheck 的配置选项，以及它们应该被设置的值（或推荐值）：<br> <table border="0" cellspacing="0" cellpadding="2" width="664"> <tbody> <tr> <td valign="top" width="268"><strong>CONFIG_CC_OPTIMIZE_FOR_SIZE=n</strong></td> <td valign="top" width="394">禁止gcc对数据长度进行优化。<br>例如在32位的机器中，为了提高内存访问速度，gcc 可能会将一些16位的数据访问提升至32位（真正使用时会舍弃高16位），这样kmemcheck 可能就会对高16位中数据内容访问发出警告（这种警告成为伪警告）。这个选项是配置kmemcheck的前提，否则kmemcheck不会出现在配置选项中。<br>默认是y，在选项”General setup”中。</td></tr> <tr> <td valign="top" width="268"><strong>CONFIG_SLAB=y or CONFIG_SLUB=y</strong></td> <td valign="top" width="394">使用slab 或者slub 机制。<br>默认是CONFIG_SLUB=y，在选项”General setup” 中。</td></tr> <tr> <td valign="top" width="268"><strong>CONFIG_FUNCTION_TRACER=n</strong></td> <td valign="top" width="394">防止嵌套的页面异常。<br>默认是n，在选项”General setup”中。</td></tr> <tr> <td valign="top" width="268"><strong>CONFIG_DEBUG_PAGEALLOC=n</strong></td> <td valign="top" width="394">关闭页面分配调试功能。<br>默认是 n，在选项”Kernel hacking”中。</td></tr> <tr> <td valign="top" width="268"><strong>CONFIG_DEBUG_INFO=y (**</strong>推荐值<strong>**)</strong></td> <td valign="top" width="394">打开内核调试信息，方便内核调试。<br>在选项”Kernel hacking” 中。</td></tr> <tr> <td valign="top" width="268"><strong>CONFIG_KMEMCHECK=y <b>(必然**</b></strong>推荐值<strong>**)</strong></td> <td valign="top" width="394">决定内核是否包含kmemcheck 功能。<br>在选项”Kernel hacking” 中。</td></tr> <tr> <td valign="top" width="268"><strong>CONFIG<em>KMEMCHECK</em>[DISABLED|ENABLED| ONESHOT]_BY_DEFAULT</strong> </td> <td valign="top" width="394">定义Kmemcheck 在机器启动时的状态。<br>DISABLED为不启动，ENABLED为启动但它会降低启动的速度，ONESHOT 将在第一次警告之后关闭Kmemcheck功能。Kmemcheck的状态是可以在系统启动后通过修改/proc/sys/kernel/kmemcheck的值来进行动态调整的。<br>默认是ENABLED，在选项”Kernel hacking” 中。</td></tr> <tr> <td valign="top" width="268"><strong>CONFIG_KMEMCHECK_QUEUE_SIZE</strong></td> <td valign="top" width="394">出错循环缓冲区大小，默认是64，即最多一次可以保存64条警告记录，推荐保留默认值。</td></tr> <tr> <td valign="top" width="268"><strong>CONFIG_KMEMCHECK_SHADOW_COPY_SHIFT</strong></td> <td valign="top" width="394">当发生警告时，保存下来的内存数据大小，默认是5，即可以保存32字节的数据，推荐保留默认值。</td></tr> <tr> <td valign="top" width="268"><strong>CONFIG_KMEMCHECK_PARTIAL_OK</strong></td> <td valign="top" width="394">为了解决gcc对数据长度的优化，默认是y，推荐保留默认值。</td></tr> <tr> <td valign="top" width="268"><strong>CONFIG_KMEMCHECK_BITOPS_OK</strong></td> <td valign="top" width="394">针对位域的访问，默认是n，推荐保留默认值（如果需要用到Kmemcheck来对位域的访问进行跟踪，推荐使用其提供的Bitfield annotations）。 </td></tr></tbody></table> </p>
+<p>&nbsp; </p><p><strong><font size="3">3. 验证实验</font></strong></p>
+<p>为了验证Kmemcheck的性能，我们编写了几种核态下非法访问内存的例子，并在linux2.6.31版本下开启Kmemcheck功能调试。</p>
+<p>系统环境：<br>WindowXP sp3 + VMware® Workstation 7.0 + Fedora 12 (v2.6.31) + gcc 4.4.2</p>
+<p><strong>3.1 alloc_page
+</strong>先用alloc_pages分配了两个页面大小的内存，然后在未初始化的情况下对其中的内容进行访问。Kmemcheck给出内存未初始化警告信息（即KMEMCHECK_SHADOW_UNINITIALIZED类型的错误信息）。</p>
+<p>部分代码示意：<br>&nbsp; <a href="http://lh3.ggpht.com/_NFbnZk4IksM/TKQ8yAuy5qI/AAAAAAAAAFk/AWFiRp9AJaw/s1600-h/code01_thumb16%5B2%5D.jpg" target="_blank" rel="external"><img src="http://lh4.ggpht.com/_NFbnZk4IksM/TKQ8zasSZfI/AAAAAAAAAFo/792JyZMn_kQ/code01_thumb16_thumb.jpg?imgmax=800" alt="code01_thumb16" title="code01_thumb16"></a> </p>
+<p>Kmemcheck给出的警告信息：<br>&nbsp;<a href="http://lh3.ggpht.com/_NFbnZk4IksM/TKQ80x9jVRI/AAAAAAAAAFw/BFK8fQeyM8w/re01%5B5%5D_thumb.jpg?imgmax=800" title="re01[5]" target="_blank" rel="external">![re01[5]</a>](<a href="http://lh5.ggpht.com/_NFbnZk4IksM/TKQ80LssPUI/AAAAAAAAAFs/zn2ftUFpkKQ/s1600-h/re01%5B5%5D%5B2%5D.jpg" target="_blank" rel="external">http://lh5.ggpht.com/_NFbnZk4IksM/TKQ80LssPUI/AAAAAAAAAFs/zn2ftUFpkKQ/s1600-h/re01%5B5%5D%5B2%5D.jpg</a>)<br>其中，A行给出非法访问的内存地址和错误类型；<br>B行给出了跟踪页中访问地址附近的32个字节；<br>C行给出了对应影子页上这32个字节的内存状态，u表示KMEMCHECK_SHADOW_UNINITIALIZED，a表示KMEMCHECK_SHADOW_UNALLOCATED，f表示KMEMCHECK_SHADOW_FREED；<br>D行指向非法访问内存所在的位置；<br>E行以下记录的是当时stack trace和寄存器信息，其中EIP记录引发警告的指令地址。</p>
+<p><strong>3.2 slab</strong><br>先创建了一个slab cache，然后对slab中未分配的对象进行访问。Kmemcheck会发出内存未分配警告信息（即KMEMCHECK_SHADOW_UNALLOCATED类型的错误信息）。</p>
+<p>部分代码示意：<br>&nbsp;<a href="http://lh5.ggpht.com/_NFbnZk4IksM/TKQ811dVoPI/AAAAAAAAAF0/fC3et7IMPmg/s1600-h/code02_thumb2%5B2%5D.jpg" target="_blank" rel="external"><img src="http://lh5.ggpht.com/_NFbnZk4IksM/TKQ82XPPkOI/AAAAAAAAAF4/QoHdBsY9toc/code02_thumb2_thumb.jpg?imgmax=800" alt="code02_thumb2" title="code02_thumb2"></a> </p>
+<p>Kmemcheck给出的警告信息：<br>&nbsp;<a href="http://lh6.ggpht.com/_NFbnZk4IksM/TKQ83Ky5MlI/AAAAAAAAAF8/j5ypsDek2OE/s1600-h/re02_thumb2%5B2%5D.jpg" target="_blank" rel="external"><img src="http://lh6.ggpht.com/_NFbnZk4IksM/TKQ832_mCfI/AAAAAAAAAGA/XVosqa_8rCA/re02_thumb2_thumb.jpg?imgmax=800" alt="re02_thumb2" title="re02_thumb2"></a> </p>
+<p><strong>3.3 kmalloc
+</strong>先用kmalloc分配内存，完毕后释放该内存，然后再去访问被释放了的内存空间。Kmemcheck给出访问内存已释放警告信息（即 KMEMCHECK_SHADOW_FREED 类型的错误信息）。</p>
+<p>部分代码示意：<br>&nbsp;<a href="http://lh6.ggpht.com/_NFbnZk4IksM/TKQ84cWsTvI/AAAAAAAAAGE/cB5b2-hI17I/s1600-h/code03_thumb2%5B2%5D.jpg" target="_blank" rel="external"><img src="http://lh5.ggpht.com/_NFbnZk4IksM/TKQ84zKpc3I/AAAAAAAAAGI/B3WFyoqBxCc/code03_thumb2_thumb.jpg?imgmax=800" alt="code03_thumb2" title="code03_thumb2"></a> </p>
+<p>Kmemcheck给出的警告信息：<br>&nbsp;<a href="http://lh3.ggpht.com/_NFbnZk4IksM/TKQ86_0HygI/AAAAAAAAAGQ/adezRLflmro/re03%5B4%5D_thumb.jpg?imgmax=800" title="re03[4]" target="_blank" rel="external">![re03[4]</a>](<a href="http://lh5.ggpht.com/_NFbnZk4IksM/TKQ86P1884I/AAAAAAAAAGM/BtWd_bmtDQ4/s1600-h/re03%5B4%5D%5B2%5D.jpg" target="_blank" rel="external">http://lh5.ggpht.com/_NFbnZk4IksM/TKQ86P1884I/AAAAAAAAAGM/BtWd_bmtDQ4/s1600-h/re03%5B4%5D%5B2%5D.jpg</a>) </p>
+<p><strong><font size="3">4. 总结</font></strong></p>
+<p>Kmemcheck作为开源的测试工具，其性能是完全可以接受的。它能够检测出对动态分配的核态的未初始化、未分配和已释放内存的非法访问，但偶尔也会给出伪警告信息。虽然目前，Kmemcheck还在不断完善中，相关指令的检测处理还不全面，对其他体系平台的支撑还有待探究。并且由于其与内存、调度、进程管理、中断处理等其他子系统的关系非常紧密，Kmemcheck的稳定性受到很多外来因素的影响。但是无疑，它的检测过程显得十分大胆、有趣，而且有效。</p>
+<p>最后，引用一名知名的linux内核开发者Ingo Molnár对Kmemcheck的评价：<br>it should also be made clear that not only does kmemcheck consume half of the RAM to do byte granular tracking of the other half of RAM, it’s also slow, very slow, because almost every kernel-space instruction will generate a pagefault and then it will be single-stepped and it takes a debug fault as well. That’s of course totally crazy, but that’s also OK and it’s what makes the feature so interesting and powerful.</p>
+<p><strong><font size="3">5. 参考资料</font></strong></p>
+<font size="2">来自IBM Linux技术文档库的文章《<a href="http://www.ibm.com/developerworks/cn/linux/l-cn-kmemcheck/" target="_blank" rel="external">Linux 内核内存检测工具 - Kmemcheck</a>》及相关<br>源码来源：<a href="http://lxr.linux.no/" title="http://lxr.linux.no/" target="_blank" rel="external">http://lxr.linux.no/</a> （2.6.31）<br>《<a href="http://oreilly.com/catalog/9780596005658/" target="_blank" rel="external">深入理解LINUX内核</a>》一书</font>
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://yoursite.com/2009/12/14/move_from_wp/e6-ba-90-e7-a0-81-e7-ac-94-e8-ae-b0-linux-e5-86-85-e6-a0-b8-e5-86-85-e5-ad-98-e6-a3-80-e6-b5-8b-e5-b7-a5-e5-85-b7kmemcheck-e6-b5-85-e8-af-bb/" data-id="ciedu83xl005op4bgw9vrre40" class="article-share-link">Share</a>
+      
+      
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Code/">Code</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Linux/">Linux</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/OS/">OS</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Tools/">Tools</a></li></ul>
+
+    </footer>
+  </div>
+  
+    
+<nav id="article-nav">
+  
+    <a href="/2009/12/21/move_from_wp/e4-b8-93-e5-88-a9-e7-94-b3-e8-af-b7-e5-8f-91-e6-98-8e-e4-b8-93-e5-88-a9-e7-9b-b8-e5-85-b3-e4-bf-a1-e6-81-af-e6-94-b6-e9-9b-86/" id="article-nav-newer" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Newer</strong>
+      <div class="article-nav-title">
+        
+          [专利申请] 发明专利相关信息收集
+        
+      </div>
+    </a>
+  
+  
+    <a href="/2009/12/08/move_from_wp/e8-af-bb-e4-b9-a6-e7-ac-94-e8-ae-b0-linux-e5-86-85-e6-a0-b8-e5-8a-a8-e6-80-81-e5-86-85-e5-ad-98-e5-88-86-e9-85-8d/" id="article-nav-older" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Older</strong>
+      <div class="article-nav-title">[读书笔记] Linux内核动态内存分配</div>
+    </a>
+  
+</nav>
+
+  
+</article>
+
+</section>
+        
+          <aside id="sidebar">
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Categories</h3>
+    <div class="widget">
+      <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/Academic/">Academic</a><span class="category-list-count">28</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/Academic/Engineering/">Engineering</a><span class="category-list-count">3</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Academic/Works/">Works</a><span class="category-list-count">2</span></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/Engineering/">Engineering</a><span class="category-list-count">4</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Hobby/">Hobby</a><span class="category-list-count">11</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/Hobby/Trivial/">Trivial</a><span class="category-list-count">3</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/Hobby/Trivial/Works/">Works</a><span class="category-list-count">1</span></li></ul></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/Trivial/">Trivial</a><span class="category-list-count">8</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Works/">Works</a><span class="category-list-count">10</span></li></ul>
+    </div>
+  </div>
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Tags</h3>
+    <div class="widget">
+      <ul class="tag-list"><li class="tag-list-item"><a class="tag-list-link" href="/tags/AI/">AI</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Analysis/">Analysis</a><span class="tag-list-count">3</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Android/">Android</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Anime/">Anime</a><span class="tag-list-count">7</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Art/">Art</a><span class="tag-list-count">7</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Bayesian/">Bayesian</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Caching/">Caching</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Code/">Code</a><span class="tag-list-count">5</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Computer-Graphics/">Computer Graphics</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Computer-Vision/">Computer Vision</a><span class="tag-list-count">13</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Data-Mining/">Data Mining</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Depth-Camera/">Depth Camera</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Design/">Design</a><span class="tag-list-count">5</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Dream/">Dream</a><span class="tag-list-count">3</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Ford-Fulkerson/">Ford-Fulkerson</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Friends/">Friends</a><span class="tag-list-count">3</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/GPU/">GPU</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Game/">Game</a><span class="tag-list-count">6</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Game-Design/">Game Design</a><span class="tag-list-count">3</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Gesture/">Gesture</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Graphcut/">Graphcut</a><span class="tag-list-count">5</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Kinect/">Kinect</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Life/">Life</a><span class="tag-list-count">17</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Linux/">Linux</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Machine-Learning/">Machine Learning</a><span class="tag-list-count">9</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Maching/">Maching</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Markov/">Markov</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Monster-Hunter/">Monster Hunter</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Motion/">Motion</a><span class="tag-list-count">6</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Movie/">Movie</a><span class="tag-list-count">6</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Music/">Music</a><span class="tag-list-count">7</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/NPR/">NPR</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/OS/">OS</a><span class="tag-list-count">4</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/OpenCV/">OpenCV</a><span class="tag-list-count">3</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Patent/">Patent</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Pose/">Pose</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Push-relabel/">Push-relabel</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Random-Forest/">Random Forest</a><span class="tag-list-count">5</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Random-Trees/">Random Trees</a><span class="tag-list-count">5</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Recognition/">Recognition</a><span class="tag-list-count">13</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Reconstruction/">Reconstruction</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Review/">Review</a><span class="tag-list-count">3</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Segmentation/">Segmentation</a><span class="tag-list-count">3</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Shape/">Shape</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Silhouette/">Silhouette</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Simulation/">Simulation</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/TV/">TV</a><span class="tag-list-count">3</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Testing/">Testing</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Theory-of-Computation/">Theory of Computation</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Tools/">Tools</a><span class="tag-list-count">4</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/WOW/">WOW</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Works/">Works</a><span class="tag-list-count">13</span></li></ul>
+    </div>
+  </div>
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Tag Cloud</h3>
+    <div class="widget tagcloud">
+      <a href="/tags/AI/" style="font-size: 11.11px;">AI</a> <a href="/tags/Analysis/" style="font-size: 12.22px;">Analysis</a> <a href="/tags/Android/" style="font-size: 10px;">Android</a> <a href="/tags/Anime/" style="font-size: 16.67px;">Anime</a> <a href="/tags/Art/" style="font-size: 16.67px;">Art</a> <a href="/tags/Bayesian/" style="font-size: 11.11px;">Bayesian</a> <a href="/tags/Caching/" style="font-size: 11.11px;">Caching</a> <a href="/tags/Code/" style="font-size: 14.44px;">Code</a> <a href="/tags/Computer-Graphics/" style="font-size: 11.11px;">Computer Graphics</a> <a href="/tags/Computer-Vision/" style="font-size: 18.89px;">Computer Vision</a> <a href="/tags/Data-Mining/" style="font-size: 10px;">Data Mining</a> <a href="/tags/Depth-Camera/" style="font-size: 11.11px;">Depth Camera</a> <a href="/tags/Design/" style="font-size: 14.44px;">Design</a> <a href="/tags/Dream/" style="font-size: 12.22px;">Dream</a> <a href="/tags/Ford-Fulkerson/" style="font-size: 10px;">Ford-Fulkerson</a> <a href="/tags/Friends/" style="font-size: 12.22px;">Friends</a> <a href="/tags/GPU/" style="font-size: 10px;">GPU</a> <a href="/tags/Game/" style="font-size: 15.56px;">Game</a> <a href="/tags/Game-Design/" style="font-size: 12.22px;">Game Design</a> <a href="/tags/Gesture/" style="font-size: 11.11px;">Gesture</a> <a href="/tags/Graphcut/" style="font-size: 14.44px;">Graphcut</a> <a href="/tags/Kinect/" style="font-size: 10px;">Kinect</a> <a href="/tags/Life/" style="font-size: 20px;">Life</a> <a href="/tags/Linux/" style="font-size: 11.11px;">Linux</a> <a href="/tags/Machine-Learning/" style="font-size: 17.78px;">Machine Learning</a> <a href="/tags/Maching/" style="font-size: 10px;">Maching</a> <a href="/tags/Markov/" style="font-size: 11.11px;">Markov</a> <a href="/tags/Monster-Hunter/" style="font-size: 10px;">Monster Hunter</a> <a href="/tags/Motion/" style="font-size: 15.56px;">Motion</a> <a href="/tags/Movie/" style="font-size: 15.56px;">Movie</a> <a href="/tags/Music/" style="font-size: 16.67px;">Music</a> <a href="/tags/NPR/" style="font-size: 10px;">NPR</a> <a href="/tags/OS/" style="font-size: 13.33px;">OS</a> <a href="/tags/OpenCV/" style="font-size: 12.22px;">OpenCV</a> <a href="/tags/Patent/" style="font-size: 10px;">Patent</a> <a href="/tags/Pose/" style="font-size: 10px;">Pose</a> <a href="/tags/Push-relabel/" style="font-size: 10px;">Push-relabel</a> <a href="/tags/Random-Forest/" style="font-size: 14.44px;">Random Forest</a> <a href="/tags/Random-Trees/" style="font-size: 14.44px;">Random Trees</a> <a href="/tags/Recognition/" style="font-size: 18.89px;">Recognition</a> <a href="/tags/Reconstruction/" style="font-size: 10px;">Reconstruction</a> <a href="/tags/Review/" style="font-size: 12.22px;">Review</a> <a href="/tags/Segmentation/" style="font-size: 12.22px;">Segmentation</a> <a href="/tags/Shape/" style="font-size: 10px;">Shape</a> <a href="/tags/Silhouette/" style="font-size: 10px;">Silhouette</a> <a href="/tags/Simulation/" style="font-size: 10px;">Simulation</a> <a href="/tags/TV/" style="font-size: 12.22px;">TV</a> <a href="/tags/Testing/" style="font-size: 11.11px;">Testing</a> <a href="/tags/Theory-of-Computation/" style="font-size: 10px;">Theory of Computation</a> <a href="/tags/Tools/" style="font-size: 13.33px;">Tools</a> <a href="/tags/WOW/" style="font-size: 10px;">WOW</a> <a href="/tags/Works/" style="font-size: 18.89px;">Works</a>
+    </div>
+  </div>
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Archives</h3>
+    <div class="widget">
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2012/10/">十月 2012</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2012/09/">九月 2012</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2012/01/">一月 2012</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2011/12/">十二月 2011</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2011/11/">十一月 2011</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2011/08/">八月 2011</a><span class="archive-list-count">4</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2011/07/">七月 2011</a><span class="archive-list-count">3</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2011/05/">五月 2011</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2011/04/">四月 2011</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2011/03/">三月 2011</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2010/12/">十二月 2010</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2010/11/">十一月 2010</a><span class="archive-list-count">4</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2010/10/">十月 2010</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2010/09/">九月 2010</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2010/07/">七月 2010</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2010/06/">六月 2010</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2010/05/">五月 2010</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2010/03/">三月 2010</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2010/02/">二月 2010</a><span class="archive-list-count">3</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2010/01/">一月 2010</a><span class="archive-list-count">5</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2009/12/">十二月 2009</a><span class="archive-list-count">4</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2009/11/">十一月 2009</a><span class="archive-list-count">6</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2009/05/">五月 2009</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2008/09/">九月 2008</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2008/07/">七月 2008</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2008/02/">二月 2008</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2008/01/">一月 2008</a><span class="archive-list-count">3</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2007/12/">十二月 2007</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2007/08/">八月 2007</a><span class="archive-list-count">1</span></li></ul>
+    </div>
+  </div>
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Recents</h3>
+    <div class="widget">
+      <ul>
+        
+          <li>
+            <a href="/2012/10/30/move_from_wp/e5-8d-8a-e5-a4-9c-e6-9b-b4-e6-96-b0-e7-9c-8b-e5-b8-ae-e5-a8-98/">半夜更新看板娘 ~ </a>
+          </li>
+        
+          <li>
+            <a href="/2012/09/25/move_from_wp/e8-bf-9f-e6-9d-a5-e7-9a-84wow-e6-af-95-e4-b8-9a-e7-95-99-e5-bf-b5/">迟来的WOW毕业留念</a>
+          </li>
+        
+          <li>
+            <a href="/2012/01/11/move_from_wp/e8-af-b4-e8-af-b4-e6-9c-80-e8-bf-91-e7-9c-8b-e8-bf-87-e7-9a-84-e7-94-b5-e8-a7-86-e5-89-a7/">说说最近看过的电视剧</a>
+          </li>
+        
+          <li>
+            <a href="/2012/01/06/move_from_wp/e9-82-a3-e4-ba-9b-e5-b9-b4-ef-bc-8c-e6-88-91-e4-bb-ac-e4-b8-80-e8-b5-b7-e5-86-99-e7-9a-84-e5-ad-a6-e4-bd-8d-e8-ae-ba-e6-96-87/">那些年，我们一起写的学位论文</a>
+          </li>
+        
+          <li>
+            <a href="/2011/12/31/move_from_wp/2011-e5-b9-b4-e7-bb-88-e7-9b-98-e7-82-b9/">2011年终盘点</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+
+  
+</aside>
+        
+      </div>
+      <footer id="footer">
+  
+  <div class="outer">
+    <div id="footer-info" class="inner">
+      &copy; 2015 lincccc<br>
+      Powered by <a href="http://hexo.io/" target="_blank">Hexo</a>
+    </div>
+  </div>
+</footer>
+    </div>
+    <nav id="mobile-nav">
+  
+    <a href="/" class="mobile-nav-link">Home</a>
+  
+    <a href="/archives" class="mobile-nav-link">Archives</a>
+  
+</nav>
+    
+
+<script src="//ajax.googleapis.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
+
+
+  <link rel="stylesheet" href="/fancybox/jquery.fancybox.css" type="text/css">
+  <script src="/fancybox/jquery.fancybox.pack.js" type="text/javascript"></script>
+
+
+<script src="/js/script.js" type="text/javascript"></script>
+
+  </div>
+</body>
+</html>
